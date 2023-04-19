@@ -11,6 +11,7 @@ export class UiService {
   private static MEASUREMENT_URL: string = UiService.BASE_URL + "/measurement";
   private static TELEMETRY_URL: string = UiService.BASE_URL + "/telemetry";
   private static CONTACT_URL: string = UiService.BASE_URL + "/contact";
+  private static CONNECTOR_URL: string = UiService.BASE_URL + "/connector";
 
   constructor(private http:  HttpClient) { }
 
@@ -64,6 +65,24 @@ export class UiService {
     const params = new HttpParams();
 
     return this.http.post<any>(`${UiService.CONTACT_URL}`, data, {
+      params
+    }).toPromise();
+  }
+
+  //Connector ----
+
+  public getConnector(): Promise<any[] | undefined> {
+    const params = new HttpParams();
+
+    return this.http.get<any[]>(UiService.CONNECTOR_URL, {
+      params
+    }).toPromise();
+  }
+
+  public createConnector(data: any): Promise<any | undefined> {
+    const params = new HttpParams();
+
+    return this.http.post<any>(`${UiService.CONNECTOR_URL}`, data, {
       params
     }).toPromise();
   }
