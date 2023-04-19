@@ -1,0 +1,120 @@
+$color-primary: #FF855A;
+$color-primary-light: #FF855A;
+$color-secondary: #F4C45B;
+$color-success: #FF855A;
+$color-danger: #FF0C0C;
+$color-warning: #F4C45B;
+$color-info: #1FD0DC;
+$font-family: "Lato", "Montserrat", sans-serif;
+
+/*
+    Shapes
+*/
+$container-radius: 1rem;
+$card-radius: 1rem;
+$button-radius: 1rem;
+$input-radius: 1rem;
+$progress-radius: 1rem;
+$menu-item-radius: 1rem;
+$image-radius: 1rem;
+
+.bg-primary {
+  background: $color-primary !important;
+}
+
+.bg-primary-light {
+  background: $color-primary-light !important;
+}
+
+.bg-secondary {
+  background: var(--text-color-secondary) !important;
+}
+
+.bg-success {
+  background: $color-success !important;
+}
+
+.bg-success-lite {
+  background: rgba($color-success, 0.5);
+}
+
+.bg-warning {
+  background: $color-warning !important;
+}
+
+.bg-danger {
+  background: $color-danger !important;
+}
+
+.bg-danger-lite {
+  background: rgba($color-danger, 0.5);
+}
+
+.bg-info {
+  background: $color-info !important;
+}
+
+.bg-info-lite {
+  background: rgba($color-info, 0.5);
+}
+
+.fg-primary {
+  color: $color-primary !important;
+}
+
+.fg-primary-light {
+  color: $color-primary-light !important;
+}
+
+.fg-custom-grey-dark {
+  color: #4c4c4c !important;
+}
+
+.fg-custom-grey-light {
+  color: #78909c !important;
+}
+
+.fg-text-color {
+  color: var(--text-color) !important;
+}
+
+.fg-secondary {
+  color: var(--text-color-secondary) !important;
+}
+
+.fg-success {
+  color: $color-success !important;
+}
+
+.fg-warning {
+  color: $color-warning !important;
+}
+
+.fg-danger {
+  color: $color-danger !important;
+}
+
+.fg-info {
+  color: $color-info !important;
+}
+
+.text-muted {
+  color: var(--text-color-secondary) !important;
+}
+
+:export {
+  color-primary: $color-primary;
+  color-secondary: $color-secondary;
+  color-success: $color-success;
+  color-danger: $color-danger;
+  color-warning: $color-warning;
+  color-info: $color-info;
+  color-primary-light: $color-primary-light;
+  container-radius: $container-radius;
+  card-radius: $card-radius;
+  progress-radius: $progress-radius;
+  button-radius: $button-radius;
+  input-radius: $input-radius;
+  menu-item-radius: $menu-item-radius;
+  image-radius: $image-radius;
+}
