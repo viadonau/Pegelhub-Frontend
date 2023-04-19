@@ -1,0 +1,36 @@
+<p-card [header]="'Pegellieferanten'" styleClass="m-auto fadeinleft animation-duration-200">
+    <p-table [value]="supplier" dataKey="id" styleClass="p-datatable-customers fadeinleft animation-duration-200"
+        [rowHover]="true" [rows]="25" responsiveLayout="scroll" [filterDelay]="0">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Pegellieferant
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Letzter Wert
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Letzter Wert von
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-entry>
+            <tr style="cursor: pointer">
+                <td>{{ entry.stationNameShort }}</td>
+                <td>{{ entry.lastValue | number : '1.2-2' }}</td>
+                <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="3" [style]="'text-align: center'">Keine Pegellieferanten vorhanden</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

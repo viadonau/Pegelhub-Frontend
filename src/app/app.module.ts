@@ -3,14 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { OverviewComponent } from './content/overview/overview.component';
+import { SharedPrimeNGModule } from './shared-prime-ng.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedPrimeNGModule
   ],
   providers: [],
   bootstrap: [AppComponent]
