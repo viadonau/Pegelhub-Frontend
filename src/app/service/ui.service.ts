@@ -10,6 +10,7 @@ export class UiService {
   private static BASE_URL: string = AppConfig.BASE_URL + "/store";
   private static MEASUREMENT_URL: string = UiService.BASE_URL + "/measurement";
   private static TELEMETRY_URL: string = UiService.BASE_URL + "/telemetry";
+  private static CONTACT_URL: string = UiService.BASE_URL + "/contact";
 
   constructor(private http:  HttpClient) { }
 
@@ -45,6 +46,24 @@ export class UiService {
     const params = new HttpParams();
 
     return this.http.post<any>(`${UiService.TELEMETRY_URL}`, data, {
+      params
+    }).toPromise();
+  }
+
+  //Contact ----
+
+  public getContacts(): Promise<any[] | undefined> {
+    const params = new HttpParams();
+
+    return this.http.get<any[]>(UiService.CONTACT_URL, {
+      params
+    }).toPromise();
+  }
+
+  public createContact(data: any): Promise<any | undefined> {
+    const params = new HttpParams();
+
+    return this.http.post<any>(`${UiService.CONTACT_URL}`, data, {
       params
     }).toPromise();
   }
