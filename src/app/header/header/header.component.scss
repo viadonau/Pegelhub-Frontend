@@ -1,0 +1,22 @@
+@import '../../../style/theme.scss';
+
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+#header>div {
+    border-radius: 0px;
+}
+
+:host {
+    ::ng-deep .p-menubar-start>img {
+        border-radius: $image-radius;
+    }
+
+    ::ng-deep .p-menubar {
+        border-radius: 0px;
+    }
+}

@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/primeng/resources/primeng.min";
+@import "./style/theme.scss"; 
+
+* {
+    font-family: $font-family;
+}
+
+body {
+    margin: 0px;
+  }
+
+
