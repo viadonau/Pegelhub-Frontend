@@ -1,4 +1,4 @@
-<p-card [header]="'Pegellieferanten'" styleClass="m-auto fadeinleft animation-duration-200">
+<p-card [header]="'Pegellieferanten'" styleClass="m-auto fadeinleft animation-duration-200" class="p-4">
     <p-table [value]="supplier" dataKey="id" styleClass="p-datatable-customers fadeinleft animation-duration-200"
         [rowHover]="true" [rows]="25" responsiveLayout="scroll" [filterDelay]="0">
         <ng-template pTemplate="header">
@@ -15,6 +15,16 @@
                 </th>
                 <th>
                     <div class="p-d-flex p-jc-between p-ai-center">
+                        RNW
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        HSW
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
                         Letzter Wert von
                     </div>
                 </th>
@@ -23,7 +33,16 @@
         <ng-template pTemplate="body" let-entry>
             <tr style="cursor: pointer">
                 <td>{{ entry.stationNameShort }}</td>
-                <td>{{ entry.lastValue | number : '1.2-2' }}</td>
+                <td>
+                    <div style="display: flex; align-content: center;">
+                        <span class="mr-2">{{ entry.lastValue | number : '1.2-2' }}</span>
+                        <span style="width: 70%">
+                            <p-progressBar [value]="entry.indicatorValue"></p-progressBar>
+                        </span>
+                    </div>
+                </td>
+                <td>{{ entry.rnw | number : '1.2-2' }}</td>
+                <td>{{ entry.hsw | number : '1.2-2' }}</td>
                 <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
             </tr>
         </ng-template>

@@ -4,6 +4,11 @@ import { OverviewComponent } from './content/overview/overview.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'overview',
+    pathMatch: 'full'
+  },
+  {
     path: 'overview',
     component: OverviewComponent
   }

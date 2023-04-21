@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Supplier {
-  id: number;
-  stationNameShort: string;
-  lastValue?: number;
-  lastValueFrom?: Date;
-}
+import { Supplier } from 'src/app/service/model/supplier.model';
+import { UiService } from 'src/app/service/ui.service';
 
 @Component({
   selector: 'app-overview',
@@ -15,26 +10,15 @@ interface Supplier {
 export class OverviewComponent implements OnInit {
   supplier: Supplier[] = [];
 
-  constructor() { }
+  constructor(
+    private uiService: UiService
+  ) { }
 
   ngOnInit(): void {
-    this.loadData();
+    this.loadSupplier();
   }
 
-  private loadData(): void {
-    this.supplier = [];
-    let idx = 0;
-    ['Achleiten', 'Wilhering', 'Mauthausen', 'Grein', 'Kienstock', 'Dürnstein', 'Korneuburg', 'Schwedenbrücke', 'Wildungsmauer', 'Thebnerstraßl'].forEach(stationName => {
-      this.supplier.push({
-        id: idx++,
-        stationNameShort: stationName,
-        lastValue: Math.random() * 5,
-        lastValueFrom: new Date(2023, 3, this.getRandomNumber(30), this.getRandomNumber(24), this.getRandomNumber(60))
-      });
-    });
+  private loadSupplier(): void {
+    this.uiService.getSuppliers().then(data => this.supplier = data);
   }
-
-  private getRandomNumber(factor: number): number {{
-    return Math.ceil(Math.random() * factor);
-  }}
 }

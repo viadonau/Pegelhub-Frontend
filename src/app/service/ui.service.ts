@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../shared/Config';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Supplier } from './model/supplier.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UiService {
   private static CONTACT_URL: string = UiService.BASE_URL + "/contact";
   private static CONNECTOR_URL: string = UiService.BASE_URL + "/connector";
 
-  constructor(private http:  HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   //Measurements ----
 
@@ -85,5 +86,37 @@ export class UiService {
     return this.http.post<any>(`${UiService.CONNECTOR_URL}`, data, {
       params
     }).toPromise();
+  }
+
+  //Supplier ----
+  public getSuppliers(): Promise<any> {
+    const fnGetRandomNumber = (factor: number) => {
+      return Math.ceil(Math.random() * factor);
+    }
+
+    return new Promise((resolve) => {
+      let idx = 0;
+
+      setTimeout(() =>
+        resolve(['Achleiten', 'Wilhering', 'Mauthausen', 'Grein', 'Kienstock', 'Dürnstein', 'Korneuburg', 'Schwedenbrücke', 'Wildungsmauer', 'Thebnerstraßl'].map(supplierName => {
+          const values: number[] = [1 + Math.random() * 5, 2 + Math.random() * 5, Math.random() * 5];
+          const obj: Supplier = {
+            id: ++idx,
+            stationNameShort: supplierName,
+            lastValue: values.filter(item => item != Math.min(...values) && Math.max(...values))[0],
+            lastValueFrom: new Date(2023, 3, fnGetRandomNumber(30), fnGetRandomNumber(24), fnGetRandomNumber(60)),
+            rnw: Math.min(...values),
+            hsw: Math.max(...values),
+            indicatorValue: 0
+          };
+
+          const avg = (obj.rnw + obj.hsw) / 2;
+          const perc = 1 - Math.min(avg, obj.lastValue as any) / Math.max(avg, obj.lastValue as any);
+          const diff = perc * 100;
+          obj.indicatorValue = Math.round(50 + diff);
+          return obj;
+        }))
+        , 500);
+    });
   }
 }
