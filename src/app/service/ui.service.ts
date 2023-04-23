@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppConfig } from 'src/app/shared/Config';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Supplier } from './model/supplier.model';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class UiService {
   private static TELEMETRY_URL: string = AppConfig.BASE_URL + "/telemetry";
   private static CONTACT_URL: string = AppConfig.BASE_URL + "/contact";
   private static CONNECTOR_URL: string = AppConfig.BASE_URL + "/connector";
+  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('/management/supplier');
 
   constructor(private http: HttpClient) { }
 
@@ -89,7 +91,21 @@ export class UiService {
   }
 
   //Supplier ----
-  public getSuppliers(): Promise<any> {
+  public getSuppliers(): Promise<Supplier[] | undefined> {
+    const params = new HttpParams();
+    return firstValueFrom(this.http.get<any[] | undefined>(UiService.SUPPLIER_URL, { params }))
+      .then(data => data?.map(dto => {
+        return {
+          id: dto.id,
+          stationNameShort: dto.stationNameShort,
+          rnw: dto.rnw,
+          hsw: dto.hsw,
+          lastValue: Math.floor(Math.random() * (dto.hsw - dto.rnw + 1) + dto.rnw),
+          lastValueFrom: dto.timestamp
+        } as Supplier;
+      }));
+  }
+  /* public getSuppliers(): Promise<any> {
     const fnGetRandomNumber = (factor: number) => {
       return Math.ceil(Math.random() * factor);
     }
@@ -126,5 +142,5 @@ export class UiService {
       }
         , 500);
     });
-  }
+  } */
 }

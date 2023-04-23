@@ -25,6 +25,6 @@ export class OverviewComponent implements OnInit {
   }
 
   private loadSupplier(): void {
-    this.uiService.getSuppliers().then(data => this.supplier = data);
+    this.uiService.getSuppliers().then((data: any) => this.supplier = data);
   }
 }
