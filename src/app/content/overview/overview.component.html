@@ -31,7 +31,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entry>
-            <tr style="cursor: pointer">
+            <tr style="cursor: pointer" (click)="navigateToDetail(entry.id)">
                 <td>{{ entry.stationNameShort }}</td>
                 <td>
                     {{ entry.lastValue | number : '1.2-2' }}
