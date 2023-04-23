@@ -34,12 +34,13 @@
             <tr style="cursor: pointer">
                 <td>{{ entry.stationNameShort }}</td>
                 <td>
-                    <div style="display: flex; align-content: center;">
+                    {{ entry.lastValue | number : '1.2-2' }}
+                    <!-- <div style="display: flex; align-content: center;">
                         <span class="mr-2">{{ entry.lastValue | number : '1.2-2' }}</span>
                         <span style="width: 70%">
                             <p-progressBar [value]="entry.indicatorValue"></p-progressBar>
                         </span>
-                    </div>
+                    </div> -->
                 </td>
                 <td>{{ entry.rnw | number : '1.2-2' }}</td>
                 <td>{{ entry.hsw | number : '1.2-2' }}</td>
