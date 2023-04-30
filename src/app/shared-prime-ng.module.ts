@@ -4,6 +4,8 @@ import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { MenubarModule } from 'primeng/menubar';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { InputTextModule } from 'primeng/inputtext';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [],
@@ -12,13 +14,17 @@ import { ProgressBarModule } from 'primeng/progressbar';
     TableModule,
     CardModule,
     MenubarModule,
-    ProgressBarModule
+    ProgressBarModule,
+    InputTextModule,
+    ChartModule
   ],
   exports: [
     TableModule,
     CardModule,
     MenubarModule,
-    ProgressBarModule
+    ProgressBarModule,
+    InputTextModule,
+    ChartModule
   ]
 })
 export class SharedPrimeNGModule { }

@@ -20,7 +20,7 @@ export class OverviewComponent implements OnInit {
     this.loadSupplier();
   }
 
-  navigateToDetail(id: number): void {
+  navigateToDetail(id: string): void {
     this.router.navigate(['/', 'detail', id]);
   }
 

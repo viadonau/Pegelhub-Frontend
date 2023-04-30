@@ -4,28 +4,44 @@ import { OverviewComponent } from './overview.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { routes } from 'src/app/app-routing.module';
 
 describe('OverviewComponent', () => {
   let component: OverviewComponent;
   let fixture: ComponentFixture<OverviewComponent>;
   let testData: Supplier[] = [
     {
-      id: 1,
+      id: '1',
       stationNameShort: 'Test I',
       lastValue: 1.8,
       lastValueFrom: new Date(),
       rnw: 1.0,
       hsw: 4.8,
-      indicatorValue: 2.0
+      indicatorValue: 2.0,
+      hsw100: 0,
+      mw: 0,
+      rnw100: 0,
+      stationBaseReferenceLevel: 0,
+      stationWaterKilometer: 0,
+      stationWaterside: '',
+      stationWaterType: ''
     }, {
-      id: 2,
+      id: '2',
       stationNameShort: 'Test II',
       lastValue: 1.9,
       lastValueFrom: new Date(),
       rnw: 1.1,
       hsw: 5.8,
-      indicatorValue: 2.1
+      indicatorValue: 2.1,
+      hsw100: 0,
+      mw: 0,
+      rnw100: 0,
+      stationBaseReferenceLevel: 0,
+      stationWaterKilometer: 0,
+      stationWaterside: '',
+      stationWaterType: ''
     }
   ];
 
@@ -33,6 +49,7 @@ describe('OverviewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [OverviewComponent],
       schemas: [NO_ERRORS_SCHEMA],
+      imports: [ RouterTestingModule.withRoutes(routes) ],
       providers: [
         HttpClient, HttpHandler
       ]
@@ -58,5 +75,13 @@ describe('OverviewComponent', () => {
       fixture.detectChanges();
       done();
     });
+  });
+
+  it('test navigation', () => {
+    const router: Router = TestBed.get(Router);
+    component.navigateToDetail('1');
+    
+    const urlSegments = router.getCurrentNavigation()?.extractedUrl.root.children['primary'].segments.map(s=>s.path)
+    expect(urlSegments?.toString()).toContain('detail,1')
   });
 });

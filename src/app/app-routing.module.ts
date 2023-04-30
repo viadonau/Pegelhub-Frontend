@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './content/overview/overview.component';
+import { DetailComponent } from './content/detail/detail.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'overview',
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'overview',
     component: OverviewComponent
+  },
+  {
+    path: 'detail/:id',
+    component: DetailComponent
   }
 ];
 

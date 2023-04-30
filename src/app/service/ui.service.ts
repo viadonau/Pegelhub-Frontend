@@ -3,6 +3,7 @@ import { AppConfig } from 'src/app/shared/Config';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Supplier } from './model/supplier.model';
 import { firstValueFrom } from 'rxjs';
+import { Measurement } from './model/measurement.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { firstValueFrom } from 'rxjs';
 export class UiService {
 
   private static BASE_URL: string = AppConfig.BASE_URL + "/store";
-  private static MEASUREMENT_URL: string = AppConfig.BASE_URL + "/measurement";
+  private static MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('/store/measurement');
   private static TELEMETRY_URL: string = AppConfig.BASE_URL + "/telemetry";
   private static CONTACT_URL: string = AppConfig.BASE_URL + "/contact";
   private static CONNECTOR_URL: string = AppConfig.BASE_URL + "/connector";
@@ -20,10 +21,10 @@ export class UiService {
 
   //Measurements ----
 
-  public getMeasurements(): Promise<any[] | undefined> {
+  public getMeasurements(range: string): Promise<Measurement[] | undefined> {
     const params = new HttpParams();
 
-    return this.http.get<any[]>(UiService.MEASUREMENT_URL, {
+    return this.http.get<any[]>(UiService.MEASUREMENT_URL.concat('/', range), {
       params
     }).toPromise();
   }
@@ -104,6 +105,11 @@ export class UiService {
           lastValueFrom: dto.timestamp
         } as Supplier;
       }));
+  }
+
+  public getSupplier(id: string): Promise<Supplier | undefined> {
+    const params = new HttpParams();
+    return firstValueFrom(this.http.get<Supplier[] | undefined>(UiService.SUPPLIER_URL, { params })).then(data => data?.filter(data => data.id == id)[0]);
   }
   /* public getSuppliers(): Promise<any> {
     const fnGetRandomNumber = (factor: number) => {
