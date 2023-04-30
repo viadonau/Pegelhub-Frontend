@@ -8,13 +8,15 @@ import { OverviewComponent } from './content/overview/overview.component';
 import { SharedPrimeNGModule } from './shared-prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
+import { DetailComponent } from './content/detail/detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     AppComponent,
-    OverviewComponent
+    OverviewComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
