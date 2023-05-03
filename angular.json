@@ -114,6 +114,9 @@
             ],
             "scripts": [
 
+            ],
+            "codeCoverageExclude": [
+              "src/app/service/**/*"
             ]
           }
         }
