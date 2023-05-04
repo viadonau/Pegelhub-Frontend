@@ -1,43 +1,47 @@
 <p-card [header]="'Pegellieferanten'" styleClass="m-auto fadeinleft animation-duration-200" class="p-4">
     <p-table [value]="supplier" dataKey="id" styleClass="p-datatable-customers fadeinleft animation-duration-200"
-        [rowHover]="true" [rows]="25" responsiveLayout="scroll" [filterDelay]="0" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
-        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowHover]="true" [rows]="25" responsiveLayout="scroll" [filterDelay]="0" [paginator]="true" [rows]="10"
+        [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '50rem' }"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [rowsPerPageOptions]="[10, 25, 50]">
         <ng-template pTemplate="header">
             <tr>
-                <th >
-                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="Pegellieferant">
-                        Pegellieferant
-                        <p-sortIcon field="Pegellieferant"></p-sortIcon></div>
-                    </th>
                 <th>
+                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="stationNameShort">
+                        Pegellieferant
+                        <p-sortIcon field="Pegellieferant"></p-sortIcon>
+                    </div>
+                </th>
+                <th style="text-align: right;">
                     <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="lastValue">
                         Letzter Wert
-                        <p-sortIcon field="lastValue"></p-sortIcon></div>
+                        <p-sortIcon field="lastValue"></p-sortIcon>
+                    </div>
                 </th>
-                <th>
+                <th style="text-align: right;">
                     <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="rnw">
                         RNW
-                        <p-sortIcon field="rnw"></p-sortIcon></div>
+                        <p-sortIcon field="rnw"></p-sortIcon>
+                    </div>
                 </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center"  pSortableColumn="hsw">
+                <th style="text-align: right;">
+                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="hsw">
                         HSW
-                        <p-sortIcon field="hsw"></p-sortIcon></div>
+                        <p-sortIcon field="hsw"></p-sortIcon>
+                    </div>
                 </th>
                 <th>
                     <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="lastValueFrom">
                         Letzter Wert von
-                        <p-sortIcon field="lastValueFrom"></p-sortIcon></div>
+                        <p-sortIcon field="lastValueFrom"></p-sortIcon>
+                    </div>
                 </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entry>
             <tr style="cursor: pointer" (click)="navigateToDetail(entry.id)">
                 <td>{{ entry.stationNameShort }}</td>
-                <td>
-                    {{ entry.lastValue | number : '1.2-2' }}
+                <td style="text-align: right;">{{ entry.lastValue | number : '1.2-2' }}
                     <!-- <div style="display: flex; align-content: center;">
                         <span class="mr-2">{{ entry.lastValue | number : '1.2-2' }}</span>
                         <span style="width: 70%">
@@ -45,8 +49,8 @@
                         </span>
                     </div> -->
                 </td>
-                <td>{{ entry.rnw | number : '1.2-2' }}</td>
-                <td>{{ entry.hsw | number : '1.2-2' }}</td>
+                <td style="text-align: right;">{{ entry.rnw | number : '1.2-2' }}</td>
+                <td style="text-align: right;">{{ entry.hsw | number : '1.2-2' }}</td>
                 <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
             </tr>
         </ng-template>
