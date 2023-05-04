@@ -2,7 +2,7 @@
     class="p-4">
     <div class="grid">
         <div class="col-12">
-            <p-fieldset legend="Metainformationen">
+            <p-fieldset legend="Metainformationen" [toggleable]="true">
                 <div class="surface-section flex">
                     <!-- <div class="font-medium text-3xl text-900 mb-3">Schwedenbrücke</div>
         <div class="text-500 mb-5">Morbi tristique blandit turpis. In viverra ligula id nulla hendrerit rutrum.</div> -->
@@ -63,7 +63,7 @@
             </p-fieldset>
         </div>
         <div class="col-12">
-            <p-fieldset legend="Messdaten">
+            <p-fieldset legend="Messdaten" [toggleable]="true">
                 <p-chart type="line" [data]="chartConfig.data" [options]="chartConfig.options"></p-chart>
             </p-fieldset>
         </div>

@@ -44,7 +44,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   private loadDetailData(): void {
     this.uiService.getSupplier(this.supplierId).then(data => {
       this.supplierDetail = data;
-      this.loadMeasurementData('3d');
+      this.loadMeasurementData('10d');
     });
 
     /* this.detailData = {
@@ -60,7 +60,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     }; */
   }
 
-  private loadMeasurementData(range: string = "5d"): void {
+  private loadMeasurementData(range: string = "1d"): void {
     this.uiService.getMeasurements(range).then(data => {
       this.measurements = this.convertMeasurementResponse(data);
       this.setChartData(this.measurements);
