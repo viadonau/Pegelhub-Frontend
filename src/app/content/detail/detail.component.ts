@@ -60,7 +60,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     }; */
   }
 
-  private loadMeasurementData(range: string = "1d"): void {
+  private loadMeasurementData(range: string = "5d"): void {
     this.uiService.getMeasurements(range).then(data => {
       this.measurements = this.convertMeasurementResponse(data);
       this.setChartData(this.measurements);

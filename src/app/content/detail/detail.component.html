@@ -1,51 +1,71 @@
-<p-card [header]="$any(this.supplierDetail?.stationNameShort)" styleClass="m-auto fadeinleft animation-duration-200" class="p-4">
-    <div class="surface-section flex">
-        <!-- <div class="font-medium text-3xl text-900 mb-3">Schwedenbrücke</div>
+<p-card [header]="$any(this.supplierDetail?.stationNameShort)" styleClass="m-auto fadeinleft animation-duration-200"
+    class="p-4">
+    <div class="grid">
+        <div class="col-12">
+            <p-fieldset legend="Metainformationen">
+                <div class="surface-section flex">
+                    <!-- <div class="font-medium text-3xl text-900 mb-3">Schwedenbrücke</div>
         <div class="text-500 mb-5">Morbi tristique blandit turpis. In viverra ligula id nulla hendrerit rutrum.</div> -->
-        <ul class="list-none p-0 m-0 col-4">
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">Pegelstelle</div>
-                <div id="detail-pegelstelle" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.stationNameShort }}</div>
-            </li>
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">Art</div>
-                <div id="detail-art" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.stationWaterType }}</div>
-            </li>
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">Ufer</div>
-                <div id="detail-ufer" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.stationWaterside }}</div>
-            </li>
-        </ul>
-        <ul class="list-none p-0 m-0 col-4">
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">Stromkilometer</div>
-                <div id="detail-stromkilometer" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.stationWaterKilometer | number: '1.2' }}</div>
-            </li>
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">PNP (Pegelnullpunkt in Meter über Adria)</div>
-                <div id="detail-pnp" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.stationBaseReferenceLevel | number: '1.2' }}</div>
-            </li>
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">RNW 2010 (Regulierungsniederwasser in cm)</div>
-                <div id="detail-rnw" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.rnw }}</div>
-            </li>
-        </ul>
-        <ul class="list-none p-0 m-0 col-4">
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">MW 2010 (Mittelwasser in cm)</div>
-                <div id="detail-mw" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.mw }}</div>
-            </li>
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">HSW 2010 (Höchster Schifffahrtswasserstand in cm)</div>
-                <div id="detail-hsw" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.hsw }}</div>
-            </li>
-            <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
-                <div class="text-500 w-full font-medium">HW 100 (100-jährliches Hochwasser in cm)</div>
-                <div id="detail-hw" class="text-900 w-full md:flex-order-0 flex-order-1">{{ this.supplierDetail?.hsw100 }}</div>
-            </li>
-        </ul>
+                    <ul class="list-none p-0 m-0 col-4">
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">Pegelstelle</div>
+                            <div id="detail-pegelstelle" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.stationNameShort }}</div>
+                        </li>
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">Art</div>
+                            <div id="detail-art" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.stationWaterType }}</div>
+                        </li>
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">Ufer</div>
+                            <div id="detail-ufer" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.stationWaterside }}</div>
+                        </li>
+                    </ul>
+                    <ul class="list-none p-0 m-0 col-4">
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">Stromkilometer</div>
+                            <div id="detail-stromkilometer" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.stationWaterKilometer | number: '1.2' }}</div>
+                        </li>
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">PNP (Pegelnullpunkt in Meter über Adria)</div>
+                            <div id="detail-pnp" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.stationBaseReferenceLevel | number: '1.2' }}</div>
+                        </li>
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">RNW 2010 (Regulierungsniederwasser in cm)</div>
+                            <div id="detail-rnw" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.rnw }}</div>
+                        </li>
+                    </ul>
+                    <ul class="list-none p-0 m-0 col-4">
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">MW 2010 (Mittelwasser in cm)</div>
+                            <div id="detail-mw" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.mw
+                                }}</div>
+                        </li>
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">HSW 2010 (Höchster Schifffahrtswasserstand in cm)
+                            </div>
+                            <div id="detail-hsw" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.hsw }}</div>
+                        </li>
+                        <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-full font-medium">HW 100 (100-jährliches Hochwasser in cm)</div>
+                            <div id="detail-hw" class="text-900 w-full md:flex-order-0 flex-order-1">{{
+                                this.supplierDetail?.hsw100 }}</div>
+                        </li>
+                    </ul>
+                </div>
+            </p-fieldset>
+        </div>
+        <div class="col-12">
+            <p-fieldset legend="Messdaten">
+                <p-chart type="line" [data]="chartConfig.data" [options]="chartConfig.options"></p-chart>
+            </p-fieldset>
+        </div>
     </div>
-</p-card>
-<p-card styleClass="m-auto fadeinleft animation-duration-200" class="p-4">
-    <p-chart type="line" [data]="chartConfig.data" [options]="chartConfig.options"></p-chart>
 </p-card>

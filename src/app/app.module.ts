@@ -7,8 +7,8 @@ import { HeaderComponent } from './header/header/header.component';
 import { OverviewComponent } from './content/overview/overview.component';
 import { SharedPrimeNGModule } from './shared-prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MenubarModule } from 'primeng/menubar';
 import { DetailComponent } from './content/detail/detail.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 
 @NgModule({
   declarations: [
@@ -20,11 +20,11 @@ import { DetailComponent } from './content/detail/detail.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     AppRoutingModule,
-    SharedPrimeNGModule,
-    MenubarModule
+    SharedPrimeNGModule
   ],
   providers: [],
   bootstrap: [AppComponent]
