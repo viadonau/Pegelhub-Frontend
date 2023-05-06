@@ -1,4 +1,4 @@
-import { BaseTest, expect, test } from './overview.action';
+import { BaseTest, expect, test } from 'tests/overview/overview.action';
 
 test.beforeEach(async ({ page, args }) => {
   await BaseTest.navigate(page, BaseTest.getConfig().BASE_URL);

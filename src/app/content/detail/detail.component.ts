@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { de } from 'date-fns/locale';
+import * as Highcharts from "highcharts/highstock";
 import { Subscription } from 'rxjs';
 import { Measurement } from 'src/app/service/model/measurement.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
@@ -18,6 +18,8 @@ export class DetailComponent implements OnInit, OnDestroy {
   public supplierDetail!: Supplier | undefined;
   public measurements!: Measurement[];
 
+  Highcharts: typeof Highcharts = Highcharts;
+
   public chartConfig = {
     data: {},
     options: {}
@@ -33,8 +35,6 @@ export class DetailComponent implements OnInit, OnDestroy {
       this.supplierId = param['id'];
       this.loadDetailData();
     });
-
-    this.setChartOptions();
   }
 
   ngOnDestroy(): void {
@@ -44,26 +44,14 @@ export class DetailComponent implements OnInit, OnDestroy {
   private loadDetailData(): void {
     this.uiService.getSupplier(this.supplierId).then(data => {
       this.supplierDetail = data;
-      this.loadMeasurementData('10d');
+      this.loadMeasurementData('5d');
     });
-
-    /* this.detailData = {
-      pegelstelle: 'Schwedenbrücke',
-      art: 'Schreibpegel und/oder Datensammler',
-      ufer: 'Rechts',
-      stromkilometer: 6.28,
-      pnp: 152.68,
-      rnw: 288,
-      mw: 338,
-      hsw: 402,
-      hw: 573
-    }; */
   }
 
   private loadMeasurementData(range: string = "1d"): void {
     this.uiService.getMeasurements(range).then(data => {
       this.measurements = this.convertMeasurementResponse(data);
-      this.setChartData(this.measurements);
+      this.initChart(this.measurements);
     });
   }
 
@@ -88,21 +76,106 @@ export class DetailComponent implements OnInit, OnDestroy {
     return measurements;
   }
 
-  private setChartData(data: Measurement[]): void {
-    const documentStyle = getComputedStyle(document.documentElement);
-
-    this.chartConfig.data = {
-      labels: this.getChartLabels(data),
-      datasets: [
-        this.getDataSet('HSW', new Array(data.length).fill(this.supplierDetail?.hsw), '+1', documentStyle.getPropertyValue('--red-700'), 0.4),
-        this.getDataSet('RNW', new Array(data.length).fill(this.supplierDetail?.rnw), false, documentStyle.getPropertyValue('--red-700'), 0.4),
-        this.getDataSet('MW', new Array(data.length).fill(this.supplierDetail?.mw), false, documentStyle.getPropertyValue('--green-500'), 0.4),
-        this.getDataSet('Pegel', data.map(obj => Number(obj.fields['pegel'])), false, documentStyle.getPropertyValue('--blue-500'), 0.4)
+  private initChart(pData: Measurement[]): void {
+    // @ts-ignore
+    Highcharts.chart('container', {
+      navigator: {
+        enabled: true
+      },
+      chart: {
+        zoomType: 'x',
+        height: 'auto'
+      },
+      title: {
+        text: 'Messdaten',
+        align: 'left'
+      },
+      xAxis: {
+        type: 'datetime'
+      },
+      yAxis: [
+        {
+          title: {
+            text: "Pegel"
+          },
+          plotLines: this.getChartPlotlines(this.supplierDetail)
+        }
+      ],
+      legend: {
+        enabled: true
+      },
+      plotOptions: {
+        area: {
+          fillColor: {
+            linearGradient: {
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 1
+            },
+            stops: [
+              // @ts-ignore
+              [0, Highcharts.getOptions().colors[0]],
+              // @ts-ignore
+              [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+            ]
+          },
+          marker: {
+            radius: 2
+          },
+          lineWidth: 1,
+          states: {
+            hover: {
+              lineWidth: 1
+            }
+          }
+        }
+      },
+      series: [
+        {
+          threshold: 0,
+          fillColor: 'transparent',
+          type: 'spline',
+          name: 'Pegel',
+          data: pData.map(entry => {
+            return [new Date(entry.timestamp).getTime(), (entry.fields as any).pegel];
+          }).sort((a, b) => a[0] - b[0])
+        }
       ]
-    };
+    });
   }
 
-  private getDataSet(title: string, values: number[], fill: string | boolean, borderColor: string, tension: number): any {
+  private getChartPlotlines(detail?: Supplier): any[] {
+    if(detail == null){
+      return [];
+    }
+    
+    return [
+      {
+        label: {
+          text: 'RNW - '.concat(String(detail.rnw))
+        },
+        color: 'red',
+        value: detail.rnw
+      },
+      {
+        label: {
+          text: 'MW - '.concat(String(detail.mw))
+        },
+        color: 'blue',
+        value: detail.mw
+      },
+      {
+        label: {
+          text: 'HSW - '.concat(String(detail.hsw))
+        },
+        color: 'red',
+        value: detail.hsw
+      }
+    ]
+  }
+
+  /* private getDataSet(title: string, values: number[], fill: string | boolean, borderColor: string, tension: number): any {
     return {
       label: title,
       data: values,
@@ -154,5 +227,5 @@ export class DetailComponent implements OnInit, OnDestroy {
         }
       }
     };
-  }
+  } */
 }

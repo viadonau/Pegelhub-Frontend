@@ -4,6 +4,7 @@ import { DetailComponent } from './detail.component';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Supplier } from 'src/app/service/model/supplier.model';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -63,7 +64,7 @@ describe('DetailComponent', () => {
     expect(component.convertMeasurementResponse(data)).toEqual(expectedData as any);
   });
 
-  it('test getDataSet', () => {
+  it('test getChartPlotlines', () => {
     const testArgs = {
       title: 'Test',
       values: [1, 2, 3],
@@ -72,34 +73,53 @@ describe('DetailComponent', () => {
       tension: 0.4
     };
 
-    // @ts-ignore
-    const datasetObj = component.getDataSet(testArgs.title, testArgs.values, testArgs.fill, testArgs.borderColor, testArgs.tension);
+    const supplier: Supplier = {
+      id: '',
+      hsw: 100,
+      hsw100: 100,
+      mw: 80,
+      rnw100: 60,
+      rnw: 68,
+      indicatorValue: 0,
+      stationBaseReferenceLevel: 0,
+      stationNameShort: '',
+      stationWaterKilometer: 0,
+      stationWaterside: '',
+      stationWaterType: '',
+      lastValue: 0,
+      lastValueFrom: new Date(2023, 0, 1, 0, 0, 0)
+    };
 
-    expect(datasetObj.label).toBe(testArgs.title);
-    expect(datasetObj.data).toBe(testArgs.values);
-    expect(datasetObj.fill).toBe(testArgs.fill);
-    expect(datasetObj.borderColor).toBe(testArgs.borderColor);
-    expect(datasetObj.tension).toBe(testArgs.tension);
-  });
+    //@ts-ignore
+    expect(component.getChartPlotlines(null)).toEqual([]);
 
-  it('test getChartLabels', () => {
-    const labels = ['28. Apr.', '29. Apr.'];
-    // @ts-ignore
-    expect(component.getChartLabels(convertedData)).toEqual(labels);
-  });
+    //@ts-ignore
+    const plotlines = component.getChartPlotlines(supplier);
 
-  it('test setChartData', () => {
-    // @ts-ignore
-    component.setChartData(convertedData);
+    const expectedPlotlines: any[] = [
+      {
+        label: {
+          text: 'RNW - '.concat(String(supplier.rnw))
+        },
+        color: 'red',
+        value: supplier.rnw
+      },
+      {
+        label: {
+          text: 'MW - '.concat(String(supplier.mw))
+        },
+        color: 'blue',
+        value: supplier.mw
+      },
+      {
+        label: {
+          text: 'HSW - '.concat(String(supplier.hsw))
+        },
+        color: 'red',
+        value: supplier.hsw
+      },
+    ];
 
-    expect((component.chartConfig.data as any).labels).toBeTruthy();
-    expect((component.chartConfig.data as any).datasets).toBeTruthy();
-  });
-
-  it('test setChartOptions', () => {
-    // @ts-ignore
-    component.setChartOptions();
-
-    expect(component.chartConfig.options).toBeTruthy();
+    expect(plotlines).toEqual(expectedPlotlines);
   });
 });

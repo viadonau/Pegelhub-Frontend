@@ -9,6 +9,7 @@ import { SharedPrimeNGModule } from './shared-prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailComponent } from './content/detail/detail.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
     HttpClientModule,
     AppRoutingModule,
     AppRoutingModule,
-    SharedPrimeNGModule
+    SharedPrimeNGModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

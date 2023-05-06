@@ -64,7 +64,9 @@
         </div>
         <div class="col-12">
             <p-fieldset legend="Messdaten" [toggleable]="true">
-                <p-chart type="line" [data]="chartConfig.data" [options]="chartConfig.options"></p-chart>
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                </figure>
             </p-fieldset>
         </div>
     </div>
