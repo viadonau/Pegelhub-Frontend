@@ -44,7 +44,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   private loadDetailData(): void {
     this.uiService.getSupplier(this.supplierId).then(data => {
       this.supplierDetail = data;
-      this.loadMeasurementData('5d');
+      this.loadMeasurementData('30d');
     });
   }
 
@@ -82,6 +82,43 @@ export class DetailComponent implements OnInit, OnDestroy {
       navigator: {
         enabled: true
       },
+      rangeSelector: {
+        enabled: true,
+        allButtonsEnabled: true,
+        selected: 0,
+        buttons: [
+          {
+            type: 'hour',
+            count: 12,
+            text: '12h',
+            title: 'View 12 hours'
+          },
+          {
+            type: 'day',
+            count: 1,
+            text: '1d',
+            title: 'View 1 day'
+          },
+          {
+            type: 'day',
+            count: 7,
+            text: '7d',
+            title: 'View 7 days'
+          },
+          {
+            type: 'month',
+            count: 1,
+            text: '1m',
+            title: 'View 1 month'
+          },
+          {
+            type: 'all',
+            text: 'All',
+            title: 'View all'
+          }
+        ]
+
+      },
       chart: {
         zoomType: 'x',
         height: 'auto'
@@ -98,6 +135,7 @@ export class DetailComponent implements OnInit, OnDestroy {
           title: {
             text: "Pegel"
           },
+          max: this.supplierDetail?.hsw,
           plotLines: this.getChartPlotlines(this.supplierDetail)
         }
       ],
@@ -146,10 +184,10 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   private getChartPlotlines(detail?: Supplier): any[] {
-    if(detail == null){
+    if (detail == null) {
       return [];
     }
-    
+
     return [
       {
         label: {
