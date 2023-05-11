@@ -9,6 +9,7 @@ import { SharedPrimeNGModule } from './shared-prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailComponent } from './content/detail/detail.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import { DataViewModule } from "primeng/dataview";
 
 @NgModule({
   declarations: [
@@ -16,15 +17,18 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
     HeaderComponent,
     AppComponent,
     OverviewComponent,
-    DetailComponent
-  ],
+    DetailComponent,
+    
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     AppRoutingModule,
-    SharedPrimeNGModule
+    SharedPrimeNGModule,
+    DataViewModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

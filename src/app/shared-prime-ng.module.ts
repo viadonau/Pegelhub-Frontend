@@ -7,6 +7,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ChartModule } from 'primeng/chart';
 import { FieldsetModule } from 'primeng/fieldset';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,9 @@ import { FieldsetModule } from 'primeng/fieldset';
     ProgressBarModule,
     InputTextModule,
     ChartModule,
-    FieldsetModule
+    FieldsetModule,
+    DataViewModule,
+    
   ],
   exports: [
     TableModule,
@@ -27,7 +30,9 @@ import { FieldsetModule } from 'primeng/fieldset';
     ProgressBarModule,
     InputTextModule,
     ChartModule,
-    FieldsetModule
+    FieldsetModule,
+    DataViewModule
+    
   ]
 })
 export class SharedPrimeNGModule { }
