@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "./style/theme.scss"; 
+@import "./style/theme.scss";
+@import "./style/highcharts.scss";
 
 * {
     font-family: $font-family;
@@ -8,5 +9,3 @@
 body {
     margin: 0px;
   }
-
-

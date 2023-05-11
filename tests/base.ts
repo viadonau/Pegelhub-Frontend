@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { TestConfig } from "./testconfig";
+import { TestConfig } from "tests/testconfig";
 
 export { TestConfig };
 export class BaseTest {
