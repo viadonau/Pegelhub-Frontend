@@ -1,63 +1,130 @@
-<p-card [header]="'Pegellieferanten'" styleClass="m-auto fadeinleft animation-duration-200" class="p-4">
-    <p-table [value]="supplier" dataKey="id" styleClass="p-datatable-customers fadeinleft animation-duration-200"
-        [rowHover]="true" [rows]="25" responsiveLayout="scroll" [filterDelay]="0" [paginator]="true" [rows]="10"
-        [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '50rem' }"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+<div class="card">
+    <p-dataView [value]="supplier" dataKey="id" [paginator]="true" [rows]='9'
+        styleClass="p-datatable-customers fadeinleft animation-duration-200" responsiveLayout="scroll"
+        [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [rowsPerPageOptions]="[10, 25, 50]">
+
         <ng-template pTemplate="header">
-            <tr>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="stationNameShort">
-                        Pegellieferant
-                        <p-sortIcon field="Pegellieferant"></p-sortIcon>
-                    </div>
-                </th>
-                <th style="text-align: right;">
-                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="lastValue">
-                        Letzter Wert
-                        <p-sortIcon field="lastValue"></p-sortIcon>
-                    </div>
-                </th>
-                <th style="text-align: right;">
-                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="rnw">
-                        RNW
-                        <p-sortIcon field="rnw"></p-sortIcon>
-                    </div>
-                </th>
-                <th style="text-align: right;">
-                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="hsw">
-                        HSW
-                        <p-sortIcon field="hsw"></p-sortIcon>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="lastValueFrom">
-                        Letzter Wert von
-                        <p-sortIcon field="lastValueFrom"></p-sortIcon>
-                    </div>
-                </th>
-            </tr>
+            <div class="flex justify-content-end">
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
         </ng-template>
-        <ng-template pTemplate="body" let-entry>
-            <tr style="cursor: pointer" (click)="navigateToDetail(entry.id)">
-                <td>{{ entry.stationName }}</td>
-                <td style="text-align: right;">{{ entry.lastValue | number : '1.2-2' }}
-                    <!-- <div style="display: flex; align-content: center;">
+
+        <ng-template pTemplate="listItem">
+            <div class="col-12">
+                <p-card [header]="'Pegellieferanten'" class="p-4">
+
+
+                    <p-table [value]="supplier" dataKey="id"
+                        styleClass="p-datatable-customers fadeinleft animation-duration-200" [rows]="25"
+                        [filterDelay]="0">
+
+                        <ng-template pTemplate="header">
+
+
+                            <tr>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="stationNameShort">
+                                        Pegellieferant
+                                        <p-sortIcon field="Pegellieferant"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th style="text-align: right;">
+                                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="lastValue">
+                                        Letzter Wert
+                                        <p-sortIcon field="lastValue"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th style="text-align: right;">
+                                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="rnw">
+                                        RNW
+                                        <p-sortIcon field="rnw"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th style="text-align: right;">
+                                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="hsw">
+                                        HSW
+                                        <p-sortIcon field="hsw"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center" pSortableColumn="lastValueFrom">
+                                        Letzter Wert von
+                                        <p-sortIcon field="lastValueFrom"></p-sortIcon>
+                                    </div>
+                                </th>
+                            </tr>
+
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-entry>
+                            <tr style="cursor: pointer" (click)="navigateToDetail(entry.id)">
+                                <td>{{ entry.stationName }}</td>
+                                <td style="text-align: right;">{{ entry.lastValue | number : '1.2-2' }}
+                                    <!-- <div style="display: flex; align-content: center;">
                         <span class="mr-2">{{ entry.lastValue | number : '1.2-2' }}</span>
                         <span style="width: 70%">
                             <p-progressBar [value]="entry.indicatorValue"></p-progressBar>
                         </span>
                     </div> -->
-                </td>
-                <td style="text-align: right;">{{ entry.rnw | number : '1.2-2' }}</td>
-                <td style="text-align: right;">{{ entry.hsw | number : '1.2-2' }}</td>
-                <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
-            </tr>
+                                </td>
+                                <td style="text-align: right;">{{ entry.rnw | number : '1.2-2' }}</td>
+                                <td style="text-align: right;">{{ entry.hsw | number : '1.2-2' }}</td>
+                                <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="5" [style]="'text-align: center'">Keine Pegellieferanten vorhanden</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-card>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="gridItem" let-entry>
+
+            <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+
+                <div style="cursor: pointer" (click)="navigateToDetail(entry.id)">
+
+                    <div class="p-4 border-1 surface-border surface-card border-round">
+
+                        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                            <span class="flex align-items-center gap-2">Letzter Wert {{ entry.lastValue | number :
+                                '1.2-2' }}
+                                <!-- <div style="display: flex; ">
+                    <span class="mr-2">{{ entry.lastValue | number : '1.2-2' }}</span>
+                    <span style="width: 70%">
+                        <p-progressBar [value]="entry.indicatorValue"></p-progressBar>
+                    </span>
+                </div> -->
+                            </span>
+                            {{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}
+
+                        </div>
+                        <div class="flex flex-column align-items-center gap-3 py-5">
+                            <div class="text-2xl font-bold">
+
+                                {{ entry.stationNameShort }}
+                            </div>
+                        </div>
+                        <div class="flex align-items-center justify-content-between">
+                            <span class="text-2xl font-semibold">RNW {{ entry.rnw | number : '1.2-2' }}</span>
+                            <span class="text-2xl font-semibold">HSW {{ entry.hsw | number : '1.2-2' }}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
                 <td colspan="5" [style]="'text-align: center'">Keine Pegellieferanten vorhanden</td>
             </tr>
         </ng-template>
-    </p-table>
-</p-card>
+
+    </p-dataView>
+</div>

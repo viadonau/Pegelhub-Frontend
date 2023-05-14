@@ -9,7 +9,7 @@ import { SharedPrimeNGModule } from './shared-prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailComponent } from './content/detail/detail.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
-import { HighchartsChartModule } from 'highcharts-angular';
+import { DataViewModule } from "primeng/dataview";
 
 @NgModule({
   declarations: [
@@ -17,8 +17,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
     HeaderComponent,
     AppComponent,
     OverviewComponent,
-    DetailComponent
-  ],
+    DetailComponent,
+    
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -26,7 +27,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     AppRoutingModule,
     AppRoutingModule,
     SharedPrimeNGModule,
-    HighchartsChartModule
+    DataViewModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

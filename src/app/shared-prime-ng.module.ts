@@ -6,6 +6,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { FieldsetModule } from 'primeng/fieldset';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,9 @@ import { FieldsetModule } from 'primeng/fieldset';
     MenubarModule,
     ProgressBarModule,
     InputTextModule,
-    FieldsetModule
+    FieldsetModule,
+    DataViewModule,
+    
   ],
   exports: [
     TableModule,
