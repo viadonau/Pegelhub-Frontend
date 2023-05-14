@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailComponent } from './detail.component';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Supplier } from 'src/app/service/model/supplier.model';
@@ -10,31 +10,35 @@ describe('DetailComponent', () => {
   let component: DetailComponent;
   let fixture: ComponentFixture<DetailComponent>;
 
-  const apiData = {
-    "1": {
-      "2023-04-28T14:18:07.349Z": {
-        "pegel": 3
-      }
+  const apiData = [{
+    "measurement": "153ea12c-e1bd-11ed-b5ea-0242ac120012",
+    "timestamp": "2023-05-13T09:45:00",
+    "fields": {
+      "pegel": 100.0
     },
-    "2": {
-      "2023-04-29T14:18:07.349Z": {
-        "pegel": 4
-      }
-    }
-  };
+    "infos": {}
+  },
+  {
+    "measurement": "153ea12c-e1bd-11ed-b5ea-0242ac120012",
+    "timestamp": "2023-05-13T09:15:00",
+    "fields": {
+      "pegel": 127.0
+    },
+    "infos": {}
+  },];
   const convertedData = [
     {
-      id: "1",
-      timestamp: "2023-04-28T14:18:07.349Z",
+      id: "153ea12c-e1bd-11ed-b5ea-0242ac120012",
+      timestamp: "2023-05-13T09:45:00",
       fields: {
-        "pegel": 3
+        "pegel": 100.0
       },
     },
     {
-      id: "2",
-      timestamp: "2023-04-29T14:18:07.349Z",
+      id: "153ea12c-e1bd-11ed-b5ea-0242ac120012",
+      timestamp: "2023-05-13T09:15:00",
       fields: {
-        "pegel": 4
+        "pegel": 127.0
       }
     }
   ];
@@ -82,10 +86,11 @@ describe('DetailComponent', () => {
       rnw: 68,
       indicatorValue: 0,
       stationBaseReferenceLevel: 0,
-      stationNameShort: '',
+      stationName: '',
       stationWaterKilometer: 0,
-      stationWaterside: '',
-      stationWaterType: '',
+      stationWaterSide: '',
+      mainUsage: '',
+      stationNumber: '0',
       lastValue: 0,
       lastValueFrom: new Date(2023, 0, 1, 0, 0, 0)
     };

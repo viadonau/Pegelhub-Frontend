@@ -21,10 +21,12 @@ export class UiService {
 
   //Measurements ----
 
-  public getMeasurements(range: string): Promise<Measurement[] | undefined> {
-    const params = new HttpParams();
+  public getMeasurements(stationNumber: string, range: string): Promise<Measurement[] | undefined> {
+    let params = new HttpParams();
+    params = params.set('apiKey', 'ZEdWu0IgHuT115c0jRfyA3MEKWrgyW68Sr12YyCM448pBlfawD3ctpDFinnbD86R');
+    params = params.set('stationNumber', stationNumber);
 
-    return this.http.get<any[]>(UiService.MEASUREMENT_URL.concat('/', range), {
+    return this.http.get<any[]>(UiService.MEASUREMENT_URL.concat('/supplier/', range), {
       params
     }).toPromise();
   }
@@ -98,18 +100,19 @@ export class UiService {
       .then(data => data?.map(dto => {
         return {
           id: dto.id,
-          stationNameShort: dto.stationNameShort,
+          stationName: dto.stationName,
           rnw: dto.rnw,
           hsw: dto.hsw,
           lastValue: Math.floor(Math.random() * (dto.hsw - dto.rnw + 1) + dto.rnw),
-          lastValueFrom: dto.timestamp
+          lastValueFrom: dto.timestamp || new Date()
         } as Supplier;
       }));
   }
 
   public getSupplier(id: string): Promise<Supplier | undefined> {
     const params = new HttpParams();
-    return firstValueFrom(this.http.get<Supplier[] | undefined>(UiService.SUPPLIER_URL, { params })).then(data => data?.filter(data => data.id == id)[0]);
+    //return firstValueFrom(this.http.get<Supplier[] | undefined>(UiService.SUPPLIER_URL, { params })).then(data => data?.filter(data => data.id == id)[0]);
+    return firstValueFrom(this.http.get<Supplier | undefined>(UiService.SUPPLIER_URL.concat('/', id), { params }));
   }
   /* public getSuppliers(): Promise<any> {
     const fnGetRandomNumber = (factor: number) => {

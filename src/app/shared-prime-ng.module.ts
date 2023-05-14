@@ -5,7 +5,6 @@ import { CardModule } from 'primeng/card';
 import { MenubarModule } from 'primeng/menubar';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
-import { ChartModule } from 'primeng/chart';
 import { FieldsetModule } from 'primeng/fieldset';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { FieldsetModule } from 'primeng/fieldset';
     MenubarModule,
     ProgressBarModule,
     InputTextModule,
-    ChartModule,
     FieldsetModule
   ],
   exports: [
@@ -26,7 +24,6 @@ import { FieldsetModule } from 'primeng/fieldset';
     MenubarModule,
     ProgressBarModule,
     InputTextModule,
-    ChartModule,
     FieldsetModule
   ]
 })

@@ -14,7 +14,7 @@ describe('OverviewComponent', () => {
   let testData: Supplier[] = [
     {
       id: '1',
-      stationNameShort: 'Test I',
+      stationName: 'Test I',
       lastValue: 1.8,
       lastValueFrom: new Date(),
       rnw: 1.0,
@@ -25,11 +25,12 @@ describe('OverviewComponent', () => {
       rnw100: 0,
       stationBaseReferenceLevel: 0,
       stationWaterKilometer: 0,
-      stationWaterside: '',
-      stationWaterType: ''
+      stationWaterSide: '',
+      mainUsage: '',
+      stationNumber: '0'
     }, {
       id: '2',
-      stationNameShort: 'Test II',
+      stationName: 'Test II',
       lastValue: 1.9,
       lastValueFrom: new Date(),
       rnw: 1.1,
@@ -40,8 +41,9 @@ describe('OverviewComponent', () => {
       rnw100: 0,
       stationBaseReferenceLevel: 0,
       stationWaterKilometer: 0,
-      stationWaterside: '',
-      stationWaterType: ''
+      stationWaterSide: '',
+      mainUsage: '',
+      stationNumber: '1'
     }
   ];
 

@@ -1,6 +1,6 @@
 export interface Supplier {
     id: string;
-    stationNameShort: string;
+    stationName: string;
     lastValue?: number;
     lastValueFrom?: Date;
     rnw: number;
@@ -12,6 +12,7 @@ export interface Supplier {
     mw: number;
     stationBaseReferenceLevel: number;
     stationWaterKilometer: number;
-    stationWaterside: string;
-    stationWaterType: string;
+    stationWaterSide: string;
+    mainUsage: string;
+    stationNumber: string;
 }

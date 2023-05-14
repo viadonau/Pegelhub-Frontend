@@ -40,7 +40,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-entry>
             <tr style="cursor: pointer" (click)="navigateToDetail(entry.id)">
-                <td>{{ entry.stationNameShort }}</td>
+                <td>{{ entry.stationName }}</td>
                 <td style="text-align: right;">{{ entry.lastValue | number : '1.2-2' }}
                     <!-- <div style="display: flex; align-content: center;">
                         <span class="mr-2">{{ entry.lastValue | number : '1.2-2' }}</span>

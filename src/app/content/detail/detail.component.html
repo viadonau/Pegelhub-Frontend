@@ -1,4 +1,4 @@
-<p-card [header]="$any(this.supplierDetail?.stationNameShort)" styleClass="m-auto fadeinleft animation-duration-200"
+<p-card [header]="$any(this.supplierDetail?.stationName)" styleClass="m-auto fadeinleft animation-duration-200"
     class="p-4">
     <div class="grid">
         <div class="col-12">
@@ -10,17 +10,17 @@
                         <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
                             <div class="text-500 w-full font-medium">Pegelstelle</div>
                             <div id="detail-pegelstelle" class="text-900 w-full md:flex-order-0 flex-order-1">{{
-                                this.supplierDetail?.stationNameShort }}</div>
+                                this.supplierDetail?.stationName }}</div>
                         </li>
                         <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
                             <div class="text-500 w-full font-medium">Art</div>
                             <div id="detail-art" class="text-900 w-full md:flex-order-0 flex-order-1">{{
-                                this.supplierDetail?.stationWaterType }}</div>
+                                this.supplierDetail?.mainUsage }}</div>
                         </li>
                         <li class="flex align-items-center py-2 px-2 border-top-1 surface-border flex-wrap">
                             <div class="text-500 w-full font-medium">Ufer</div>
                             <div id="detail-ufer" class="text-900 w-full md:flex-order-0 flex-order-1">{{
-                                this.supplierDetail?.stationWaterside }}</div>
+                                this.supplierDetail?.stationWaterSide }}</div>
                         </li>
                     </ul>
                     <ul class="list-none p-0 m-0 col-4">

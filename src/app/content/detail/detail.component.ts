@@ -44,12 +44,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   private loadDetailData(): void {
     this.uiService.getSupplier(this.supplierId).then(data => {
       this.supplierDetail = data;
-      this.loadMeasurementData('30d');
+      this.loadMeasurementData(String(this.supplierDetail?.stationNumber), '30d');
     });
   }
 
-  private loadMeasurementData(range: string = "1d"): void {
-    this.uiService.getMeasurements(range).then(data => {
+  private loadMeasurementData(stationNumber: string, range: string = "1d"): void {
+    this.uiService.getMeasurements(stationNumber, range).then(data => {
       this.measurements = this.convertMeasurementResponse(data);
       this.initChart(this.measurements);
     });
@@ -57,8 +57,16 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   public convertMeasurementResponse(data: any): Measurement[] {
     const measurements: Measurement[] = [];
+    
+    data.forEach((entry: any) => {
+      measurements.push({
+        id: entry.measurement,
+        timestamp: entry.timestamp,
+        fields: entry.fields
+      });
+    });
 
-    Object.entries(data).forEach(entry => {
+    /* Object.entries(data).forEach(entry => {
       const id = entry[0];
 
       Object.entries(entry[1] as Map<any, any>).forEach(values => {
@@ -71,7 +79,7 @@ export class DetailComponent implements OnInit, OnDestroy {
           fields: fields
         });
       })
-    });
+    }); */
 
     return measurements;
   }
@@ -176,7 +184,7 @@ export class DetailComponent implements OnInit, OnDestroy {
           type: 'spline',
           name: 'Pegel',
           data: pData.map(entry => {
-            return [new Date(entry.timestamp).getTime(), (entry.fields as any).pegel];
+            return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, (entry.fields as any).pegel];
           }).sort((a, b) => a[0] - b[0])
         }
       ]
@@ -212,58 +220,4 @@ export class DetailComponent implements OnInit, OnDestroy {
       }
     ]
   }
-
-  /* private getDataSet(title: string, values: number[], fill: string | boolean, borderColor: string, tension: number): any {
-    return {
-      label: title,
-      data: values,
-      fill: fill,
-      borderColor: borderColor,
-      backgroundColor: 'rgba(0, 0, 0, 0.25)',
-      tension: tension
-    };
-  }
-
-  private getChartLabels(data: Measurement[]): string[] {
-    return data.map(obj => new Date(obj.timestamp).toLocaleDateString('de', { day: '2-digit', month: 'short' }))
-  }
-
-  private setChartOptions(): void {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-    this.chartConfig.options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.6,
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: textColorSecondary
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false
-          }
-        },
-        y: {
-          ticks: {
-            color: textColorSecondary
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false
-          }
-        }
-      }
-    };
-  } */
 }
