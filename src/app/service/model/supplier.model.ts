@@ -13,6 +13,8 @@ export interface Supplier {
     stationBaseReferenceLevel: number;
     stationWaterKilometer: number;
     stationWaterSide: string;
+    stationWaterLatitude: number;
+    stationWaterLongitude: number;
     mainUsage: string;
     stationNumber: string;
 }

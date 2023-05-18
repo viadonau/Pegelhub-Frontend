@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as Highcharts from "highcharts/highstock";
 import { Subscription } from 'rxjs';
+import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 import { Measurement } from 'src/app/service/model/measurement.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { UiService } from 'src/app/service/ui.service';
@@ -17,6 +18,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   public supplierDetail!: Supplier | undefined;
   public measurements!: Measurement[];
+  public position!: LeafletPosition;
 
   Highcharts: typeof Highcharts = Highcharts;
 
@@ -44,6 +46,14 @@ export class DetailComponent implements OnInit, OnDestroy {
   private loadDetailData(): void {
     this.uiService.getSupplier(this.supplierId).then(data => {
       this.supplierDetail = data;
+      if(data){
+        this.position = {
+          supplierId: data.id,
+          title: data.stationName,
+          latitude: data.stationWaterLatitude,
+          longitude: data.stationWaterLongitude
+        };
+      }
       this.loadMeasurementData(String(this.supplierDetail?.stationNumber), '30d');
     });
   }

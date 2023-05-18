@@ -10,7 +10,12 @@ import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 export class PositionComponent implements AfterViewInit, OnChanges {
  
   @Input("")
-  suppliers!: LeafletPosition[];
+  suppliers: LeafletPosition[] = [];
+  @Input("")
+  allowNaviation: boolean = false;
+
+  private static readonly startPositionLongitude: number = 14.9492;
+  private static readonly startPositionLatitude: number = 48.1916;
 
   private map!: any;
 
@@ -25,7 +30,7 @@ export class PositionComponent implements AfterViewInit, OnChanges {
   private setUpLeafletMap(){
     if(!this.map){
       this.map = leaflet.map("positionMap",{
-        center: [ 48.1916, 14.9492],
+        center: [ PositionComponent.startPositionLatitude, PositionComponent.startPositionLongitude],
         zoom: 8
       });
 
@@ -33,6 +38,14 @@ export class PositionComponent implements AfterViewInit, OnChanges {
         maxZoom: 18,
         minZoom: 3,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
+
+      this.suppliers.forEach(supplier=>{
+        const marker = leaflet.marker([supplier.latitude, supplier.longitude],{
+          title: supplier.title
+        });
+        marker.bindPopup(`<b>${supplier.title}</b>`).openPopup();
+        marker.addTo(this.map)
       });
 
       tiles.addTo(this.map);
