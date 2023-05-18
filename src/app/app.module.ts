@@ -8,6 +8,7 @@ import { OverviewComponent } from './content/overview/overview.component';
 import { SharedPrimeNGModule } from './shared-prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailComponent } from './content/detail/detail.component';
+import { NotFoundComponent } from './content/not-found/not-found.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import { DataViewModule } from "primeng/dataview";
 
@@ -18,7 +19,7 @@ import { DataViewModule } from "primeng/dataview";
     AppComponent,
     OverviewComponent,
     DetailComponent,
-    
+    NotFoundComponent
     ],
   imports: [
     BrowserModule,

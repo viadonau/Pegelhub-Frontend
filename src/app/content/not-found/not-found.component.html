@@ -1,0 +1,20 @@
+<div class="row justify-content-center">
+    <div class="col-sm-12">
+        <div class="card shadow-sm border-0 mx-auto mt-5 text-center" [style]="{width: '35rem'}">
+            <h2 class="mb-0 px-5" [style]="{fontSize: '6rem'}">404</h2>
+            <hr>
+
+            <div class="d-inline-flex align-items-center justify-content-center" [style]="{fontSize: '1.5rem'}">
+                <i class="cil-search me-2"></i>
+                <span class="card-subtitle mb-0 text-muted">
+                    Seite nicht gefunden | Ungültige URL
+                </span>
+            </div>
+
+            <div class="card-body mx-auto mt-2">
+                <p-button label="Zurück zur Übersicht" icon="pi pi-search" iconPos="right"
+                    [routerLink]="['/', 'overview']"></p-button>
+            </div>
+        </div>
+    </div>
+</div>

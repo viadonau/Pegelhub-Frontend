@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './content/overview/overview.component';
 import { DetailComponent } from './content/detail/detail.component';
+import { NotFoundComponent } from './content/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,14 @@ export const routes: Routes = [
   {
     path: 'detail/:id',
     component: DetailComponent
+  },
+  {
+    path: 'notfound',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'notfound'
   }
 ];
 
