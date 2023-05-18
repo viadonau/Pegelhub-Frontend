@@ -9,9 +9,9 @@ import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 })
 export class PositionComponent implements AfterViewInit, OnChanges {
  
-  @Input("")
+  @Input()
   suppliers: LeafletPosition[] = [];
-  @Input("")
+  @Input()
   allowNaviation: boolean = false;
 
   private static readonly startPositionLongitude: number = 14.9492;
