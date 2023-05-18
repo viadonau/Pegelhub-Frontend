@@ -41,11 +41,13 @@ export class PositionComponent implements AfterViewInit, OnChanges {
       });
 
       this.suppliers.forEach(supplier=>{
-        const marker = leaflet.marker([supplier.latitude, supplier.longitude],{
-          title: supplier.title
-        });
-        marker.bindPopup(`<b>${supplier.title}</b>`).openPopup();
-        marker.addTo(this.map)
+        if(supplier){
+          const marker = leaflet.marker([supplier.latitude, supplier.longitude],{
+            title: supplier.title
+          });
+          marker.bindPopup(`<b>${supplier.title}</b>`).openPopup();
+          marker.addTo(this.map)
+        }
       });
 
       tiles.addTo(this.map);
