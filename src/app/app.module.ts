@@ -11,6 +11,7 @@ import { DetailComponent } from './content/detail/detail.component';
 import { NotFoundComponent } from './content/not-found/not-found.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import { DataViewModule } from "primeng/dataview";
+import { PositionComponent } from './content/position/position.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { DataViewModule } from "primeng/dataview";
     AppComponent,
     OverviewComponent,
     DetailComponent,
+    PositionComponent,
     NotFoundComponent
     ],
   imports: [
