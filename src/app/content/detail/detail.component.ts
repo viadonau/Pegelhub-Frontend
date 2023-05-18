@@ -55,9 +55,19 @@ export class DetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  public stationWaterSideFormatter(stationWaterSide: string | undefined): string | undefined {
+    if (stationWaterSide == 'R') {
+      return "rechts";
+    } else if (stationWaterSide == 'L') {
+      return "links";
+    } else {
+      return stationWaterSide;
+    }
+  }
+
   public convertMeasurementResponse(data: any): Measurement[] {
     const measurements: Measurement[] = [];
-    
+
     data.forEach((entry: any) => {
       measurements.push({
         id: entry.measurement,

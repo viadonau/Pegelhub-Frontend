@@ -68,6 +68,13 @@ describe('DetailComponent', () => {
     expect(component.convertMeasurementResponse(data)).toEqual(expectedData as any);
   });
 
+  it('test stationWaterSideFormatter', () => {
+    expect(component.stationWaterSideFormatter('L')).toEqual('links');
+    expect(component.stationWaterSideFormatter('R')).toEqual('rechts');
+    expect(component.stationWaterSideFormatter('A')).toEqual('A');
+    expect(component.stationWaterSideFormatter(undefined)).toEqual(undefined);
+  });
+
   it('test getChartPlotlines', () => {
     const testArgs = {
       title: 'Test',
