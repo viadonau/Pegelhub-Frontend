@@ -1,0 +1,18 @@
+div.card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    //grid-template-rows: 200px auto 200px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 5px;
+    grid-row: 10;
+    
+  }
+
+div.pagination{
+
+margin-top: 20px;
+
+
+}  
+
+
