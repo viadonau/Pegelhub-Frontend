@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './content/overview/overview.component';
 import { DetailComponent } from './content/detail/detail.component';
 import { NotFoundComponent } from './content/not-found/not-found.component';
+import { QueryInterceptor } from './service/query.interceptor';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,7 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    canActivate: [QueryInterceptor],
     path: 'overview',
     component: OverviewComponent
   },
