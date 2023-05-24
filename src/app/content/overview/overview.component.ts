@@ -16,8 +16,8 @@ import { UiService } from 'src/app/service/ui.service';
 
 })
 export class OverviewComponent implements OnInit {
-<<<<<<< HEAD
- supplier: Supplier[] = [];
+  supplier: Supplier[] = [];
+  public displayMode: ("table" | "tile" | "mini" | "map") = 'table';
   gfg: any[]
   gfg2: any[]
   p: number = 1;
@@ -35,32 +35,21 @@ export class OverviewComponent implements OnInit {
 
   constructor(
     private uiService: UiService,
-    private router: Router
-  ) {
-
-    this.gfg = [
-      {label:"GRID", value: "1", icon: "pi pi-th-large" },
-     ];
-
-     this.gfg2 = [
-      {label:"TABLE", value: "2", icon: "pi pi-table" },
-     ];
-
-    
-
-   }
-=======
-  supplier: Supplier[] = [];
-  public displayMode: ("table" | "tile" | "mini" | "map") = 'table';
-  
-
-  constructor(
-    private uiService: UiService,
     private router: Router,
     private route: ActivatedRoute,
     private queryService: QueryService
-  ) { }
->>>>>>> d35a6bf34961b37a29a7c954d90bc774f444b74b
+  ) {
+    this.gfg = [
+      {label:"GRID", value: "2", icon: "pi pi-th-large" },
+     ];
+
+     this.gfg2 = [
+      {label:"TABLE", value: "1", icon: "pi pi-table" },
+     ];
+
+   }
+
+
 
   ngOnInit(): void {
     this.route.queryParams
