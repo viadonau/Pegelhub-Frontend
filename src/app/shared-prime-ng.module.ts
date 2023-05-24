@@ -7,7 +7,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DataViewModule } from 'primeng/dataview';
-import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,8 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     FieldsetModule,
     DataViewModule,
-    ButtonModule
+    SelectButtonModule,
+    PaginatorModule 
   ],
   exports: [
     TableModule,
@@ -29,7 +31,8 @@ import { ButtonModule } from 'primeng/button';
     ProgressBarModule,
     InputTextModule,
     FieldsetModule,
-    ButtonModule
+    SelectButtonModule,
+    PaginatorModule 
   ]
 })
 export class SharedPrimeNGModule { }

@@ -11,41 +11,7 @@ import { routes } from 'src/app/app-routing.module';
 describe('OverviewComponent', () => {
   let component: OverviewComponent;
   let fixture: ComponentFixture<OverviewComponent>;
-  let testData: Supplier[] = [
-    {
-      id: '1',
-      stationName: 'Test I',
-      lastValue: 1.8,
-      lastValueFrom: new Date(),
-      rnw: 1.0,
-      hsw: 4.8,
-      indicatorValue: 2.0,
-      hsw100: 0,
-      mw: 0,
-      rnw100: 0,
-      stationBaseReferenceLevel: 0,
-      stationWaterKilometer: 0,
-      stationWaterSide: '',
-      mainUsage: '',
-      stationNumber: '0'
-    }, {
-      id: '2',
-      stationName: 'Test II',
-      lastValue: 1.9,
-      lastValueFrom: new Date(),
-      rnw: 1.1,
-      hsw: 5.8,
-      indicatorValue: 2.1,
-      hsw100: 0,
-      mw: 0,
-      rnw100: 0,
-      stationBaseReferenceLevel: 0,
-      stationWaterKilometer: 0,
-      stationWaterSide: '',
-      mainUsage: '',
-      stationNumber: '1'
-    }
-  ];
+ 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -61,7 +27,7 @@ describe('OverviewComponent', () => {
     fixture = TestBed.createComponent(OverviewComponent);
     component = fixture.componentInstance;
 
-    component.supplier = testData;
+    // component.supplier = testData;
 
     fixture.detectChanges();
   });

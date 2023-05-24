@@ -15,13 +15,38 @@ import { UiService } from 'src/app/service/ui.service';
 
 })
 export class OverviewComponent implements OnInit {
-  supplier: Supplier[] = [];
-  
+ supplier: Supplier[] = [];
+  gfg: any[]
+  gfg2: any[]
+  p: number = 1;
+  public display: number = 1;
+  first: number = 0;
+  rows: number = 10;
+
+  onPageChange(event: { first: number; rows: number; }) {
+      this.first = event.first;
+      this.rows = event.rows;
+  }
+
+   
+ 
 
   constructor(
     private uiService: UiService,
     private router: Router
-  ) { }
+  ) {
+
+    this.gfg = [
+      {label:"GRID", value: "1", icon: "pi pi-th-large" },
+     ];
+
+     this.gfg2 = [
+      {label:"TABLE", value: "2", icon: "pi pi-table" },
+     ];
+
+    
+
+   }
 
   ngOnInit(): void {
     this.loadSupplier();
@@ -34,4 +59,11 @@ export class OverviewComponent implements OnInit {
   private loadSupplier(): void {
     this.uiService.getSuppliers().then((data: any) => this.supplier = data.slice(0, 12));
   }
+
+  changeDisplay(displayOption: number): void {
+    this.display = displayOption;
+  }
+
+ 
+
 }
