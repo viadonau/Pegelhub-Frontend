@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as Highcharts from "highcharts/highstock";
 import { Subscription } from 'rxjs';
 import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
@@ -29,7 +29,8 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private uiService: UiService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +56,9 @@ export class DetailComponent implements OnInit, OnDestroy {
         };
       }
       this.loadMeasurementData(String(this.supplierDetail?.stationNumber), '30d');
+    }).catch(error=>{
+      debugger;
+      this.router.navigate(['/notfound']);
     });
   }
 
