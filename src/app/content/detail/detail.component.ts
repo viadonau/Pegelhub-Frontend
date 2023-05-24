@@ -57,7 +57,6 @@ export class DetailComponent implements OnInit, OnDestroy {
       }
       this.loadMeasurementData(String(this.supplierDetail?.stationNumber), '30d');
     }).catch(error=>{
-      debugger;
       this.router.navigate(['/notfound']);
     });
   }
