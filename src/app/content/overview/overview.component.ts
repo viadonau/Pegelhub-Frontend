@@ -27,6 +27,7 @@ export class OverviewComponent implements OnInit {
   first: number = 0;
   rows: number = 10;
   public positions!: LeafletPosition[];
+  public miniMode: boolean = false;
 
   onPageChange(event: { first: number; rows: number; }) {
       this.first = event.first;
@@ -48,7 +49,7 @@ export class OverviewComponent implements OnInit {
      ];
 
      this.gfg3 = [
-      {label:"MAP", value: "2", icon: "pi pi-map" },
+      {label:"MAP", value: "3", icon: "pi pi-map" },
      ];
 
    }
@@ -58,7 +59,23 @@ export class OverviewComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-        this.displayMode = this.queryService.getMode();       
+        this.displayMode = this.queryService.getMode();  
+        this.miniMode = false;
+
+        switch(this.displayMode){
+          case "map":
+            this.display = 3;
+            break;
+          case 'table':
+            this.display = 1;
+            break;
+          case 'tile':
+            this.display = 2;
+            break;
+          case 'mini':
+            this.miniMode = true;
+            break;
+        }     
       }
     );
     this.loadSupplier();

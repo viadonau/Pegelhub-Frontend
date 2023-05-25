@@ -38,13 +38,7 @@
        
         </div> 
     </ng-container>
-    <ng-container *ngIf="display <= 2">
-      <div class="pagination">
-        <div class="card flex justify-content-center">
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="50" [rowsPerPageOptions]="[10, 20, 30]"  [showFirstLastIcon]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
-        </div>
-      </div>
-    </ng-container>
+    
     
     <ng-container #table *ngIf="display === 1;">
       <p-table [value]="supplier" responsiveLayout="scroll" [filterDelay]="0"
@@ -61,11 +55,11 @@
                 <p-sortIcon field="lastValue"></p-sortIcon>
               
             </th>
-            <th style="text-align: right;" pSortableColumn="rnw">
+            <th style="text-align: right;" pSortableColumn="rnw" *ngIf="!this.miniMode">
                RNW
                 <p-sortIcon field="rnw"></p-sortIcon>
             </th>
-            <th style="text-align: right;" pSortableColumn="hsw">
+            <th style="text-align: right;" pSortableColumn="hsw" *ngIf="!this.miniMode">
                 HSW
                 <p-sortIcon field="hsw"></p-sortIcon>
             </th>
@@ -79,8 +73,8 @@
           <tr style="cursor: pointer" (click)="navigateToDetail(entry.id)">
             <td>{{ entry.stationName }}</td>
             <td style="text-align: right;">{{ entry.lastValue | number: '1.2-2' }}</td>
-            <td style="text-align: right;">{{ entry.rnw | number: '1.2-2' }}</td>
-            <td style="text-align: right;">{{ entry.hsw | number: '1.2-2' }}</td>
+            <td style="text-align: right;" *ngIf="!this.miniMode">{{ entry.rnw | number: '1.2-2' }}</td>
+            <td style="text-align: right;" *ngIf="!this.miniMode">{{ entry.hsw | number: '1.2-2' }}</td>
             <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
           </tr>
         </ng-template>
@@ -91,6 +85,13 @@
         </ng-template>
       </p-table>
       
+    </ng-container>
+    <ng-container *ngIf="display <= 2">
+      <div class="pagination">
+        <div class="card flex justify-content-center">
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="50" [rowsPerPageOptions]="[10, 20, 30]"  [showFirstLastIcon]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
+        </div>
+      </div>
     </ng-container>
     <ng-container *ngIf="display === 3;">
       <app-position *ngIf="this.positions" [suppliers]="this.positions"></app-position>
