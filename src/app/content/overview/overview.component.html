@@ -5,11 +5,12 @@
       
         <p-selectButton [options]="gfg2" optionLabel="label" optionValue="1" (click)="changeDisplay(1)"></p-selectButton>
         <p-selectButton [options]="gfg" optionLabel="label" optionValue="2" (click)="changeDisplay(2)"></p-selectButton>
+        <p-selectButton [options]="gfg3" optionLabel="label" optionValue="3" (click)="changeDisplay(3)"></p-selectButton>
       </div>
     </ng-template>
   
    
-    <ng-container *ngIf="display === 2; else table"  >
+    <ng-container *ngIf="display === 2"  >
      
       <div class="card">
         <ng-template #grid pTemplate="gridItem"  ngFor let-entry [ngForOf]="supplier">
@@ -37,12 +38,15 @@
        
         </div> 
     </ng-container>
-    <div class="pagination">
-    <div class="card flex justify-content-center">
-      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="50" [rowsPerPageOptions]="[10, 20, 30]"  [showFirstLastIcon]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
-    </div>
-  </div>
-    <ng-template #table >
+    <ng-container *ngIf="display <= 2">
+      <div class="pagination">
+        <div class="card flex justify-content-center">
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="50" [rowsPerPageOptions]="[10, 20, 30]"  [showFirstLastIcon]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
+        </div>
+      </div>
+    </ng-container>
+    
+    <ng-container #table *ngIf="display === 1;">
       <p-table [value]="supplier" responsiveLayout="scroll" [filterDelay]="0"
        >
         <ng-template pTemplate="header">
@@ -86,6 +90,10 @@
           </tr>
         </ng-template>
       </p-table>
-    </ng-template>
+      
+    </ng-container>
+    <ng-container *ngIf="display === 3;">
+      <app-position *ngIf="this.positions" [suppliers]="this.positions"></app-position>
+    </ng-container>
   </p-card>
   

@@ -1,5 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { QueryService } from 'src/app/service/query.service';
 import { UiService } from 'src/app/service/ui.service';
@@ -18,20 +19,19 @@ import { UiService } from 'src/app/service/ui.service';
 export class OverviewComponent implements OnInit {
   supplier: Supplier[] = [];
   public displayMode: ("table" | "tile" | "mini" | "map") = 'table';
-  gfg: any[]
-  gfg2: any[]
+  gfg: any[];
+  gfg2: any[];
+  gfg3: any[];
   p: number = 1;
   public display: number = 1;
   first: number = 0;
   rows: number = 10;
+  public positions!: LeafletPosition[];
 
   onPageChange(event: { first: number; rows: number; }) {
       this.first = event.first;
       this.rows = event.rows;
   }
-
-   
- 
 
   constructor(
     private uiService: UiService,
@@ -45,6 +45,10 @@ export class OverviewComponent implements OnInit {
 
      this.gfg2 = [
       {label:"TABLE", value: "1", icon: "pi pi-table" },
+     ];
+
+     this.gfg3 = [
+      {label:"MAP", value: "2", icon: "pi pi-map" },
      ];
 
    }
@@ -65,7 +69,19 @@ export class OverviewComponent implements OnInit {
   }
 
   private loadSupplier(): void {
-    this.uiService.getSuppliers().then((data: any) => this.supplier = data.slice(0, 12));
+    this.uiService.getSuppliers().then((data: any) => {
+      this.supplier = data.slice(0, 12);
+      if(data){
+        this.positions = data.map((supplier: any) => {
+          return {
+            supplierId: supplier.id,
+            title: supplier.stationName,
+            latitude: supplier.stationWaterLatitude,
+            longitude: supplier.stationWaterLongitude
+          }
+        });
+      }
+    });
   }
 
   changeDisplay(displayOption: number): void {
