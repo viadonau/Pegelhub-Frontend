@@ -104,7 +104,9 @@ export class UiService {
           rnw: dto.rnw,
           hsw: dto.hsw,
           lastValue: Math.floor(Math.random() * (dto.hsw - dto.rnw + 1) + dto.rnw),
-          lastValueFrom: dto.timestamp || new Date()
+          lastValueFrom: dto.timestamp || new Date(),
+          stationWaterLatitude: dto.stationWaterLatitude,
+          stationWaterLongitude: dto.stationWaterLongitude
         } as Supplier;
       }));
   }

@@ -89,7 +89,7 @@
     <ng-container *ngIf="display <= 2">
       <div class="pagination">
         <div class="card flex justify-content-center">
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="50" [rowsPerPageOptions]="[10, 20, 30]"  [showFirstLastIcon]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="supplier.length" [rowsPerPageOptions]="[10, 20, 30]"  [showFirstLastIcon]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
         </div>
       </div>
     </ng-container>
