@@ -18,6 +18,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   public supplierDetail!: Supplier | undefined;
   public measurements!: Measurement[];
+  public prognose!: Measurement[];
   public position!: LeafletPosition;
 
   Highcharts: typeof Highcharts = Highcharts;
@@ -62,9 +63,16 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   private loadMeasurementData(stationNumber: string, range: string = "1d"): void {
-    this.uiService.getMeasurements(stationNumber, range).then(data => {
-      this.measurements = this.convertMeasurementResponse(data);
-      this.initChart(this.measurements);
+    const aPromises = [];
+
+    aPromises.push(this.uiService.getMeasurements(stationNumber, range));
+    aPromises.push(this.uiService.getPrognose(stationNumber));
+
+    Promise.all(aPromises).then(values => {
+      this.measurements = this.convertMeasurementResponse(values[0]);
+      this.prognose = this.convertMeasurementResponse(values[1]);
+      
+      this.initChart(this.measurements, this.prognose);
     });
   }
 
@@ -107,7 +115,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     return measurements;
   }
 
-  private initChart(pData: Measurement[]): void {
+  private initChart(pData: Measurement[], prognose: Measurement[] = []): void {
     // @ts-ignore
     Highcharts.chart('container', {
       navigator: {
@@ -208,6 +216,14 @@ export class DetailComponent implements OnInit, OnDestroy {
           name: 'Pegel',
           data: pData.map(entry => {
             return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, (entry.fields as any).pegel];
+          }).sort((a, b) => a[0] - b[0])
+        }, {
+          threshold: 0,
+          fillColor: 'transparent',
+          type: 'spline',
+          name: 'Prognose',
+          data: prognose.map(entry => {
+            return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, parseInt((entry.fields as any).pegel)];
           }).sort((a, b) => a[0] - b[0])
         }
       ]

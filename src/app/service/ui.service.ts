@@ -31,6 +31,38 @@ export class UiService {
     }).toPromise();
   }
 
+  public getPrognose(stationNumber: string): Promise<Measurement[] | undefined> {
+    let params = new HttpParams();
+    params = params.set('apiKey', 'ZEdWu0IgHuT115c0jRfyA3MEKWrgyW68Sr12YyCM448pBlfawD3ctpDFinnbD86R');
+    params = params.set('stationNumber', stationNumber);
+
+    return new Promise((resolve) => {
+      const prognose: Measurement[] = [];
+      
+      /* const date = new Date();
+      date.setMilliseconds(0);
+      date.setSeconds(0);
+      date.setMinutes(0);
+      date.setHours(date.getHours() + 1);
+
+      date.setDate(14);
+      date.setMonth(4);
+
+      for(let i = 0; i < 48; i++){
+        date.setMinutes(date.getMinutes() + 30);
+        prognose.push(
+          {
+            id: String(Math.round(Math.random() * 100000000)),
+            timestamp: date.toISOString(),
+            fields: {'pegel': String(Math.round(Math.random() * 150))}
+          }
+        )
+      } */
+      
+      resolve(prognose);
+  });
+  }
+
   public createMeasurement(data: any): Promise<any | undefined> {
     const params = new HttpParams();
 
