@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
         return this.authService.authData.pipe(take(1), exhaustMap(authData => {
             const apiKey = authData?.apiKey;
             const modifiedReq = apiKey == null ? req.clone() : req.clone({
-                params: new HttpParams().set('apiKey', 'asdf')
+                params: new HttpParams().set('apiKey', apiKey)
             });
 
             return next.handle(modifiedReq);
