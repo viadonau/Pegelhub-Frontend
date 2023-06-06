@@ -1,5 +1,5 @@
 <p-menubar id="header" [model]="this.menuItems">
   <ng-template pTemplate="start">
-    <img id="headerLogo" src="assets/pegelhub_logo.png" height="40" class="mr-2">
+    <img id="headerLogo" src="assets/pegelhub_logo.png" height="40" class="mr-2" (click)="onHeaderClick()" style="cursor: pointer;">
   </ng-template>
 </p-menubar>
