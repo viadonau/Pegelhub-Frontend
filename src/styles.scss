@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./style/base-theme.scss";
 @import "./style/theme.scss";
 @import "./style/highcharts.scss";
 
@@ -9,3 +10,18 @@
 body {
     margin: 0px;
   }
+
+  //Themings
+  .p-button {
+    border-radius: $button-radius !important;
+  }
+
+  .p-card {
+    border-radius: $card-radius !important;
+  }
+
+  /*$container-radius: 1rem;
+  $input-radius: 1rem;
+  $progress-radius: 1rem;
+  $menu-item-radius: 1rem;
+  $image-radius: 1rem;*/

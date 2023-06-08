@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
 
 @Component({
@@ -9,7 +10,11 @@ import {MenuItem} from 'primeng/api';
 export class HeaderComponent {
   public menuItems: MenuItem[];
 
-  constructor() {
+  constructor(private router: Router) {
     this.menuItems = [];
+  }
+
+  public onHeaderClick(){
+    this.router.navigate(['/']);
   }
 }

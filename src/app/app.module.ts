@@ -12,7 +12,7 @@ import { NotFoundComponent } from './content/not-found/not-found.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import { DataViewModule } from "primeng/dataview";
 import { PositionComponent } from './content/position/position.component';
-import { QueryInterceptor } from './service/query.interceptor';
+import { AuthInterceptor } from './service/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,9 @@ import { QueryInterceptor } from './service/query.interceptor';
     DataViewModule,
     
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
