@@ -1,7 +1,7 @@
 export interface Supplier {
     id: string;
     stationName: string;
-    lastValue?: number;
+    lastValue: number;
     lastValueFrom?: Date;
     rnw: number;
     hsw: number;

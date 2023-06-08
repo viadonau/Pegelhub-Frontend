@@ -3,44 +3,13 @@
       <div class="card flex justify-content-end">
         
       
-        <p-selectButton [options]="gfg2" optionLabel="label" optionValue="1" (click)="changeDisplay(1)"></p-selectButton>
-        <p-selectButton [options]="gfg" optionLabel="label" optionValue="2" (click)="changeDisplay(2)"></p-selectButton>
+        <p-selectButton [options]="gfg" optionLabel="label" optionValue="1" (click)="changeDisplay(1)"></p-selectButton>
+        <p-selectButton [options]="gfg2" optionLabel="label" optionValue="2" (click)="changeDisplay(2)"></p-selectButton>
         <p-selectButton [options]="gfg3" optionLabel="label" optionValue="3" (click)="changeDisplay(3)"></p-selectButton>
       </div>
     </ng-template>
   
-   
-    <ng-container *ngIf="display === 2"  >
-     
-      <div class="card">
-        <ng-template #grid pTemplate="gridItem"  ngFor let-entry [ngForOf]="supplier">
-          
-            <div style="cursor: pointer" (click)="navigateToDetail(entry.id)">
-                <div class="p-4 border-1 surface-border surface-card border-round">
-                  <div class="flex flex-wrap align-items-center justify-content-between gap-2">
-                    <span class="flex align-items-center gap-2">Letzter Wert {{ entry.lastValue | number:'1.2-2' }}</span>
-                    {{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}
-                  </div>
-                  <div class="flex flex-column align-items-center gap-3 py-5">
-                    <div class="text-2xl font-bold">{{ entry.stationName }}</div>
-                  </div>
-                  <div class="flex align-items-center justify-content-between">
-                    <span class="text-2xl font-semibold">RNW {{ entry.rnw | number: '1.2-2' }}</span>
-                    <span class="text-2xl font-semibold">HSW {{ entry.hsw | number: '1.2-2' }}</span>
-                  </div>
-                </div>
-            
-              </div>
-          
-           
-        </ng-template>
-        
-       
-        </div> 
-    </ng-container>
-    
-    
-    <ng-container #table *ngIf="display === 1;">
+    <ng-container #table *ngIf="display === 1">
       <p-table [value]="supplier" responsiveLayout="scroll" [filterDelay]="0"
        >
         <ng-template pTemplate="header">
@@ -77,6 +46,7 @@
             <td style="text-align: right;" *ngIf="!this.miniMode">{{ entry.hsw | number: '1.2-2' }}</td>
             <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
           </tr>
+          
         </ng-template>
         <ng-template pTemplate="emptymessage">
           <tr>
@@ -86,9 +56,45 @@
       </p-table>
       
     </ng-container>
+   
+    <ng-container *ngIf="display === 2"  >
+     
+      <div class="card">
+        <ng-template #grid pTemplate="gridItem"  ngFor let-entry [ngForOf]="supplier">
+            <div style="cursor: pointer" (click)="navigateToDetail(entry.id)">
+                <div class="p-4 border-1 surface-border surface-card border-round">
+                  
+                  <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                  
+                    <span class="flex align-items-center gap-2 text-2xl font-bold">Letzter Wert {{ entry.lastValue | number:'1.2-2' }}</span>
+                    <span class="flex align-items-center gap-2 text-2xl font-bold"> {{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</span>
+                  </div>
+                  <div class="flex flex-column align-items-center gap-3 py-5">
+                    <div class="text-3xl font-bold">{{ entry.stationName }}</div>
+                  </div>
+                  <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                    <span class="text-lg">RNW {{ entry.rnw | number: '1.2-2' }}</span>
+                    <span style="width: 40%;"><p-progressBar [value]="getCombinedValue(entry)"  [showValue]="false"></p-progressBar></span>
+                    <span class="text-lg">HSW {{ entry.hsw | number: '1.2-2' }}</span>
+                    
+                  </div>
+                </div>
+            
+              </div>
+          
+           
+        </ng-template>
+        
+       
+        </div> 
+    </ng-container>
+    
+    
+   
     <ng-container *ngIf="display <= 2">
       <div class="pagination">
         <div class="card flex justify-content-center">
+          
           <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="supplier.length" [rowsPerPageOptions]="[10, 20, 30]"  [showFirstLastIcon]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
         </div>
       </div>

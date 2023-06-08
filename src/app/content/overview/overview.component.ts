@@ -40,13 +40,16 @@ export class OverviewComponent implements OnInit {
     private route: ActivatedRoute,
     private queryService: QueryService
   ) {
+
     this.gfg = [
+      {label:"TABLE", value: "1", icon: "pi pi-table" },
+     ];
+
+    this.gfg2 = [
       {label:"GRID", value: "2", icon: "pi pi-th-large" },
      ];
 
-     this.gfg2 = [
-      {label:"TABLE", value: "1", icon: "pi pi-table" },
-     ];
+     
 
      this.gfg3 = [
       {label:"MAP", value: "3", icon: "pi pi-map" },
@@ -100,6 +103,13 @@ export class OverviewComponent implements OnInit {
         });
       }
     });
+  }
+
+  getCombinedValue(entry: Supplier): number {
+    const minValue = Math.min(entry.rnw);
+    const maxValue = Math.max(entry.hsw);
+
+    return (100/entry.hsw*entry.lastValue);
   }
 
   changeDisplay(displayOption: number): void {
