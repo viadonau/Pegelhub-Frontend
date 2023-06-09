@@ -1,0 +1,27 @@
+<div style="justify-content: space-around; display: flex;">
+    <div style="width: 50%;">
+        <p-card class="p-4">
+            <ng-template pTemplate="content">
+                <ng-container>
+                    <div>
+                        <form [formGroup]="this.loginForm">
+                            <div class="grid fadein">
+                                <div class="col-12">
+                                    <div class="w-full inline-flex">
+                                        <i class="pi pi-user fg-primary mx-2 my-auto"></i>
+                                        <input id="apiKeyInp" formControlName="apiKey" class="w-full input-round"
+                                            type="text" pInputText placeholder="API Key">
+                                    </div>
+                                </div>
+                                <div class="col-12 pt-0" style="text-align: center;">
+                                    <button pRipple pButton class="p-button-primary p-button p-button-rounded"
+                                        type="button" (click)="onContinue()" (keypress)="onContinue()">Weiter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </ng-container>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

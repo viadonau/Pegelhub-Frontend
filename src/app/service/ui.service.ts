@@ -23,7 +23,6 @@ export class UiService {
 
   public getMeasurements(stationNumber: string, range: string): Promise<Measurement[] | undefined> {
     let params = new HttpParams();
-    params = params.set('apiKey', 'ZEdWu0IgHuT115c0jRfyA3MEKWrgyW68Sr12YyCM448pBlfawD3ctpDFinnbD86R');
     params = params.set('stationNumber', stationNumber);
 
     return this.http.get<any[]>(UiService.MEASUREMENT_URL.concat('/supplier/', range), {
@@ -33,7 +32,6 @@ export class UiService {
 
   public getPrognose(stationNumber: string): Promise<Measurement[] | undefined> {
     let params = new HttpParams();
-    params = params.set('apiKey', 'ZEdWu0IgHuT115c0jRfyA3MEKWrgyW68Sr12YyCM448pBlfawD3ctpDFinnbD86R');
     params = params.set('stationNumber', stationNumber);
 
     return new Promise((resolve) => {
