@@ -47,19 +47,23 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   private loadDetailData(): void {
     this.uiService.getSupplier(this.supplierId).then(data => {
-      this.supplierDetail = data;
-      if(data){
-        this.position = {
-          supplierId: data.id,
-          title: data.stationName,
-          latitude: data.stationWaterLatitude,
-          longitude: data.stationWaterLongitude
-        };
-      }
+      this.setDetailData(data); 
       this.loadMeasurementData(String(this.supplierDetail?.stationNumber), '30d');
-    }).catch(error=>{
+    }).catch(error => {
       this.router.navigate(['/notfound']);
     });
+  }
+
+  public setDetailData(data: Supplier | undefined): void {
+    this.supplierDetail = data;
+    if (data) {
+      this.position = {
+        supplierId: data.id,
+        title: data.stationName,
+        latitude: data.stationWaterLatitude,
+        longitude: data.stationWaterLongitude
+      };
+    }
   }
 
   private loadMeasurementData(stationNumber: string, range: string = "1d"): void {
@@ -71,7 +75,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     Promise.all(aPromises).then(values => {
       this.measurements = this.convertMeasurementResponse(values[0]);
       this.prognose = this.convertMeasurementResponse(values[1]);
-      
+
       this.initChart(this.measurements, this.prognose);
     });
   }
@@ -96,21 +100,6 @@ export class DetailComponent implements OnInit, OnDestroy {
         fields: entry.fields
       });
     });
-
-    /* Object.entries(data).forEach(entry => {
-      const id = entry[0];
-
-      Object.entries(entry[1] as Map<any, any>).forEach(values => {
-        const timestamp = values[0];
-        const fields = values[1];
-
-        measurements.push({
-          id: id,
-          timestamp: timestamp,
-          fields: fields
-        });
-      })
-    }); */
 
     return measurements;
   }
@@ -214,20 +203,22 @@ export class DetailComponent implements OnInit, OnDestroy {
           fillColor: 'transparent',
           type: 'spline',
           name: 'Pegel',
-          data: pData.map(entry => {
-            return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, (entry.fields as any).pegel];
-          }).sort((a, b) => a[0] - b[0])
+          data: this.prepareMeasurementsForChart(pData)
         }, {
           threshold: 0,
           fillColor: 'transparent',
           type: 'spline',
           name: 'Prognose',
-          data: prognose.map(entry => {
-            return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, parseInt((entry.fields as any).pegel)];
-          }).sort((a, b) => a[0] - b[0])
+          data: this.prepareMeasurementsForChart(prognose)
         }
       ]
     });
+  }
+
+  private prepareMeasurementsForChart(arr: Measurement[]): any {
+    return arr.map(entry => {
+      return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, (entry.fields as any).pegel];
+    }).sort((a, b) => a[0] - b[0])
   }
 
   private getChartPlotlines(detail?: Supplier): any[] {

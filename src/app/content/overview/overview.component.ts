@@ -5,10 +5,6 @@ import { Supplier } from 'src/app/service/model/supplier.model';
 import { QueryService } from 'src/app/service/query.service';
 import { UiService } from 'src/app/service/ui.service';
 
-
-
-
-
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
@@ -48,16 +44,11 @@ export class OverviewComponent implements OnInit {
     this.gfg2 = [
       {label:"GRID", value: "2", icon: "pi pi-th-large" },
      ];
-
-     
-
+    
      this.gfg3 = [
       {label:"MAP", value: "3", icon: "pi pi-map" },
      ];
-
    }
-
-
 
   ngOnInit(): void {
     this.uiService.getPrognose('').then(data => console.log(data));
@@ -106,16 +97,10 @@ export class OverviewComponent implements OnInit {
   }
 
   getCombinedValue(entry: Supplier): number {
-    const minValue = Math.min(entry.rnw);
-    const maxValue = Math.max(entry.hsw);
-
     return (100/entry.hsw*entry.lastValue);
   }
 
   changeDisplay(displayOption: number): void {
     this.display = displayOption;
   }
-
- 
-
 }
