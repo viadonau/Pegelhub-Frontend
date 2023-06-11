@@ -1,8 +1,6 @@
 <p-card [header]="'Pegellieferanten'" class="p-4">
     <ng-template pTemplate="header">
       <div class="card flex justify-content-end">
-        
-      
         <p-selectButton [options]="gfg" optionLabel="label" optionValue="1" (click)="changeDisplay(1)"></p-selectButton>
         <p-selectButton [options]="gfg2" optionLabel="label" optionValue="2" (click)="changeDisplay(2)"></p-selectButton>
         <p-selectButton [options]="gfg3" optionLabel="label" optionValue="3" (click)="changeDisplay(3)"></p-selectButton>
@@ -59,7 +57,7 @@
    
     <ng-container *ngIf="display === 2"  >
      
-      <div class="card">
+      <div id="cardContainer" class="card">
         <ng-template #grid pTemplate="gridItem"  ngFor let-entry [ngForOf]="supplier">
             <div style="cursor: pointer" (click)="navigateToDetail(entry.id)">
                 <div class="p-4 border-1 surface-border surface-card border-round">
