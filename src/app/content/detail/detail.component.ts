@@ -217,7 +217,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   private prepareMeasurementsForChart(arr: Measurement[]): any {
     return arr.map(entry => {
-      return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, (entry.fields as any).pegel];
+      return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, parseFloat((entry.fields as any).pegel)];
     }).sort((a, b) => a[0] - b[0])
   }
 
