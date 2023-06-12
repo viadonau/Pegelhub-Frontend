@@ -13,6 +13,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import { DataViewModule } from "primeng/dataview";
 import { PositionComponent } from './content/position/position.component';
 import { AuthInterceptor } from './service/auth.interceptor';
+import { LoginComponent } from './content/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { AuthInterceptor } from './service/auth.interceptor';
     OverviewComponent,
     DetailComponent,
     PositionComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
     ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { AuthInterceptor } from './service/auth.interceptor';
     AppRoutingModule,
     SharedPrimeNGModule,
     DataViewModule,
-    
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

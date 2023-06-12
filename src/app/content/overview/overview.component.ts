@@ -5,10 +5,6 @@ import { Supplier } from 'src/app/service/model/supplier.model';
 import { QueryService } from 'src/app/service/query.service';
 import { UiService } from 'src/app/service/ui.service';
 
-
-
-
-
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
@@ -22,7 +18,7 @@ export class OverviewComponent implements OnInit {
   gfg: any[];
   gfg2: any[];
   gfg3: any[];
-  p: number = 1;
+ 
   public display: number = 1;
   first: number = 0;
   rows: number = 10;
@@ -40,21 +36,19 @@ export class OverviewComponent implements OnInit {
     private route: ActivatedRoute,
     private queryService: QueryService
   ) {
-    this.gfg = [
-      {label:"GRID", value: "2", icon: "pi pi-th-large" },
-     ];
 
-     this.gfg2 = [
+    this.gfg = [
       {label:"TABLE", value: "1", icon: "pi pi-table" },
      ];
 
+    this.gfg2 = [
+      {label:"GRID", value: "2", icon: "pi pi-th-large" },
+     ];
+    
      this.gfg3 = [
       {label:"MAP", value: "3", icon: "pi pi-map" },
      ];
-
    }
-
-
 
   ngOnInit(): void {
     this.uiService.getPrognose('').then(data => console.log(data));
@@ -102,10 +96,11 @@ export class OverviewComponent implements OnInit {
     });
   }
 
+  getCombinedValue(entry: Supplier): number {
+    return (100/entry.hsw*entry.lastValue);
+  }
+
   changeDisplay(displayOption: number): void {
     this.display = displayOption;
   }
-
- 
-
 }

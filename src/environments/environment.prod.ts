@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  BASE_URL: "http://localhost:8086/services"
+  BASE_URL: "https://194.48.2.22/authentication/services"
 };

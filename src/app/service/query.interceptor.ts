@@ -12,14 +12,14 @@ export class QueryInterceptor implements CanActivate {
       case 'map':
         this.queryService.setMode(route.queryParams['displayType']);
         break;
-      case 'table':
+      case 'tile':
         this.queryService.setMode(route.queryParams['displayType']);
         break;
       case 'mini':
         this.queryService.setMode(route.queryParams['displayType']);
         break;
       default:
-        this.queryService.setMode("tile")
+        this.queryService.setMode("table")
     }
     return true;
   }

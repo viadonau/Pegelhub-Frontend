@@ -9,6 +9,8 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { DataViewModule } from 'primeng/dataview';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { PaginatorModule } from 'primeng/paginator';
+import { ToastModule } from 'primeng/toast';
+
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,8 @@ import { PaginatorModule } from 'primeng/paginator';
     FieldsetModule,
     DataViewModule,
     SelectButtonModule,
-    PaginatorModule 
+    PaginatorModule,
+    ToastModule,
   ],
   exports: [
     TableModule,
@@ -32,7 +35,8 @@ import { PaginatorModule } from 'primeng/paginator';
     InputTextModule,
     FieldsetModule,
     SelectButtonModule,
-    PaginatorModule 
+    PaginatorModule, 
+    ToastModule,
   ]
 })
 export class SharedPrimeNGModule { }

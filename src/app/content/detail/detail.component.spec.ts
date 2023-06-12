@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Supplier } from 'src/app/service/model/supplier.model';
+import { Measurement } from 'src/app/service/model/measurement.model';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -75,6 +76,32 @@ describe('DetailComponent', () => {
     expect(component.stationWaterSideFormatter(undefined)).toEqual(undefined);
   });
 
+  it('test prepareMeasurementsForChart', () => {
+    const measurements: Measurement[] = [];
+    measurements.push({
+      id: '1',
+      timestamp: '2023-01-01T00:00:00',
+      fields: {
+        'pegel': '120'
+      }
+    });
+    measurements.push({
+      id: '2',
+      timestamp: '2023-01-02T00:00:00',
+      fields: {
+        'pegel': '150'
+      }
+    });
+
+    const expectedData = [
+      [1672531200000, '120'],
+      [1672617600000, '150']
+    ];
+
+    // @ts-ignore
+    expect(component.prepareMeasurementsForChart(measurements)).toEqual(expectedData);
+  });
+
   it('test getChartPlotlines', () => {
     const testArgs = {
       title: 'Test',
@@ -96,6 +123,8 @@ describe('DetailComponent', () => {
       stationName: '',
       stationWaterKilometer: 0,
       stationWaterSide: '',
+      stationWaterLatitude: 0,
+      stationWaterLongitude: 0,
       mainUsage: '',
       stationNumber: '0',
       lastValue: 0,
@@ -133,5 +162,43 @@ describe('DetailComponent', () => {
     ];
 
     expect(plotlines).toEqual(expectedPlotlines);
+  });
+
+  it('test setDetailData valid data', () => {
+    const supplier: Supplier = {
+      id: '',
+      hsw: 100,
+      hsw100: 100,
+      mw: 80,
+      rnw100: 60,
+      rnw: 68,
+      indicatorValue: 0,
+      stationBaseReferenceLevel: 0,
+      stationName: '',
+      stationWaterKilometer: 0,
+      stationWaterSide: '',
+      stationWaterLatitude: 0,
+      stationWaterLongitude: 0,
+      mainUsage: '',
+      stationNumber: '0',
+      lastValue: 0,
+      lastValueFrom: new Date(2023, 0, 1, 0, 0, 0)
+    };
+
+    const positionData = {
+      supplierId: supplier.id,
+      title: supplier.stationName,
+      latitude: supplier.stationWaterLatitude,
+      longitude: supplier.stationWaterLongitude
+    };
+
+    component.setDetailData(supplier);
+    expect(component.supplierDetail).toEqual(supplier);
+    expect(component.position).toEqual(positionData);
+  });
+  it('test setDetailData invvalid data', () => {
+    component.setDetailData(undefined);
+    expect(component.supplierDetail).toBeUndefined();
+    expect(component.position).toBeUndefined();
   });
 });
