@@ -7,7 +7,7 @@ export class QueryService {
   private mode: ("table" | "tile" | "mini" | "map");
 
   constructor() { 
-    this.mode = "tile";
+    this.mode = "table";
   }
 
   public getMode(): ("table" | "tile" | "mini" | "map") {

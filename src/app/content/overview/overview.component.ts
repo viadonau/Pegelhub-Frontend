@@ -18,7 +18,7 @@ export class OverviewComponent implements OnInit {
   gfg: any[];
   gfg2: any[];
   gfg3: any[];
-  p: number = 1;
+ 
   public display: number = 1;
   first: number = 0;
   rows: number = 10;
