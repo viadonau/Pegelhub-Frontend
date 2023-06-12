@@ -5,6 +5,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Architecural Overview
 ![Architectural Overview](Pegelhub.png)
 
+## Theming
+The Applicatiion provides theming support in two different ways:
+- theme.scss
+- base-theme.scss
+
+### theme.scss
+The main theme file provides scss-variables used for coloring and shaping html-elements. In order to change these parameters, values needed to provided for the offered scss-variables.
+
+### base-theme.scss
+This is the PrimeNG main theme and is responsible for the general styling of the application. Here, changes can be done to the PrimeNG style classes and rules.
+
 ## Deployment
 To deploy the application on a web server, follow the instructions below. the application is deployed and made available in a docker container.
 
