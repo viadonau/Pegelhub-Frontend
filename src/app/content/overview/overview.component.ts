@@ -51,7 +51,6 @@ export class OverviewComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.uiService.getPrognose('').then(data => console.log(data));
     this.route.queryParams
       .subscribe(params => {
         this.displayMode = this.queryService.getMode();  
