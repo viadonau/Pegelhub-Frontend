@@ -11,7 +11,7 @@ import { Measurement } from './model/measurement.model';
 export class UiService {
 
   private static MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('/store/measurement');
-  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('/management/supplier');
+  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('/management/supplier/measurement');
 
   constructor(private http: HttpClient) { }
 
