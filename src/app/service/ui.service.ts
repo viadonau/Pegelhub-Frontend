@@ -11,7 +11,8 @@ import { Measurement } from './model/measurement.model';
 export class UiService {
 
   private static MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('/store/measurement');
-  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('/management/supplier/measurement');
+  private static SUPPLIER_WITH_MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('/management/supplier/measurement');
+  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('/management/supplier');
 
   constructor(private http: HttpClient) { }
 
@@ -60,7 +61,7 @@ export class UiService {
   //Supplier ----
   public getSuppliers(): Promise<Supplier[] | undefined> {
     const params = new HttpParams();
-    return firstValueFrom(this.http.get<any[] | undefined>(UiService.SUPPLIER_URL, { params }))
+    return firstValueFrom(this.http.get<any[] | undefined>(UiService.SUPPLIER_WITH_MEASUREMENT_URL, { params }))
       .then(data => data?.map(dto => {
         return {
           id: dto.id,
