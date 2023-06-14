@@ -48,7 +48,7 @@ export class UiService {
           {
             id: String(Math.round(Math.random() * 100000000)),
             timestamp: date.toISOString(),
-            fields: {'pegel': String(Math.round(Math.random() * 150))}
+            fields: {'value': String(Math.round(Math.random() * 150))}
           }
         )
       } */
@@ -67,8 +67,8 @@ export class UiService {
           stationName: dto.stationName,
           rnw: dto.rnw,
           hsw: dto.hsw,
-          lastValue: Math.floor(Math.random() * (dto.hsw - dto.rnw + 1) + dto.rnw),
-          lastValueFrom: dto.timestamp || new Date(),
+          lastValue: dto.measurement.fields.value,
+          lastValueFrom: dto.measurement.timestamp || new Date(),
           stationWaterLatitude: dto.stationWaterLatitude,
           stationWaterLongitude: dto.stationWaterLongitude
         } as Supplier;

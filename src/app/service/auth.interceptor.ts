@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return this.authService.authData.pipe(take(1), exhaustMap(authData => {
-            const apiKey = authData?.apiKey || 'ZEdWu0IgHuT115c0jRfyA3MEKWrgyW68Sr12YyCM448pBlfawD3ctpDFinnbD86R';
+            const apiKey = authData?.apiKey || 'O5p1A2NCmTgEX6snXO9mGJKaPp3pNaKhj6RAUK5glP1mOjh1Vm2M0OwPjooMc5fT';
 
             const modifiedReq = apiKey == null ? req.clone() : req.clone({
                 params: req.params.set('apiKey', apiKey)
