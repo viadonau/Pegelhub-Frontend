@@ -96,7 +96,7 @@ export class OverviewComponent implements OnInit {
   }
 
   getCombinedValue(entry: Supplier): number {
-    return (100/entry.hsw*entry.lastValue);
+    return entry.lastValue ? (100 / entry.hsw * entry.lastValue) : 100;
   }
 
   changeDisplay(displayOption: number): void {

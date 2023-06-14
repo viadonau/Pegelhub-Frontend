@@ -68,8 +68,8 @@ export class UiService {
           stationName: dto.stationName,
           rnw: dto.rnw,
           hsw: dto.hsw,
-          lastValue: dto.measurement.fields.value,
-          lastValueFrom: dto.measurement.timestamp || new Date(),
+          lastValue: dto.measurement?.fields?.value,
+          lastValueFrom: dto.measurement?.timestamp,
           stationWaterLatitude: dto.stationWaterLatitude,
           stationWaterLongitude: dto.stationWaterLongitude
         } as Supplier;
