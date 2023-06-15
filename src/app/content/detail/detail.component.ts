@@ -203,6 +203,7 @@ export class DetailComponent implements OnInit, OnDestroy {
           fillColor: 'transparent',
           type: 'spline',
           name: 'Pegel',
+          showInNavigator: true,
           data: this.prepareMeasurementsForChart(pData)
         }, {
           threshold: 0,
