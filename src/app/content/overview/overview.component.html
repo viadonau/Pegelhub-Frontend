@@ -41,7 +41,7 @@
           <td style="text-align: right;">{{ entry.lastValue | number: '1.2-2' }}</td>
           <td style="text-align: right;" *ngIf="!this.miniMode">{{ entry.rnw | number: '1.2-2' }}</td>
           <td style="text-align: right;" *ngIf="!this.miniMode">{{ entry.hsw | number: '1.2-2' }}</td>
-          <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</td>
+          <td>{{ entry.lastValueFrom | date: 'yyyy-MM-dd HH:mm' }}</td>
         </tr>
 
       </ng-template>
