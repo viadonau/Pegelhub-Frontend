@@ -108,7 +108,11 @@ export class DetailComponent implements OnInit, OnDestroy {
     // @ts-ignore
     Highcharts.chart('container', {
       navigator: {
-        enabled: true
+        enabled: true,
+        yAxis: {
+          max: this.supplierDetail?.hsw ? this.supplierDetail?.hsw + 50 : null,
+          min: 0
+        }
       },
       rangeSelector: {
         enabled: true,
