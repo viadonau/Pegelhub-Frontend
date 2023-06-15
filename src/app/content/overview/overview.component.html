@@ -63,7 +63,7 @@
 
             <div class="flex flex-wrap align-items-center justify-content-between gap-2" *ngIf="entry.lastValue">
               <span class="flex align-items-center gap-2 text-2xl font-bold">Letzter Wert {{ entry.lastValue | number:'1.2-2' }}</span>
-              <span class="flex align-items-center gap-2 text-2xl font-bold"> {{ entry.lastValueFrom | date: 'yyyy-MM-dd hh:mm' }}</span>
+              <span class="flex align-items-center gap-2 text-2xl font-bold"> {{ entry.lastValueFrom | date: 'yyyy-MM-dd HH:mm' }}</span>
             </div>
             <div class="flex flex-column align-items-center gap-3 py-5">
               <div class="text-3xl font-bold">{{ entry.stationName }}</div>
