@@ -23,11 +23,6 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   Highcharts: typeof Highcharts = Highcharts;
 
-  public chartConfig = {
-    data: {},
-    options: {}
-  }
-
   constructor(
     private uiService: UiService,
     private activatedRoute: ActivatedRoute,
@@ -160,7 +155,13 @@ export class DetailComponent implements OnInit, OnDestroy {
         align: 'left'
       },
       xAxis: {
-        type: 'datetime'
+        type: 'datetime',
+        dateTimeLabelFormats: {
+          day: '%d. %b'
+        },
+        title: {
+          text: "Zeitpunkt"
+        }
       },
       yAxis: [
         {
@@ -168,7 +169,8 @@ export class DetailComponent implements OnInit, OnDestroy {
             text: "Pegel"
           },
           max: this.supplierDetail?.hsw,
-          plotLines: this.getChartPlotlines(this.supplierDetail)
+          plotLines: this.getChartPlotlines(this.supplierDetail),
+          tickInterval: 50
         }
       ],
       legend: {
