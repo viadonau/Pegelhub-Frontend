@@ -61,8 +61,9 @@
         <div style="cursor: pointer" (click)="navigateToDetail(entry.id)">
           <div class="p-4 border-1 surface-border surface-card border-round">
 
-            <div class="flex flex-wrap align-items-center justify-content-between gap-2" *ngIf="entry.lastValue">
-              <span class="flex align-items-center gap-2 text-2xl font-bold">Letzter Wert {{ entry.lastValue | number:'1.2-2' }}</span>
+            <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+              <span class="flex align-items-center gap-2 text-2xl font-bold" *ngIf="entry.lastValue">Letzter Wert: {{ entry.lastValue | number:'1.2-2' }}</span>
+              <span class="flex align-items-center gap-2 text-2xl font-bold" *ngIf="!entry.lastValue">Letzter Wert: -</span>
               <span class="flex align-items-center gap-2 text-2xl font-bold"> {{ entry.lastValueFrom | date: 'yyyy-MM-dd HH:mm' }}</span>
             </div>
             <div class="flex flex-column align-items-center gap-3 py-5">
