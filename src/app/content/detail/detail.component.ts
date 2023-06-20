@@ -92,7 +92,8 @@ export class DetailComponent implements OnInit, OnDestroy {
       measurements.push({
         id: entry.measurement,
         timestamp: entry.timestamp,
-        fields: entry.fields
+        fields: entry.fields,
+        infos: entry.infos
       });
     });
 
