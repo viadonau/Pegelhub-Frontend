@@ -63,12 +63,20 @@ export class UiService {
     const params = new HttpParams();
     return firstValueFrom(this.http.get<any[] | undefined>(UiService.SUPPLIER_WITH_MEASUREMENT_URL, { params }))
       .then(data => data?.map(dto => {
+        let lastValue: any = null;
+        if(dto.measurement?.fields?.value){
+          lastValue = parseFloat(dto.measurement?.fields?.value);
+        }
+        if(dto.measurement?.infos?.height){
+          lastValue += parseFloat(dto.measurement?.infos?.height) / 100;
+        }
+        lastValue = Math.round(lastValue);
         return {
           id: dto.id,
           stationName: dto.stationName,
           rnw: dto.rnw,
           hsw: dto.hsw,
-          lastValue: dto.measurement?.fields?.value,
+          lastValue: lastValue,
           lastValueFrom: dto.measurement?.timestamp,
           stationWaterLatitude: dto.stationWaterLatitude,
           stationWaterLongitude: dto.stationWaterLongitude
