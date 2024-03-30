@@ -1,44 +1,48 @@
 # Pegelhub
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+This project contains the dedicated Angular application for the Pegelhub project.
 
 ## Architecural Overview
 ![Architectural Overview](Pegelhub.png)
 
 ## Theming
-The Applicatiion provides theming support in two different ways:
+The application provides theming support in two different ways:
 - theme.scss
 - base-theme.scss
 
 ### theme.scss
-The main theme file provides scss-variables used for coloring and shaping html-elements. In order to change these parameters, values needed to provided for the offered scss-variables.
+The main theme file provides scss-variables used for coloring and shaping HTML elements. In order to change these parameters, the actual values need to be provided for the given SCSS variables.
 
 ### base-theme.scss
-This is the PrimeNG main theme and is responsible for the general styling of the application. Here, changes can be done to the PrimeNG style classes and rules.
+This is the PrimeNG main theme which is responsible for the general styling of the application. Here, changes can be done to the PrimeNG style classes and rules.
 
 ## Deployment
-To deploy the application on a web server, follow the instructions below. the application is deployed and made available in a docker container.
+To deploy the application on a web server, follow the instructions below. The application is deployed and made available in a docker container.
 
 ### Prerequisites
 Make sure that the following software is installed on your system:
-- Docker Desktop `https://www.docker.com/get-started`
-- Docker Compose `https://docs.docker.com/compose/install`
+- Docker Desktop: `https://www.docker.com/get-started`
 
 ### Configure Environment
-- In angular, environments are used to define which configuration should be used for which environment.
-- The following environment file is used for deployment via docker: `environment.prod.ts`
-- Among other things, the end point of the API is stored in the variable `BASE_URL`.
+- In Angular, environments are used to define which configuration should be used for which environment.
+- The following environment file is used for the deployment via Docker: `environment.prod.ts`
+- Inside this particular file the endpoint of the API is stored in the variable `BASE_URL`.
 
-### Step 1:
+### Involved files
 - Navigate to the root directory of your Angular app.
-- Here we find a `docker-compose.yml` file and a `Dockerfile`, which are needed for deployment.
-- The `docker-compose.yml` file refers to the Dockerfile. While the `docker-compose.yml` file defines which containers are to be created, the `Dockerfile` defines a series of commands that initiate the build, copy the resulting source and finally start the container.
+- Here we find a `docker-compose.yml` file and a `Dockerfile` which are both needed for a functioning deployment.
+- `docker-compose.yml` defines which containers are to be created
+- `Dockerfile` defines a series of commands that initiate the build, copy the resulting source and finally start the container.
 
-### Step 2:
-- The container can be built with the command `docker-compose build`. You can then start it with `docker-compose up` or stop it with `docker-compose down`.
-- After the container has been started with `docker-compose up`, the application is accessible under port 80.
+### Startup Procedure
+1. Start `Docker Desktop` on your local machine and wait until it has booted successfully.
+2. Afterward the container can be built with the command `docker-compose build`. This will take some time depending on the power of your system.
+3. It is finished once the docker image `nginx` appears in the `Images` section of Docker Desktop.
+4. You can then start it with `docker-compose up` or stop it with `docker-compose down`.
+5. To make sure the application is running correctly, take a look at `Containers` inside Docker Desktop. Here you should see the container `pegelhub-frontend` and a green icon on the left.
+6. After the container has been successfully started with `docker-compose up`, the application is accessible under port 80.
 
-## Development server
+## Running the application locally
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
@@ -50,14 +54,45 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Component Tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the component tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Unit tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Make sure the application is running in the background with `ng start`
 
-## Further help
+Once it is up and running you can run `ng pw-test` to execute the unit tests via [Playwright](https://playwright.dev).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**Note**: 
+
+Playwright may ask you to first install playwright appropriately.
+If that is the case, the command `npx playwright install` has to be executed before running the tests.
+
+## Compodoc
+
+Serves as a documentation tool for this Angular application.
+Based on the source code it generates a good-looking and easy-to-understand documentation that is easily accessible.
+
+### Build
+
+Execute the command `ng compodoc:build` to generate the documentation.
+
+### Serve
+
+Execute the command `ng compodoc:serve` to serve the documentation and gain access to it.
+The documentation should be available on port **8080**.
+
+**Note**
+
+The build command should always be executed before starting with the serve procedure.
+If this is not the case, the documentation will not be accessible.
+
+### Build and Serve (combined)
+
+Execute the command `ng compodoc:build-and-serve` to combine the build and serve procedures into one step.
+
+## Highcharts
+
+Represents a JavaScript charting library based on SVG and some canvas/WebGL.
+Used to show all kind of diagrams and charts across the application.
