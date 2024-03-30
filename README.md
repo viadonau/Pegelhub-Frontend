@@ -68,3 +68,31 @@ Once it is up and running you can run `ng pw-test` to execute the unit tests via
 
 Playwright may ask you to first install playwright appropriately.
 If that is the case, the command `npx playwright install` has to be executed before running the tests.
+
+## Compodoc
+
+Serves as a documentation tool for this Angular application.
+Based on the source code it generates a good-looking and easy-to-understand documentation that is easily accessible.
+
+### Build
+
+Execute the command `ng compodoc:build` to generate the documentation.
+
+### Serve
+
+Execute the command `ng compodoc:serve` to serve the documentation and gain access to it.
+The documentation should be available on port **8080**.
+
+**Note**
+
+The build command should always be executed before starting with the serve procedure.
+If this is not the case, the documentation will not be accessible.
+
+### Build and Serve (combined)
+
+Execute the command `ng compodoc:build-and-serve` to combine the build and serve procedures into one step.
+
+## Highcharts
+
+Represents a JavaScript charting library based on SVG and some canvas/WebGL.
+Used to show all kind of diagrams and charts across the application.
