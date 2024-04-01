@@ -42,7 +42,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   private loadDetailData(): void {
     this.uiService.getSupplier(this.supplierId).then(data => {
-      this.setDetailData(data); 
+      this.setDetailData(data);
       this.loadMeasurementData(String(this.supplierDetail?.stationNumber), '30d');
     }).catch(error => {
       this.router.navigate(['/notfound']);
@@ -225,7 +225,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   private prepareMeasurementsForChart(arr: Measurement[]): any {
     return arr.map(entry => {
-      return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, Math.round(parseFloat((entry.fields as any).value) + parseFloat(entry?.infos['height'] || '0') / 100.0)];
+      return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, Math.round(parseFloat((entry.fields as any)['pegel']) + parseFloat(entry?.infos['height'] || '0') / 100.0)];
     }).sort((a, b) => a[0] - b[0])
   }
 

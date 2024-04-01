@@ -34,13 +34,15 @@ describe('DetailComponent', () => {
       fields: {
         "pegel": 100.0
       },
+      "infos": {}
     },
     {
       id: "153ea12c-e1bd-11ed-b5ea-0242ac120012",
       timestamp: "2023-05-13T09:15:00",
       fields: {
         "pegel": 127.0
-      }
+      },
+      "infos": {}
     }
   ];
 
@@ -83,19 +85,21 @@ describe('DetailComponent', () => {
       timestamp: '2023-01-01T00:00:00',
       fields: {
         'pegel': '120'
-      }
+      },
+      infos: {}
     });
     measurements.push({
       id: '2',
       timestamp: '2023-01-02T00:00:00',
       fields: {
         'pegel': '150'
-      }
+      },
+      infos: {}
     });
 
     const expectedData = [
-      [1672531200000, '120'],
-      [1672617600000, '150']
+      [1672531200000, 120],
+      [1672617600000, 150]
     ];
 
     // @ts-ignore
