@@ -8,7 +8,7 @@
   </ng-template>
 
   <ng-container #table *ngIf="display === 1">
-    <p-table [value]="supplier" responsiveLayout="scroll" [filterDelay]="0">
+    <p-table [value]="suppliers" responsiveLayout="scroll" [filterDelay]="0">
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="stationName">
@@ -57,7 +57,7 @@
   <ng-container *ngIf="display === 2">
 
     <div id="cardContainer" class="card">
-      <ng-template #grid pTemplate="gridItem" ngFor let-entry [ngForOf]="supplier">
+      <ng-template #grid pTemplate="gridItem" ngFor let-entry [ngForOf]="suppliers">
         <div style="cursor: pointer" (click)="navigateToDetail(entry.id)">
           <div class="p-4 border-1 surface-border surface-card border-round">
 
@@ -94,7 +94,7 @@
       <div class="card flex justify-content-center">
 
         <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
-          [totalRecords]="supplier.length" [rowsPerPageOptions]="[10, 20, 30]" [showFirstLastIcon]="true"
+          [totalRecords]="suppliers.length" [rowsPerPageOptions]="[10, 20, 30]" [showFirstLastIcon]="true"
           [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
       </div>
     </div>

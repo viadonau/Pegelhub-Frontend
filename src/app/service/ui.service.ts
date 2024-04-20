@@ -10,21 +10,20 @@ import { Measurement } from './model/measurement.model';
 })
 export class UiService {
 
-  private static MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('/store/measurement');
-  private static SUPPLIER_WITH_MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('/management/supplier/measurement');
-  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('/management/supplier');
+  private static MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('measurement');
+  private static SUPPLIER_LAST_VALUE_URL: string = AppConfig.BASE_URL.concat('measurement/last');
+  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('supplier');
 
   constructor(private http: HttpClient) { }
 
-  //Measurements ----
-
+  // Measurements ----
   public getMeasurements(stationNumber: string, range: string): Promise<Measurement[] | undefined> {
     let params = new HttpParams();
     params = params.set('stationNumber', stationNumber);
 
-    return this.http.get<any[]>(UiService.MEASUREMENT_URL.concat('/supplier/', range), {
-      params
-    }).toPromise();
+    return firstValueFrom(this.http.get<any[]>(UiService.MEASUREMENT_URL.concat('/supplier/', range), {
+      params: params
+    }));
   }
 
   public getPrognose(stationNumber: string): Promise<Measurement[] | undefined> {
@@ -33,7 +32,7 @@ export class UiService {
 
     return new Promise((resolve) => {
       const prognose: Measurement[] = [];
-      
+
       /* const date = new Date();
       date.setMilliseconds(0);
       date.setSeconds(0);
@@ -53,24 +52,27 @@ export class UiService {
           }
         )
       } */
-      
+
       resolve(prognose);
   });
   }
 
-  //Supplier ----
+  // Suppliers ----
   public getSuppliers(): Promise<Supplier[] | undefined> {
-    const params = new HttpParams();
-    return firstValueFrom(this.http.get<any[] | undefined>(UiService.SUPPLIER_WITH_MEASUREMENT_URL, { params }))
+    return firstValueFrom(this.http.get<any[] | undefined>(UiService.SUPPLIER_URL))
       .then(data => data?.map(dto => {
         let lastValue: any = null;
-        if(dto.measurement?.fields?.value){
+
+        if (dto.measurement?.fields?.value) {
           lastValue = parseFloat(dto.measurement?.fields?.value);
         }
-        if(dto.measurement?.infos?.height){
+
+        if (dto.measurement?.infos?.height) {
           lastValue += parseFloat(dto.measurement?.infos?.height) / 100;
         }
+
         lastValue = Math.round(lastValue);
+
         return {
           id: dto.id,
           stationName: dto.stationName,
@@ -85,46 +87,10 @@ export class UiService {
   }
 
   public getSupplier(id: string): Promise<Supplier | undefined> {
-    const params = new HttpParams();
-    //return firstValueFrom(this.http.get<Supplier[] | undefined>(UiService.SUPPLIER_URL, { params })).then(data => data?.filter(data => data.id == id)[0]);
-    return firstValueFrom(this.http.get<Supplier | undefined>(UiService.SUPPLIER_URL.concat('/', id), { params }));
+    return firstValueFrom(this.http.get<Supplier | undefined>(UiService.SUPPLIER_URL.concat('/', id)));
   }
-  /* public getSuppliers(): Promise<any> {
-    const fnGetRandomNumber = (factor: number) => {
-      return Math.ceil(Math.random() * factor);
-    }
 
-    return new Promise((resolve) => {
-      let idx = 0;
-
-      setTimeout(() => {
-        resolve(['Achleiten', 'Wilhering', 'Mauthausen', 'Grein', 'Kienstock', 'Dürnstein', 'Korneuburg', 'Schwedenbrücke', 'Wildungsmauer', 'Thebnerstraßl']
-          .map(supplierName => {
-            const values: number[] = [1 + Math.random() * 5, 2 + Math.random() * 5, Math.random() * 5];
-            const obj: Supplier = {
-              id: ++idx,
-              stationNameShort: supplierName,
-              lastValue: values.filter(item => item != Math.min(...values) && Math.max(...values))[0],
-              lastValueFrom: new Date(2023, 3, fnGetRandomNumber(30), fnGetRandomNumber(24), fnGetRandomNumber(60)),
-              rnw: Math.min(...values),
-              hsw: Math.max(...values),
-              indicatorValue: 0
-            };
-
-            const avg = (obj.rnw + obj.hsw) / 2;
-            const perc = 1 - Math.min(avg, obj.lastValue as any) / Math.max(avg, obj.lastValue as any);
-            const diff = perc * 100;
-            obj.indicatorValue = Math.round(50 + diff);
-
-            return obj;
-          })
-        );
-
-        try {
-          this.http.get('/supplier').toPromise();
-        } catch { }
-      }
-        , 500);
-    });
-  } */
+  public getLastMeasurementOfSupplier(): Promise<Measurement | undefined> {
+    return firstValueFrom(this.http.get<Measurement | undefined>(UiService.SUPPLIER_LAST_VALUE_URL));
+  }
 }
