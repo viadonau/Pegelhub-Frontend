@@ -1,11 +1,11 @@
 // src/app/auth/auth-guard.service.ts
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { QueryService } from './query.service';
 @Injectable({
   providedIn: 'root'
 })
-export class QueryInterceptor implements CanActivate {
+export class QueryInterceptor  {
   constructor(public queryService: QueryService, public router: Router) { }
   canActivate(route: ActivatedRouteSnapshot): boolean {
     switch (route.queryParams['displayType']) {
