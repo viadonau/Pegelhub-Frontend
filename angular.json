@@ -82,10 +82,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pegelhub:build:production"
+              "buildTarget": "pegelhub:build:production"
             },
             "development": {
-              "browserTarget": "pegelhub:build:development"
+              "buildTarget": "pegelhub:build:development"
             }
           },
           "options": {
@@ -96,7 +96,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pegelhub:build"
+            "buildTarget": "pegelhub:build"
           }
         },
         "test": {
