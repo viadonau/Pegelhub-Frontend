@@ -4,12 +4,13 @@ import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { QueryService } from 'src/app/service/query.service';
 import { UiService } from 'src/app/service/ui.service';
+import {PaginatorState} from "primeng/paginator";
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
- 
+
 
 })
 export class OverviewComponent implements OnInit {
@@ -18,16 +19,16 @@ export class OverviewComponent implements OnInit {
   gfg: any[];
   gfg2: any[];
   gfg3: any[];
- 
+
   public display: number = 1;
   first: number = 0;
   rows: number = 10;
   public positions!: LeafletPosition[];
   public miniMode: boolean = false;
 
-  onPageChange(event: { first: number; rows: number; }) {
-      this.first = event.first;
-      this.rows = event.rows;
+  onPageChange(event: PaginatorState) {
+      this.first = event.first ?? 0;
+      this.rows = event.rows ?? 0;
   }
 
   constructor(
@@ -44,7 +45,7 @@ export class OverviewComponent implements OnInit {
     this.gfg2 = [
       {label:"GRID", value: "2", icon: "pi pi-th-large" },
      ];
-    
+
      this.gfg3 = [
       {label:"MAP", value: "3", icon: "pi pi-map" },
      ];
@@ -53,7 +54,7 @@ export class OverviewComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-        this.displayMode = this.queryService.getMode();  
+        this.displayMode = this.queryService.getMode();
         this.miniMode = false;
 
         switch(this.displayMode){
@@ -69,7 +70,7 @@ export class OverviewComponent implements OnInit {
           case 'mini':
             this.miniMode = true;
             break;
-        }     
+        }
       }
     );
     this.loadSupplier();
