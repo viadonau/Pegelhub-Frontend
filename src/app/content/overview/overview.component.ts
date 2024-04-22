@@ -1,17 +1,16 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import {Component, DestroyRef, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { QueryService } from 'src/app/service/query.service';
 import { UiService } from 'src/app/service/ui.service';
-import {PaginatorState} from "primeng/paginator";
+import { PaginatorState } from "primeng/paginator";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
-
-
 })
 export class OverviewComponent implements OnInit {
   supplier: Supplier[] = [];
@@ -35,24 +34,37 @@ export class OverviewComponent implements OnInit {
     private uiService: UiService,
     private router: Router,
     private route: ActivatedRoute,
-    private queryService: QueryService
+    private queryService: QueryService,
+    private destroyRef: DestroyRef
   ) {
 
     this.gfg = [
-      {label:"TABLE", value: "1", icon: "pi pi-table" },
+      {
+        label:"TABLE",
+        value: "1",
+        icon: "pi pi-table"
+      },
      ];
 
     this.gfg2 = [
-      {label:"GRID", value: "2", icon: "pi pi-th-large" },
+      {
+        label:"GRID",
+        value: "2",
+        icon: "pi pi-th-large"
+      },
      ];
 
      this.gfg3 = [
-      {label:"MAP", value: "3", icon: "pi pi-map" },
+      {
+        label:"MAP",
+        value: "3",
+        icon: "pi pi-map"
+      },
      ];
    }
 
   ngOnInit(): void {
-    this.route.queryParams
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(params => {
         this.displayMode = this.queryService.getMode();
         this.miniMode = false;
@@ -83,7 +95,7 @@ export class OverviewComponent implements OnInit {
   private loadSupplier(): void {
     this.uiService.getSuppliers().then((data: any) => {
       this.supplier = data.slice(0, 12);
-      if(data){
+      if (data) {
         this.positions = data.map((supplier: any) => {
           return {
             supplierId: supplier.id,
