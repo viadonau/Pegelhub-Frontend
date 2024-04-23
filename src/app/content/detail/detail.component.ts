@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Highcharts from "highcharts/highstock";
 import { Subscription } from 'rxjs';
@@ -6,6 +6,7 @@ import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 import { Measurement } from 'src/app/service/model/measurement.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { UiService } from 'src/app/service/ui.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-detail',
@@ -26,11 +27,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   constructor(
     private uiService: UiService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
-    this.activatedRouteSubscription = this.activatedRoute.params.subscribe(param => {
+    this.activatedRouteSubscription = this.activatedRoute.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(param => {
       this.supplierId = param['id'];
       this.loadDetailData();
     });
