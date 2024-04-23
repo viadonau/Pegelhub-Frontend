@@ -5,7 +5,7 @@ FROM node:18-alpine AS build
 WORKDIR /app
 
 # Install @angular/cli
-RUN npm install @angular/cli@15.2.4
+RUN npm install @angular/cli@17.3.5
 
 # Copy the rest of the app's source code to the container
 COPY . .
