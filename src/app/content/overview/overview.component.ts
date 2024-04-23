@@ -84,9 +84,9 @@ export class OverviewComponent implements OnInit {
     this.loadSuppliers();
   }
 
-  protected onPageChange(event: { first: number; rows: number; }) {
-    this.first = event.first;
-    this.rows = event.rows;
+  protected onPageChange(event: PaginatorState) {
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? 0;
   }
 
   protected navigateToDetail(id: string): void {
