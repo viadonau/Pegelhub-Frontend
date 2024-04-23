@@ -13,22 +13,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit {
-  supplier: Supplier[] = [];
-  public displayMode: ("table" | "tile" | "mini" | "map") = 'table';
-  gfg: any[];
-  gfg2: any[];
-  gfg3: any[];
+  protected suppliers: Supplier[] = [];
+  protected displayMode: ("table" | "tile" | "mini" | "map") = 'table';
 
-  public display: number = 1;
-  first: number = 0;
-  rows: number = 10;
-  public positions!: LeafletPosition[];
-  public miniMode: boolean = false;
+  protected gfg!: any[];
+  protected gfg2!: any[];
+  protected gfg3!: any[];
 
-  onPageChange(event: PaginatorState) {
-      this.first = event.first ?? 0;
-      this.rows = event.rows ?? 0;
-  }
+  protected display: number = 1;
+  protected first: number = 0;
+  protected rows: number = 10;
+  protected positions!: LeafletPosition[];
+  protected miniMode: boolean = false;
 
   constructor(
     private uiService: UiService,
@@ -85,18 +81,23 @@ export class OverviewComponent implements OnInit {
         }
       }
     );
-    this.loadSupplier();
+    this.loadSuppliers();
   }
 
-  navigateToDetail(id: string): void {
+  protected onPageChange(event: PaginatorState) {
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? 0;
+  }
+
+  protected navigateToDetail(id: string): void {
     this.router.navigate(['/', 'detail', id]);
   }
 
-  private loadSupplier(): void {
-    this.uiService.getSuppliers().then((data: any) => {
-      this.supplier = data.slice(0, 12);
-      if (data) {
-        this.positions = data.map((supplier: any) => {
+  private loadSuppliers(): void {
+    this.uiService.getSuppliers().then((suppliers: Supplier[] | undefined) => {
+      if (suppliers) {
+        this.suppliers = suppliers.slice(0, 12);
+        this.positions = suppliers.map((supplier: Supplier) => {
           return {
             supplierId: supplier.id,
             title: supplier.stationName,
@@ -108,11 +109,11 @@ export class OverviewComponent implements OnInit {
     });
   }
 
-  getCombinedValue(entry: Supplier): number {
+  protected getCombinedValue(entry: Supplier): number {
     return entry.lastValue ? (100 / entry.hsw * entry.lastValue) : 0;
   }
 
-  changeDisplay(displayOption: number): void {
+  protected changeDisplay(displayOption: number): void {
     this.display = displayOption;
   }
 }

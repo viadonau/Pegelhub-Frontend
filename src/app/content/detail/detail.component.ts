@@ -92,7 +92,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
     data.forEach((entry: any) => {
       measurements.push({
-        id: entry.measurement,
+        measurement: entry.measurement,
         timestamp: entry.timestamp,
         fields: entry.fields,
         infos: entry.infos
