@@ -14,6 +14,8 @@ import { PositionComponent } from './content/position/position.component';
 import { AuthInterceptor } from './service/auth.interceptor';
 import { LoginComponent } from './content/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DataViewModule,
     FormsModule,
     ReactiveFormsModule,
+    RippleModule,
+    ButtonModule,
   ],
   providers: [
     {
