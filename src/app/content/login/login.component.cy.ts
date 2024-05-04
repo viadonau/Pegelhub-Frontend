@@ -9,17 +9,22 @@ describe('Login Component', () => {
     cy.button('Weiter').should('be.disabled');
   })
 
-  it.only('should perform redirect to overview page after next button has been clicked and api-key is valid', () => {
+  it('should perform redirect to overview page after next button has been clicked and api-key is valid', () => {
     cy.get('input').should('have.attr', 'placeholder', 'API Key').type('asdf');
-    cy.contains('Weiter').click();
+    cy.button('Weiter').click();
+    // TODO: check for redirect
   })
 
-  it('should show an asterisk inside the api-key input field', () => {
-    cy.contains('Weiter').should('be.disabled');
+  it.only('should show an asterisk inside the api-key input field', () => {
+    cy.get('#required-icon').should('be.visible');
   })
 
   it('should show an appropriate help text if the api-key input does not correspond to the Base64 pattern', () => {
-    cy.contains('Weiter').should('be.disabled');
+    // TODO
+  })
+
+  it('should show an appropriate help text if the api-key input is empty', () => {
+    // TODO
   })
 
 })
