@@ -3,8 +3,8 @@ import { BaseTest, expect, test } from 'tests/overview/overview.action';
 test.beforeEach(async ({ page, args }) => {
   await BaseTest.navigate(page, BaseTest.getConfig().BASE_URL.concat('/', 'login'));
 
-  await (await BaseTest.getElementById(page, 'api-key-input')).fill('asdf');
-  await (await BaseTest.getElementById(page, 'next-btn')).click();
+  await BaseTest.getElementById(page, 'api-key-input').fill('asdf');
+  await BaseTest.getElementById(page, 'next-btn').click();
 
   await BaseTest.validateUrl(page, new RegExp(`.*${BaseTest.getConfig().PATH_OVERVIEW}*`));
 });
@@ -13,7 +13,7 @@ test('select table view', async ({page})=> {
   const tableView = (await BaseTest.getElementByTag(page, 'p-selectbutton').all()).at(0);
   await tableView?.click();
 
-  const table = await BaseTest.getElementByTag(page, 'table');
+  const table = BaseTest.getElementByTag(page, 'table');
   await expect(table).toBeVisible();
 })
 
@@ -21,7 +21,7 @@ test('select grid view', async ({page})=> {
   const cardView = (await BaseTest.getElementByTag(page, 'p-selectbutton').all()).at(1);
   await cardView?.click();
 
-  const cards = await BaseTest.getElementById(page, 'cardContainer');
+  const cards = BaseTest.getElementById(page, 'cardContainer');
   await expect(cards).toBeVisible();
 })
 
@@ -29,14 +29,14 @@ test('select map view', async ({page})=> {
   const mapView = (await BaseTest.getElementByTag(page, 'p-selectbutton').all()).at(2);
   await mapView?.click();
 
-  const map = await BaseTest.getElementById(page, 'positionMap');
+  const map = BaseTest.getElementById(page, 'positionMap');
   await expect(map).toBeVisible();
 })
 
 test('has table title', async ({ page, args }) => {
   const cardTitle = BaseTest.getElementByClass(page, args.tableTitleClass);
 
-  await (cardTitle.filter({ hasText: args.tableTitle }));
+  cardTitle.filter({hasText: args.tableTitle});
 })
 
 test('table has columns', async ({ page, args }) => {
@@ -48,7 +48,7 @@ test('table has columns', async ({ page, args }) => {
 
   await (expect(columns).toHaveCount(columnHeaders.length));
 
-  for (var idx = 0; idx < columnHeaders.length; idx++) {
+  for (let idx = 0; idx < columnHeaders.length; idx++) {
     await (expect(columns.nth(idx)).toContainText(columnHeaders[idx]));
   }
 })
@@ -59,7 +59,7 @@ test('table data is shown', async ({ page }) => {
   await (await BaseTest.getElementByTag(page, 'p-selectbutton').all()).at(0)?.click();
   const rows = BaseTest.getElementByTag(page, 'tbody > tr');
 
-  await expect(await rows.count()).toBeGreaterThan(0);
+  expect(await rows.count()).toBeGreaterThan(0);
 })
 
 test('grid data is shown', async ({ page }) => {
@@ -68,5 +68,5 @@ test('grid data is shown', async ({ page }) => {
   await (await BaseTest.getElementByTag(page, 'p-selectbutton').all()).at(1)?.click();
   const rows = BaseTest.getElementByTag(page, '#cardContainer > div');
 
-  await expect(await rows.count()).toBeGreaterThan(0);
+  expect(await rows.count()).toBeGreaterThan(0);
 })
