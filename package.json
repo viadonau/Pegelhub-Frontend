@@ -11,7 +11,8 @@
     "pw-test": "npx playwright test",
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
-    "compodoc:serve": "compodoc -s"
+    "compodoc:serve": "compodoc -s",
+    "test:comp": "ng run pegelhub:cypress-comp"
   },
   "private": true,
   "dependencies": {
@@ -37,13 +38,16 @@
     "zone.js": "~0.14.4"
   },
   "devDependencies": {
+    "@angular-devkit/core": "^17.3.5",
     "@angular-devkit/build-angular": "^17.3.5",
     "@angular/cli": "~17.3.5",
     "@angular/compiler-cli": "^17.3.5",
     "@compodoc/compodoc": "^1.1.23",
+    "@cypress/schematic": "^2.5.1",
     "@playwright/test": "^1.43.1",
     "@types/jasmine": "~5.1.4",
     "@types/leaflet": "^1.9.11",
+    "cypress": "^13.8.1",
     "jasmine-core": "~5.1.2",
     "karma": "~6.4.3",
     "karma-chrome-launcher": "~3.2.0",

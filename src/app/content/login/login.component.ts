@@ -1,12 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
+import {TooltipModule} from "primeng/tooltip";
+import {CardModule} from "primeng/card";
+import {InputTextModule} from "primeng/inputtext";
+import {RippleModule} from "primeng/ripple";
+import {ButtonModule} from "primeng/button";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  imports: [
+    TooltipModule,
+    ReactiveFormsModule,
+    CardModule,
+    InputTextModule,
+    RippleModule,
+    ButtonModule
+  ],
+  standalone: true
 })
 export class LoginComponent implements OnInit {
   private apiKeyPattern = new RegExp("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/][AQgw]==|[A-Za-z0-9+/]{2}[AEIMQUYcgkosw048]=)?$");

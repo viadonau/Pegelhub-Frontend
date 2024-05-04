@@ -12,7 +12,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { DataViewModule } from "primeng/dataview";
 import { PositionComponent } from './content/position/position.component';
 import { AuthInterceptor } from './service/auth.interceptor';
-import { LoginComponent } from './content/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
@@ -26,7 +25,6 @@ import { ButtonModule } from 'primeng/button';
     DetailComponent,
     PositionComponent,
     NotFoundComponent,
-    LoginComponent
     ],
   imports: [
     BrowserModule,
