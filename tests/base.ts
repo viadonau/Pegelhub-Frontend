@@ -30,4 +30,8 @@ export class BaseTest {
     static navigate(page: Page, url: string): Promise<void | any> {
         return page.goto(url);
     }
+
+    static button(page: Page, label: string): Locator {
+        return page.getByText(label);
+    }
 }
