@@ -33,5 +33,5 @@ declare namespace Cypress {
 }
 
 Cypress.Commands.add('button', (label) => {
-  cy.get('button').contains(label).click()
+  cy.get('button').contains(label);
 })
