@@ -30,7 +30,7 @@
                                       class="p-button-primary p-button p-button-rounded"
                                       type="button"
                                       [disabled]="loginForm.invalid"
-                                      [pTooltip]="loginForm.invalid ? 'Die Eingabe eines gültigen API Keys ist zuvor notwendig' : ''"
+                                      [pTooltip]="nextButtonTooltip"
                                       (click)="onContinue()"
                                       (keypress)="onContinue()">
                                       Weiter

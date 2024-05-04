@@ -58,4 +58,19 @@ export class LoginComponent implements OnInit {
 
     return errorMsg;
   }
+
+  get nextButtonTooltip(): string {
+    let tooltip = '';
+    const apiKeyFormControl = this.loginForm.get('apiKey');
+
+    if (apiKeyFormControl?.hasError('required')) {
+      tooltip = 'Die Eingabe eines gültigen API Keys ist notwendig';
+    }
+
+    if (apiKeyFormControl?.hasError('pattern')) {
+      tooltip = 'Der eingegebene API Key entspricht nicht dem Base64-Format';
+    }
+
+    return tooltip;
+  }
 }
