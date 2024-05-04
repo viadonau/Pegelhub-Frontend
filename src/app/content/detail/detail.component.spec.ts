@@ -81,7 +81,7 @@ describe('DetailComponent', () => {
   it('test prepareMeasurementsForChart', () => {
     const measurements: Measurement[] = [];
     measurements.push({
-      id: '1',
+      measurement: '1',
       timestamp: '2023-01-01T00:00:00',
       fields: {
         'pegel': '120'
@@ -89,7 +89,7 @@ describe('DetailComponent', () => {
       infos: {}
     });
     measurements.push({
-      id: '2',
+      measurement: '2',
       timestamp: '2023-01-02T00:00:00',
       fields: {
         'pegel': '150'

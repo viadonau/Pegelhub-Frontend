@@ -25,7 +25,7 @@ describe('LoginComponent', () => {
 
   it('test onContinue', () => {
     const token = 'asdf';
-    component.loginForm.patchValue(
+    component['loginForm'].patchValue(
       {
         apiKey: token
       }

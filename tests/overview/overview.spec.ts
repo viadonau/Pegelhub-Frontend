@@ -3,8 +3,8 @@ import { BaseTest, expect, test } from 'tests/overview/overview.action';
 test.beforeEach(async ({ page, args }) => {
   await BaseTest.navigate(page, BaseTest.getConfig().BASE_URL.concat('/', 'login'));
 
-  await (await BaseTest.getElementById(page, 'apiKeyInp')).fill('asdf');
-  await (await BaseTest.getElementById(page, 'btnLogin')).click();
+  await (await BaseTest.getElementById(page, 'api-key-input')).fill('asdf');
+  await (await BaseTest.getElementById(page, 'next-btn')).click();
 
   await BaseTest.validateUrl(page, new RegExp(`.*${BaseTest.getConfig().PATH_OVERVIEW}*`));
 });

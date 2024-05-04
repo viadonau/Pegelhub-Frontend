@@ -5,13 +5,13 @@ test.beforeEach(async ({ page, args }) => {
 });
 
 test('trigger login without data', async ({ page }) => {
-    await (await BaseTest.getElementById(page, 'btnLogin')).click();
+    await (await BaseTest.getElementById(page, 'next-btn')).click();
     await BaseTest.validateUrl(page, new RegExp(`.*${BaseTest.getConfig().PATH_OVERVIEW}*`));
 })
 
 test('trigger login with data', async ({ page }) => {
-    await (await BaseTest.getElementById(page, 'apiKeyInp')).fill('asdf');
-    await (await BaseTest.getElementById(page, 'btnLogin')).click();
+    await (await BaseTest.getElementById(page, 'api-key-input')).fill('asdf');
+    await (await BaseTest.getElementById(page, 'next-btn')).click();
 
     await BaseTest.validateUrl(page, new RegExp(`.*${BaseTest.getConfig().PATH_OVERVIEW}*`));
 })
