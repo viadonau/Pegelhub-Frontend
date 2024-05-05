@@ -54,20 +54,13 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Component Tests
+## Running End-to-End Tests
 
-Run `ng test` to execute the component tests via [Karma](https://karma-runner.github.io).
+Run `ng test:e2e` to execute the e2e tests via [Cypress](https://www.cypress.io/).
 
-## Unit tests
+## Running Component tests
 
-Make sure the application is running in the background with `ng start`
-
-Once it is up and running you can run `ng pw-test` to execute the unit tests via [Playwright](https://playwright.dev).
-
-**Note**: 
-
-Playwright may ask you to first install playwright appropriately.
-If that is the case, the command `npx playwright install` has to be executed before running the tests.
+Run `ng test:comp` to execute the component tests via [Cypress](https://www.cypress.io/).
 
 ## Compodoc
 

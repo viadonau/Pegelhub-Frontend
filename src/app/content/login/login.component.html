@@ -7,15 +7,34 @@
                         <form [formGroup]="this.loginForm">
                             <div class="grid fadein">
                                 <div class="col-12">
-                                    <div class="w-full inline-flex">
+                                    <div class="w-full inline-flex mb-2">
                                         <i class="pi pi-user fg-primary mx-2 my-auto"></i>
-                                        <input id="apiKeyInp" formControlName="apiKey" class="w-full input-round"
-                                            type="text" pInputText placeholder="API Key">
+                                        <span class="p-input-icon-right w-full">
+                                            <i id="required-icon" class="pi pi-asterisk"></i>
+                                            <input
+                                              pInputText
+                                              id="api-key-input"
+                                              formControlName="apiKey"
+                                              class="w-full input-round"
+                                              type="text"
+                                              placeholder="API Key">
+                                        </span>
                                     </div>
+                                  <small id="api-key-help" class="text-muted">{{ formErrorMessage }}</small>
                                 </div>
-                                <div class="col-12 pt-0" style="text-align: center;">
-                                    <button id="btnLogin" pRipple pButton class="p-button-primary p-button p-button-rounded"
-                                        type="button" (click)="onContinue()" (keypress)="onContinue()">Weiter</button>
+                                <div class="col-12" style="text-align: center;">
+                                    <button
+                                      pRipple
+                                      pButton
+                                      id="next-btn"
+                                      class="p-button-primary p-button p-button-rounded"
+                                      type="button"
+                                      [disabled]="loginForm.invalid"
+                                      [pTooltip]="nextButtonTooltip"
+                                      (click)="onContinue()"
+                                      (keypress)="onContinue()">
+                                      Weiter
+                                    </button>
                                 </div>
                             </div>
                         </form>

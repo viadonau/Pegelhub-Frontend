@@ -7,11 +7,11 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "pw-test": "npx playwright test",
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
-    "compodoc:serve": "compodoc -s"
+    "compodoc:serve": "compodoc -s",
+    "test:comp": "ng run pegelhub:cypress-comp",
+    "test:e2e": "ng run pegelhub:cypress-e2e"
   },
   "private": true,
   "dependencies": {
@@ -37,19 +37,14 @@
     "zone.js": "~0.14.4"
   },
   "devDependencies": {
+    "@angular-devkit/core": "^17.3.5",
     "@angular-devkit/build-angular": "^17.3.5",
     "@angular/cli": "~17.3.5",
     "@angular/compiler-cli": "^17.3.5",
     "@compodoc/compodoc": "^1.1.23",
-    "@playwright/test": "^1.43.1",
-    "@types/jasmine": "~5.1.4",
+    "@cypress/schematic": "^2.5.1",
     "@types/leaflet": "^1.9.11",
-    "jasmine-core": "~5.1.2",
-    "karma": "~6.4.3",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.1",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
+    "cypress": "^13.8.1",
     "typescript": "~5.2.2"
   }
 }

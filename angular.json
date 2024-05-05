@@ -74,6 +74,11 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "test": {
+              "optimization": false,
+              "extractLicenses": true,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -86,6 +91,9 @@
             },
             "development": {
               "buildTarget": "pegelhub:build:development"
+            },
+            "test": {
+              "buildTarget": "pegelhub:build:test"
             }
           },
           "options": {
@@ -123,6 +131,31 @@
             "codeCoverageExclude": [
               "src/app/service/**/*"
             ]
+          }
+        },
+        "cypress-comp": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "headless": false,
+            "component": true,
+            "watch": true,
+            "devServerTarget": "pegelhub:serve:test",
+            "projectPath": "Pegelhub-Frontend",
+            "configFile": "cypress.config.ts",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "cypress-e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "headless": false,
+            "component": false,
+            "e2e": true,
+            "watch": true,
+            "devServerTarget": "pegelhub:serve:test",
+            "projectPath": "Pegelhub-Frontend",
+            "configFile": "cypress.config.ts",
+            "tsConfig": "tsconfig.spec.json"
           }
         }
       }
