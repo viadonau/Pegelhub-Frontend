@@ -26,5 +26,4 @@ describe('Login Component', () => {
   it('should show an appropriate help text if the api-key input is empty', () => {
     // TODO
   })
-
 })
