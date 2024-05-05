@@ -10,7 +10,8 @@
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s",
-    "test:comp": "ng run pegelhub:cypress-comp"
+    "test:comp": "ng run pegelhub:cypress-comp",
+    "test:e2e": "ng run pegelhub:cypress-e2e"
   },
   "private": true,
   "dependencies": {

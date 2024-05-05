@@ -133,22 +133,24 @@
             ]
           }
         },
-        "test-comp": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "headless": true,
-            "component": true,
-            "devServerTarget": "pegelhub:serve:test",
-            "projectPath": "@pegelhub",
-            "configFile": "cypress.config.ts",
-            "tsConfig": "tsconfig.spec.json"
-          }
-        },
         "cypress-comp": {
           "builder": "@cypress/schematic:cypress",
           "options": {
             "headless": false,
             "component": true,
+            "watch": true,
+            "devServerTarget": "pegelhub:serve:test",
+            "projectPath": "Pegelhub-Frontend",
+            "configFile": "cypress.config.ts",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "cypress-e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "headless": false,
+            "component": false,
+            "e2e": true,
             "watch": true,
             "devServerTarget": "pegelhub:serve:test",
             "projectPath": "Pegelhub-Frontend",
