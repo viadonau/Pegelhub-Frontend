@@ -29,9 +29,14 @@
 declare namespace Cypress {
      interface Chainable {
        button(label: string): Chainable<Element>;
+       tooltip(label: string): Chainable<Element>;
      }
 }
 
 Cypress.Commands.add('button', (label) => {
   cy.get('button').contains(label);
+})
+
+Cypress.Commands.add('tooltip', (label) => {
+  cy.get('[role="tooltip"]').contains(label);
 })
