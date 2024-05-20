@@ -30,6 +30,7 @@ declare namespace Cypress {
      interface Chainable {
        button(label: string): Chainable<Element>;
        tooltip(label: string): Chainable<Element>;
+       image(label: string): Chainable<Element>;
      }
 }
 
@@ -39,4 +40,8 @@ Cypress.Commands.add('button', (label) => {
 
 Cypress.Commands.add('tooltip', (label) => {
   cy.get('[role="tooltip"]').contains(label);
+})
+
+Cypress.Commands.add('image', (label) => {
+  cy.get(`img[alt="${label}"]`);
 })

@@ -10,7 +10,7 @@ export class AuthService {
 
     initialize() {
       const apiKey: string | null = localStorage.getItem('api_key');
-      this.loggedIn.set(apiKey !== null)
+      this.loggedIn.set(apiKey !== null);
     }
 
     isUserLoggedIn(): Signal<boolean> {
