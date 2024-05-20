@@ -1,24 +1,34 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, exhaustMap, take } from "rxjs";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
+import { Observable, catchError, throwError } from "rxjs";
 import { AuthService } from "./auth.service";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+    private authService = inject(AuthService);
+    private router = inject(Router);
 
-    constructor(
-        private authService: AuthService
-    ) { }
+    intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const apiKey: string | null = localStorage.getItem('api_key');
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return this.authService.authData.pipe(take(1), exhaustMap(authData => {
-            const apiKey = authData?.apiKey;
+        if (apiKey) {
+          req = req.clone({
+            setParams: {
+              apiKey: apiKey
+            }
+          });
+        }
 
-            const modifiedReq = apiKey == null || apiKey == '' ? req.clone() : req.clone({
-                params: req.params.set('apiKey', apiKey)
-            });
+        return next.handle(req).pipe(
+          catchError((error: HttpResponse<unknown>) => {
+            if (error.status === 401) {
+              this.authService.logout();
+              void this.router.navigate(['/login']);
+            }
 
-            return next.handle(modifiedReq);
-        }));
+            return throwError(() => error);
+          })
+        );
     }
 }

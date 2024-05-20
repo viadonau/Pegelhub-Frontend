@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { Router } from '@angular/router';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -8,23 +8,22 @@ import { AuthService } from 'src/app/service/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  public menuItems: MenuItem[];
+export class HeaderComponent implements OnInit {
+  private router = inject(Router);
+  public authService = inject(AuthService);
 
-  constructor(
-    private router: Router,
-    public authService: AuthService
-  ) {
-    this.menuItems = [];
+  protected menuItems: MenuItem[] = [];
+  protected loggedIn!: Signal<boolean>;
+
+  ngOnInit() {
+    this.loggedIn = this.authService.isUserLoggedIn();
   }
 
   public onHeaderClick(){
-    this.router.navigate(['/']);
+    void this.router.navigate(['/']);
   }
 
   public onLogout(): void {
-    this.authService.loggedIn = false;
-    this.authService.authData.next(null);
-    this.router.navigate(['/', 'login']);
+    this.authService.logout();
   }
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { AuthInterceptor } from './service/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
+import { AuthService } from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,17 @@ import { ButtonModule } from 'primeng/button';
       useClass: AuthInterceptor,
       multi: true
     },
+    {
+      provide: APP_INITIALIZER,
+      deps: [AuthService],
+      useFactory: checkExistingApiKey,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+function checkExistingApiKey(authService: AuthService) {
+  return () => authService.initialize();
+}

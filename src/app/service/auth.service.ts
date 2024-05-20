@@ -1,16 +1,31 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    private router = inject(Router);
+    private loggedIn: WritableSignal<boolean> = signal(false);
 
-    constructor() { }
+    initialize() {
+      const apiKey: string | null = localStorage.getItem('api_key');
+      this.loggedIn.set(apiKey !== null)
+    }
 
-    public loggedIn: boolean = false;
+    isUserLoggedIn(): Signal<boolean> {
+      return this.loggedIn.asReadonly();
+    }
 
-    public authData = new BehaviorSubject<{
-        apiKey: string
-    } | null>(null);
+    login(apiKey: string) {
+      localStorage.setItem('api_key', apiKey);
+      this.loggedIn.set(true);
+      void this.router.navigate(['/']);
+    }
+
+    logout() {
+      localStorage.removeItem('api_key');
+      this.loggedIn.set(false);
+      void this.router.navigate(['/login']);
+    }
 }
