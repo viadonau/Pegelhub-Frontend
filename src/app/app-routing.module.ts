@@ -5,7 +5,7 @@ import { DetailComponent } from './content/detail/detail.component';
 import { NotFoundComponent } from './content/not-found/not-found.component';
 import { QueryInterceptor } from './service/query.interceptor';
 import { LoginComponent } from './content/login/login.component';
-import { isAuthenticated } from './service/auth.guard';
+import { canActivate } from './service/auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,12 +14,12 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    canActivate: [isAuthenticated, QueryInterceptor],
+    canActivate: [canActivate, QueryInterceptor],
     path: 'overview',
     component: OverviewComponent
   },
   {
-    canActivate: [isAuthenticated],
+    canActivate: [canActivate],
     path: 'detail/:id',
     component: DetailComponent
   },

@@ -1,9 +1,0 @@
-<p-menubar id="header" [model]="this.menuItems">
-  <ng-template pTemplate="start">
-    <img id="headerLogo" src="assets/pegelhub_logo.png" height="40" class="mr-2" (click)="onHeaderClick()"
-      style="cursor: pointer;">
-  </ng-template>
-  <ng-template pTemplate="end" *ngIf="this.authService.loggedIn">
-    <button label="Abmelden" class="p-button-primary p-button p-button-rounded pi pi-sign-out" (click)="onLogout()">Abmelden</button>  
-  </ng-template>
-</p-menubar>
