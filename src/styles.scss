@@ -9,19 +9,12 @@
 
 body {
     margin: 0px;
-  }
+}
 
-  //Themings
-  .p-button {
-    border-radius: $button-radius !important;
-  }
+.p-button {
+  border-radius: $button-radius !important;
+}
 
-  .p-card {
-    border-radius: $card-radius !important;
-  }
-
-  /*$container-radius: 1rem;
-  $input-radius: 1rem;
-  $progress-radius: 1rem;
-  $menu-item-radius: 1rem;
-  $image-radius: 1rem;*/
+.p-card {
+  border-radius: $card-radius !important;
+}
