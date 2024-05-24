@@ -2,6 +2,8 @@
 
 This project contains the dedicated Angular application for the Pegelhub project.
 
+The Angular version that is in use is ``18.0.0``
+
 ## Architecural Overview
 ![Architectural Overview](Pegelhub.png)
 
