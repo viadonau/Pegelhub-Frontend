@@ -18,6 +18,13 @@ describe('Header Settings Component', () => {
     });
   });
 
+  function checkApiKeyLocalStorageValue(value: string | null) {
+    cy.window().then((win) => {
+      const apiKeyVal = win.localStorage.getItem('api_key');
+      expect(apiKeyVal).to.be.equal(value);
+    });
+  }
+
   it('should show settings button', () => {
     cy.iconButton('pi-cog').should('be.visible');
   });
@@ -43,12 +50,25 @@ describe('Header Settings Component', () => {
     cy.dialog('API Key ändern').should('be.visible');
   });
 
+  it('should replace api-key value with new form value in localstorage', () => {
+    cy.iconButton('pi-cog').click();
+    cy.menuOption('API Key ändern').click();
+    cy.dialog('API Key ändern').input('api-key').type('newvalue');
+    cy.button('Speichern').click();
+    checkApiKeyLocalStorageValue('newvalue');
+  });
+
+  it('should show toast after successful change of api-key', () => {
+    cy.iconButton('pi-cog').click();
+    cy.menuOption('API Key ändern').click();
+    cy.dialog('API Key ändern').input('api-key').type('newvalue');
+    cy.button('Speichern').click();
+    cy.toast('Erfolg').should('be.visible');
+  });
+
   it('should remove api-key from localstorage on logout-option click', () => {
     cy.iconButton('pi-cog').click();
     cy.menuOption('Abmelden').click();
-    cy.window().then((win) => {
-      const apiKeyVal = win.localStorage.getItem('api_key');
-      expect(apiKeyVal).to.be.null;
-    });
+    checkApiKeyLocalStorageValue(null);
   });
 });

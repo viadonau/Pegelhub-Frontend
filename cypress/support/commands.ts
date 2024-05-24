@@ -35,6 +35,8 @@ declare namespace Cypress {
        menu(label: string): Chainable<Element>;
        menuOption(label: string): Chainable<Element>;
        dialog(header: string): Chainable<Element>;
+       input(id: string): Chainable<Element>;
+       toast(summary: string): Chainable<Element>;
      }
 }
 
@@ -64,4 +66,12 @@ Cypress.Commands.add('menuOption', (label) => {
 
 Cypress.Commands.add('dialog', (header) => {
   cy.get(`p-dialog[header="${header}"]`);
+})
+
+Cypress.Commands.add('input', (id) => {
+  cy.get(`input[id="${id}"]`);
+})
+
+Cypress.Commands.add('toast', (summary) => {
+  cy.get('p-toastitem').contains(summary)
 })
