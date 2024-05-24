@@ -12,6 +12,64 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="./" class="navbar-brand">pegelhub documentation</a>
@@ -32,46 +90,74 @@
                    <div class="content-data">
 
 <h1>Pegelhub</h1>
-<p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 15.2.4.</p>
+<p>This project contains the dedicated Angular application for the Pegelhub project.</p>
 <h2>Architecural Overview</h2>
 <p><img src="Pegelhub.png" alt="Architectural Overview" class="img-responsive"></p>
+<h2>Theming</h2>
+<p>The application provides theming support in two different ways:</p>
+<ul>
+<li>theme.scss</li>
+<li>base-theme.scss</li>
+</ul>
+<h3>theme.scss</h3>
+<p>The main theme file provides scss-variables used for coloring and shaping HTML elements. In order to change these parameters, the actual values need to be provided for the given SCSS variables.</p>
+<h3>base-theme.scss</h3>
+<p>This is the PrimeNG main theme which is responsible for the general styling of the application. Here, changes can be done to the PrimeNG style classes and rules.</p>
 <h2>Deployment</h2>
-<p>To deploy the application on a web server, follow the instructions below. the application is deployed and made available in a docker container.</p>
+<p>To deploy the application on a web server, follow the instructions below. The application is deployed and made available in a docker container.</p>
 <h3>Prerequisites</h3>
 <p>Make sure that the following software is installed on your system:</p>
 <ul>
-<li>Docker Desktop <code>https://www.docker.com/get-started</code></li>
-<li>Docker Compose <code>https://docs.docker.com/compose/install</code></li>
+<li>Docker Desktop: <code>https://www.docker.com/get-started</code></li>
 </ul>
 <h3>Configure Environment</h3>
 <ul>
-<li>In angular, environments are used to define which configuration should be used for which environment.</li>
-<li>The following environment file is used for deployment via docker: <code>environment.prod.ts</code></li>
-<li>Among other things, the end point of the API is stored in the variable <code>BASE_URL</code>.</li>
+<li>In Angular, environments are used to define which configuration should be used for which environment.</li>
+<li>The following environment file is used for the deployment via Docker: <code>environment.prod.ts</code></li>
+<li>Inside this particular file the endpoint of the API is stored in the variable <code>BASE_URL</code>.</li>
 </ul>
-<h3>Step 1:</h3>
+<h3>Involved files</h3>
 <ul>
 <li>Navigate to the root directory of your Angular app.</li>
-<li>Here we find a <code>docker-compose.yml</code> file and a <code>Dockerfile</code>, which are needed for deployment.</li>
-<li>The <code>docker-compose.yml</code> file refers to the Dockerfile. While the <code>docker-compose.yml</code> file defines which containers are to be created, the <code>Dockerfile</code> defines a series of commands that initiate the build, copy the resulting source and finally start the container.</li>
+<li>Here we find a <code>docker-compose.yml</code> file and a <code>Dockerfile</code> which are both needed for a functioning deployment.</li>
+<li><code>docker-compose.yml</code> defines which containers are to be created</li>
+<li><code>Dockerfile</code> defines a series of commands that initiate the build, copy the resulting source and finally start the container.</li>
 </ul>
-<h3>Step 2:</h3>
-<ul>
-<li>The container can be built with the command <code>docker-compose build</code>. You can then start it with <code>docker-compose up</code> or stop it with <code>docker-compose down</code>.</li>
-<li>After the container has been started with <code>docker-compose up</code>, the application is accessible under port 80.</li>
-</ul>
-<h2>Development server</h2>
+<h3>Startup Procedure</h3>
+<ol>
+<li>Start <code>Docker Desktop</code> on your local machine and wait until it has booted successfully.</li>
+<li>Afterward the container can be built with the command <code>docker-compose build</code>. This will take some time depending on the power of your system.</li>
+<li>It is finished once the docker image <code>nginx</code> appears in the <code>Images</code> section of Docker Desktop.</li>
+<li>You can then start it with <code>docker-compose up</code> or stop it with <code>docker-compose down</code>.</li>
+<li>To make sure the application is running correctly, take a look at <code>Containers</code> inside Docker Desktop. Here you should see the container <code>pegelhub-frontend</code> and a green icon on the left.</li>
+<li>After the container has been successfully started with <code>docker-compose up</code>, the application is accessible under port 80.</li>
+</ol>
+<h2>Running the application locally</h2>
 <p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The application will automatically reload if you change any of the source files.</p>
 <h2>Code scaffolding</h2>
 <p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
 <h2>Build</h2>
 <p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
-<h2>Running unit tests</h2>
-<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
-<h2>Running end-to-end tests</h2>
-<p>Run <code>ng e2e</code> to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.</p>
-<h2>Further help</h2>
-<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://angular.io/cli">Angular CLI Overview and Command Reference</a> page.</p>
+<h2>Running End-to-End Tests</h2>
+<p>Run <code>ng test:e2e</code> to execute the e2e tests via <a href="https://www.cypress.io/">Cypress</a>.</p>
+<h2>Running Component tests</h2>
+<p>Run <code>ng test:comp</code> to execute the component tests via <a href="https://www.cypress.io/">Cypress</a>.</p>
+<h2>Compodoc</h2>
+<p>Serves as a documentation tool for this Angular application.
+Based on the source code it generates a good-looking and easy-to-understand documentation that is easily accessible.</p>
+<h3>Build</h3>
+<p>Execute the command <code>ng compodoc:build</code> to generate the documentation.</p>
+<h3>Serve</h3>
+<p>Execute the command <code>ng compodoc:serve</code> to serve the documentation and gain access to it.
+The documentation should be available on port <strong>8080</strong>.</p>
+<p><strong>Note</strong></p>
+<p>The build command should always be executed before starting with the serve procedure.
+If this is not the case, the documentation will not be accessible.</p>
+<h3>Build and Serve (combined)</h3>
+<p>Execute the command <code>ng compodoc:build-and-serve</code> to combine the build and serve procedures into one step.</p>
+<h2>Highcharts</h2>
+<p>Represents a JavaScript charting library based on SVG and some canvas/WebGL.
+Used to show all kind of diagrams and charts across the application.</p>
 
 
 

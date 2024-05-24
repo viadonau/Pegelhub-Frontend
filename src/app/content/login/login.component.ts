@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { TooltipModule } from "primeng/tooltip";
 import { CardModule } from "primeng/card";
 import { InputTextModule } from "primeng/inputtext";
 import { RippleModule } from "primeng/ripple";
 import { ButtonModule } from "primeng/button";
+import { ApiKey } from "../../shared/patterns";
 
 @Component({
   selector: 'app-login',
@@ -23,13 +23,11 @@ import { ButtonModule } from "primeng/button";
   standalone: true
 })
 export class LoginComponent {
-  private apiKeyPattern = new RegExp("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/][AQgw]==|[A-Za-z0-9+/]{2}[AEIMQUYcgkosw048]=)?$");
+  private authService = inject(AuthService);
 
   protected loginForm =  new FormGroup({
-    apiKey: new FormControl('', [Validators.required, Validators.pattern(this.apiKeyPattern)])
+    apiKey: new FormControl('', [Validators.required, Validators.pattern(ApiKey)])
   });
-
-  constructor(private authService: AuthService, private router: Router) {}
 
   onContinue(): void {
     if (this.loginForm.invalid) {

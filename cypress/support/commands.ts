@@ -31,6 +31,12 @@ declare namespace Cypress {
        button(label: string): Chainable<Element>;
        tooltip(label: string): Chainable<Element>;
        image(label: string): Chainable<Element>;
+       iconButton(icon: string): Chainable<Element>;
+       menu(label: string): Chainable<Element>;
+       menuOption(label: string): Chainable<Element>;
+       dialog(header: string): Chainable<Element>;
+       input(id: string): Chainable<Element>;
+       toast(summary: string): Chainable<Element>;
      }
 }
 
@@ -44,4 +50,28 @@ Cypress.Commands.add('tooltip', (label) => {
 
 Cypress.Commands.add('image', (label) => {
   cy.get(`img[alt="${label}"]`);
+})
+
+Cypress.Commands.add('iconButton', (icon) => {
+  cy.get(`p-button[icon="pi ${icon}"]`);
+})
+
+Cypress.Commands.add('menu', (label) => {
+  cy.get('p-menu').find('li').contains(label);
+})
+
+Cypress.Commands.add('menuOption', (label) => {
+  cy.get('p-menu').find('li').contains(label);
+})
+
+Cypress.Commands.add('dialog', (header) => {
+  cy.get(`p-dialog[header="${header}"]`);
+})
+
+Cypress.Commands.add('input', (id) => {
+  cy.get(`input[id="${id}"]`);
+})
+
+Cypress.Commands.add('toast', (summary) => {
+  cy.get('p-toastitem').contains(summary)
 })

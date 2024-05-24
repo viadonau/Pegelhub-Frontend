@@ -22,9 +22,9 @@ describe('Header Component', () => {
     cy.image('Pegelhub Logo').should('be.visible');
   });
 
-  it('should not show Logout Button if user is not logged in', () => {
+  it('should not show Settings Button if user is not logged in', () => {
     mockLoggedOut();
-    cy.get('.p-menubar-end').should('not.contain.text', 'Abmelden');
+    cy.get('.p-menubar-end').children().should('have.length', 0);
   });
 
   /**
@@ -35,8 +35,8 @@ describe('Header Component', () => {
     cy.image('Pegelhub Logo').should('be.visible');
   });
 
-  it('should show Logout Button on the right side if user is logged in', () => {
+  it('should show Settings Button on the right side if user is logged in', () => {
     mockLoggedIn();
-    cy.get('.p-menubar-end').should('contain.text', 'Abmelden');
+    cy.get('.p-menubar-end').iconButton('pi-cog').should('be.visible');
   });
 })

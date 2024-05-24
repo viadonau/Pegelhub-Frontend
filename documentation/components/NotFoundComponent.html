@@ -12,6 +12,64 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="../" class="navbar-brand">pegelhub documentation</a>
@@ -98,7 +156,18 @@
                 <td class="col-md-9"><code>app-not-found</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">Standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ButtonModule</code>
+                            <code>RouterLink</code>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -136,15 +205,17 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { RouterLink } from &#x27;@angular/router&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
 
 @Component({
-  selector: &#x27;app-not-found&#x27;,
-  templateUrl: &#x27;./not-found.component.html&#x27;,
-  styleUrls: [&#x27;./not-found.component.scss&#x27;]
+    selector: &#x27;app-not-found&#x27;,
+    templateUrl: &#x27;./not-found.component.html&#x27;,
+    styleUrls: [&#x27;./not-found.component.scss&#x27;],
+    standalone: true,
+    imports: [ButtonModule, RouterLink]
 })
-export class NotFoundComponent {
-
-}
+export class NotFoundComponent {}
 </code></pre>
     </div>
 
@@ -204,7 +275,7 @@ export class NotFoundComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row justify-content-center">    <div class="col-sm-12">        <div class="card shadow-sm border-0 mx-auto mt-5 text-center" [style]="{width: \'35rem\'}">            <h2 class="mb-0 px-5" [style]="{fontSize: \'6rem\'}">404</h2>            <hr>            <div class="d-inline-flex align-items-center justify-content-center" [style]="{fontSize: \'1.5rem\'}">                <i class="cil-search me-2"></i>                <span class="card-subtitle mb-0 text-muted">                    Seite nicht gefunden | Ungültige URL                </span>            </div>            <div class="card-body mx-auto mt-2">                <p-button label="Zurück zur Übersicht" icon="pi pi-search" iconPos="right"                    [routerLink]="[\'/\', \'overview\']"></p-button>            </div>        </div>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetailComponent', 'selector': 'app-detail'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PositionComponent', 'selector': 'app-position'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetailComponent', 'selector': 'app-detail'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderSettingsComponent', 'selector': 'app-header-settings'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PositionComponent', 'selector': 'app-position'},{'name': 'TestComponent', 'selector': ''}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NotFoundComponent'};
 </script>

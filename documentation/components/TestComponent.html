@@ -96,7 +96,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  AppComponent</li>
+  TestComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -109,14 +109,6 @@
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
         <li class="nav-item">
-            <a href="#templateData" class="nav-link"
-                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
-        </li>
-        <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -127,7 +119,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/app.component.ts</code>
+    <code>src/app/service/auth.service.cy.ts</code>
 </p>
 
 
@@ -135,89 +127,55 @@
 
 
 
-<section data-compodoc="block-metadata">
-    <h3>Metadata</h3>
-    <table class="table table-sm table-hover metadata">
-        <tbody>
 
 
-
-
-
-
-
-
-
-
-
-
-            <tr>
-                <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-root</code></td>
-            </tr>
-
-            <tr>
-                <td class="col-md-3">Standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
-
-            <tr>
-                <td class="col-md-3">imports</td>
-                <td class="col-md-9">
-                                <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
-                            <code>RouterOutlet</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./app.component.scss</code></td>
-            </tr>
-
-
-
-            <tr>
-                <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./app.component.html</code></td>
-            </tr>
-
-
-
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/service/auth.service.cy.ts:8</a></div>
+                            </td>
+                        </tr>
+
                 <tr>
                     <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#title" >title</a>
-                            </li>
-                        </ul>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                     </td>
                 </tr>
-
-
-
-
-
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 </section>
 
 
@@ -225,83 +183,92 @@
 
 
 
-
-    <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="title"></a>
-                    <span class="name">
-                        <span ><b>title</b></span>
-                        <a href="#title"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;Pegelhub&#x27;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/app.component.ts:13</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { RouterOutlet } from &#x27;@angular/router&#x27;;
-import { HeaderComponent } from &#x27;./content/header/header.component&#x27;;
+import { AuthService } from &#x27;./auth.service&#x27;;
+import { TestBed } from &#x27;@angular/core/testing&#x27;;
 
 @Component({
-    selector: &#x27;app-root&#x27;,
-    templateUrl: &#x27;./app.component.html&#x27;,
-    styleUrls: [&#x27;./app.component.scss&#x27;],
-    standalone: true,
-    imports: [HeaderComponent, RouterOutlet]
+  template: &#x60;&#x60;
 })
-export class AppComponent {
-  title &#x3D; &#x27;Pegelhub&#x27;;
+class TestComponent {
+  // this is needed so the service is bootstrapped (and injectable)
+  constructor(private authService: AuthService) {}
 }
-</code></pre>
-    </div>
 
-    <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;app-header&gt;&lt;/app-header&gt;
-&lt;div class&#x3D;&quot;content-container&quot;&gt;
-  &lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;/div&gt;
-</code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./app.component.scss</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss">.content-container {
-    margin: 55px 8px 8px 8px;
+describe(&#x27;Auth Service&#x27;, () &#x3D;&gt; {
+  function mockExistingApiKey() {
+   return cy.window().then((window) &#x3D;&gt; {
+      window.localStorage.setItem(&#x27;api_key&#x27;, &#x27;test&#x27;);
+      cy.mount(TestComponent).then(() &#x3D;&gt; {
+        const authService &#x3D; TestBed.inject(AuthService);
+        authService.initialize();
+      });
+    });
   }
+
+  function mockWithoutApiKey() {
+    return cy.mount(TestComponent);
+  }
+
+  /**
+   * Tests based on the api-key existing in the localstorage
+   */
+  it(&#x27;should set loggedIn value to true if api-key already exists in localstorage&#x27;, () &#x3D;&gt; {
+    mockExistingApiKey().then(() &#x3D;&gt; {
+      const authService &#x3D; TestBed.inject(AuthService);
+      const loggedIn &#x3D; authService.isUserLoggedIn();
+
+      expect(loggedIn()).to.eq(true);
+    });
+  });
+
+  it(&#x27;should set loggedIn value to true if already logged in and page has been reloaded&#x27;, () &#x3D;&gt; {
+    mockExistingApiKey().then(() &#x3D;&gt; {
+      const authService &#x3D; TestBed.inject(AuthService);
+      const loggedIn &#x3D; authService.isUserLoggedIn();
+
+      expect(loggedIn()).to.eq(true);
+
+      mockExistingApiKey().then(() &#x3D;&gt; {
+        expect(loggedIn()).to.eq(true);
+      });
+    })
+  });
+
+  /**
+   * Tests based on the api-key not existing in the localstorage
+   */
+  it(&#x27;should set api-key in localstorage to form value if login was successful&#x27;, () &#x3D;&gt; {
+    mockWithoutApiKey().then(() &#x3D;&gt; {
+      const authService &#x3D; TestBed.inject(AuthService);
+      authService.login(&#x27;test&#x27;);
+
+      cy.window().then((window) &#x3D;&gt; {
+        const apiKey &#x3D; window.localStorage.getItem(&#x27;api_key&#x27;);
+        expect(apiKey).to.eq(&#x27;test&#x27;);
+      });
+    });
+  });
+
+  it(&#x27;should set loggedIn value to true if login was successful&#x27;, () &#x3D;&gt; {
+    mockWithoutApiKey().then(() &#x3D;&gt; {
+      const authService &#x3D; TestBed.inject(AuthService);
+      authService.login(&#x27;test&#x27;);
+
+      const loggedIn &#x3D; authService.isUserLoggedIn();
+      expect(loggedIn()).to.eq(true);
+    });
+  });
+})
 </code></pre>
     </div>
+
+
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -328,10 +295,10 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-header></app-header><div class="content-container">  <router-outlet></router-outlet></div></div>'
+        var COMPONENT_TEMPLATE = '<div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetailComponent', 'selector': 'app-detail'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderSettingsComponent', 'selector': 'app-header-settings'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PositionComponent', 'selector': 'app-position'},{'name': 'TestComponent', 'selector': ''}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AppComponent'};
+    var ACTUAL_COMPONENT = {'name': 'TestComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -377,7 +344,7 @@ export class AppComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'TestComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -4,6 +4,6 @@
          style="cursor: pointer;" alt="Pegelhub Logo">
   </ng-template>
   <ng-template pTemplate="end">
-    <button *ngIf="loggedIn()" label="Abmelden" class="p-button-primary p-button p-button-rounded pi pi-sign-out" (click)="onLogout()">Abmelden</button>
+    <app-header-settings *ngIf="loggedIn()"></app-header-settings>
   </ng-template>
 </p-menubar>

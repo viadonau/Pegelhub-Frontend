@@ -17,10 +17,10 @@ export class AuthService {
       return this.loggedIn.asReadonly();
     }
 
-    login(apiKey: string) {
+    login(apiKey: string): Promise<boolean> {
       localStorage.setItem('api_key', apiKey);
       this.loggedIn.set(true);
-      void this.router.navigate(['/']);
+      return this.router.navigate(['/']);
     }
 
     logout() {
