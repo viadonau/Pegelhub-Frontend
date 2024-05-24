@@ -32,6 +32,9 @@ declare namespace Cypress {
        tooltip(label: string): Chainable<Element>;
        image(label: string): Chainable<Element>;
        iconButton(icon: string): Chainable<Element>;
+       menu(label: string): Chainable<Element>;
+       menuOption(label: string): Chainable<Element>;
+       dialog(header: string): Chainable<Element>;
      }
 }
 
@@ -49,4 +52,16 @@ Cypress.Commands.add('image', (label) => {
 
 Cypress.Commands.add('iconButton', (icon) => {
   cy.get(`p-button[icon="pi ${icon}"]`);
+})
+
+Cypress.Commands.add('menu', (label) => {
+  cy.get('p-menu').find('li').contains(label);
+})
+
+Cypress.Commands.add('menuOption', (label) => {
+  cy.get('p-menu').find('li').contains(label);
+})
+
+Cypress.Commands.add('dialog', (header) => {
+  cy.get(`p-dialog[header="${header}"]`);
 })
