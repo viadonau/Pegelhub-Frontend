@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AppConfig } from 'src/app/shared/Config';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Supplier } from './model/supplier.model';
 import { firstValueFrom } from 'rxjs';
 import { Measurement } from './model/measurement.model';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiService {
 
-  private static MEASUREMENT_URL: string = AppConfig.BASE_URL.concat('measurement');
-  private static SUPPLIER_LAST_VALUE_URL: string = AppConfig.BASE_URL.concat('measurement/last');
-  private static SUPPLIER_URL: string = AppConfig.BASE_URL.concat('supplier');
+  private static MEASUREMENT_URL: string = environment.BASE_URL.concat('measurement');
+  private static SUPPLIER_LAST_VALUE_URL: string = environment.BASE_URL.concat('measurement/last');
+  private static SUPPLIER_URL: string = environment.BASE_URL.concat('supplier');
 
   constructor(private http: HttpClient) { }
 

@@ -1,16 +1,37 @@
-import {Component, DestroyRef, OnInit} from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { QueryService } from 'src/app/service/query.service';
 import { UiService } from 'src/app/service/ui.service';
-import { PaginatorState } from "primeng/paginator";
+import { PaginatorState, PaginatorModule } from "primeng/paginator";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PositionComponent } from '../position/position.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { NgIf, NgFor, DecimalPipe, DatePipe } from '@angular/common';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+    selector: 'app-overview',
+    templateUrl: './overview.component.html',
+    styleUrls: ['./overview.component.scss'],
+    standalone: true,
+    imports: [
+        CardModule,
+        SharedModule,
+        SelectButtonModule,
+        NgIf,
+        TableModule,
+        NgFor,
+        ProgressBarModule,
+        PaginatorModule,
+        PositionComponent,
+        DecimalPipe,
+        DatePipe,
+    ],
 })
 export class OverviewComponent implements OnInit {
   protected suppliers: Supplier[] = [];
@@ -90,7 +111,7 @@ export class OverviewComponent implements OnInit {
   }
 
   protected navigateToDetail(id: string): void {
-    this.router.navigate(['/', 'detail', id]);
+    void this.router.navigate(['/', 'detail', id]);
   }
 
   private loadSuppliers(): void {

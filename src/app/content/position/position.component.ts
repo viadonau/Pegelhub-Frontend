@@ -3,16 +3,14 @@ import * as leaflet from 'leaflet';
 import { LeafletPosition } from 'src/app/service/model/leafletPosition.model';
 
 @Component({
-  selector: 'app-position',
-  templateUrl: './position.component.html',
-  styleUrls: ['./position.component.scss']
+    selector: 'app-position',
+    templateUrl: './position.component.html',
+    styleUrls: ['./position.component.scss'],
+    standalone: true
 })
 export class PositionComponent implements AfterViewInit, OnChanges {
- 
-  @Input()
-  suppliers: LeafletPosition[] = [];
-  @Input()
-  allowNaviation: boolean = false;
+  @Input() suppliers: LeafletPosition[] = [];
+  @Input() allowNaviation = false;
 
   private static readonly startPositionLongitude: number = 14.9492;
   private static readonly startPositionLatitude: number = 48.1916;
@@ -21,14 +19,14 @@ export class PositionComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.setUpLeafletMap();
-  } 
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setUpLeafletMap();
   }
 
   private setUpLeafletMap(){
-    if(!this.map){
+    if (!this.map) {
       this.map = leaflet.map("positionMap",{
         center: [ PositionComponent.startPositionLatitude, PositionComponent.startPositionLongitude],
         zoom: 8
@@ -41,10 +39,11 @@ export class PositionComponent implements AfterViewInit, OnChanges {
       });
 
       this.suppliers.forEach(supplier=>{
-        if(supplier){
+        if (supplier) {
           const marker = leaflet.marker([supplier.latitude, supplier.longitude],{
             title: supplier.title
           });
+
           marker.bindPopup(`<b>${supplier.title}</b>`).openPopup();
           marker.addTo(this.map)
         }
@@ -53,5 +52,5 @@ export class PositionComponent implements AfterViewInit, OnChanges {
       tiles.addTo(this.map);
     }
   }
-  
+
 }

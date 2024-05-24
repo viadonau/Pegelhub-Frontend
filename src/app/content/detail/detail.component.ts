@@ -7,11 +7,17 @@ import { Measurement } from 'src/app/service/model/measurement.model';
 import { Supplier } from 'src/app/service/model/supplier.model';
 import { UiService } from 'src/app/service/ui.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PositionComponent } from '../position/position.component';
+import { NgIf, DecimalPipe } from '@angular/common';
+import { FieldsetModule } from 'primeng/fieldset';
+import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+    selector: 'app-detail',
+    templateUrl: './detail.component.html',
+    styleUrls: ['./detail.component.scss'],
+    standalone: true,
+    imports: [CardModule, FieldsetModule, NgIf, PositionComponent, DecimalPipe]
 })
 export class DetailComponent implements OnInit, OnDestroy {
   private activatedRouteSubscription!: Subscription;
@@ -46,7 +52,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.uiService.getSupplier(this.supplierId).then(data => {
       this.setDetailData(data);
       this.loadMeasurementData(String(this.supplierDetail?.stationNumber), '30d');
-    }).catch(error => {
+    }).catch(() => {
       this.router.navigate(['/notfound']);
     });
   }
