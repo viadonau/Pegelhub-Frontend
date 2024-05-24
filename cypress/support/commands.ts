@@ -31,6 +31,7 @@ declare namespace Cypress {
        button(label: string): Chainable<Element>;
        tooltip(label: string): Chainable<Element>;
        image(label: string): Chainable<Element>;
+       iconButton(icon: string): Chainable<Element>;
      }
 }
 
@@ -44,4 +45,8 @@ Cypress.Commands.add('tooltip', (label) => {
 
 Cypress.Commands.add('image', (label) => {
   cy.get(`img[alt="${label}"]`);
+})
+
+Cypress.Commands.add('iconButton', (icon) => {
+  cy.get(`p-button[icon="pi ${icon}"]`);
 })
