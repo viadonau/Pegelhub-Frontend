@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/service/auth.service';
 import { MenubarModule } from 'primeng/menubar';
 import { NgIf } from '@angular/common';
+import { HeaderSettingsComponent } from "./settings/settings.component";
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./header.component.scss'],
   imports: [
     MenubarModule,
-    NgIf
+    NgIf,
+    HeaderSettingsComponent
   ],
   standalone: true
 })
@@ -28,9 +30,5 @@ export class HeaderComponent implements OnInit {
 
   public onHeaderClick(){
     void this.router.navigate(['/']);
-  }
-
-  public onLogout(): void {
-    this.authService.logout();
   }
 }

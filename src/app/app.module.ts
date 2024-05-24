@@ -16,6 +16,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from './service/auth.service';
 import { HeaderComponent } from './content/header/header.component';
+import { HeaderSettingsComponent } from "./content/header/settings/settings.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { HeaderComponent } from './content/header/header.component';
     RippleModule,
     ButtonModule,
     HeaderComponent,
+    HeaderSettingsComponent
   ],
   providers: [
     {
