@@ -12,6 +12,64 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="../" class="navbar-brand">pegelhub documentation</a>
@@ -105,6 +163,10 @@
                 <td class="col-md-9"><code>app-position</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">Standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
 
             <tr>
@@ -233,7 +295,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/content/position/position.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/content/position/position.component.ts:13</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -259,7 +321,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/content/position/position.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/content/position/position.component.ts:12</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -291,21 +353,21 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/content/position/position.component.ts:22</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/content/position/position.component.ts:20</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -328,53 +390,51 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/app/content/position/position.component.ts:26</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="24"
+                                    class="link-to-prism">src/app/content/position/position.component.ts:24</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>changes</td>
-                                    <td>
-                                            <code>SimpleChanges</code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                        <code>SimpleChanges</code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -385,7 +445,7 @@
                 <td class="col-md-4">
                     <a name="setUpLeafletMap"></a>
                     <span class="name">
-                        <span class="modifier">Private</span>
+                            <span class="modifier">Private</span>
                         <span ><b>setUpLeafletMap</b></span>
                         <a href="#setUpLeafletMap"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -393,27 +453,27 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>setUpLeafletMap()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/app/content/position/position.component.ts:30</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/content/position/position.component.ts:28</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -444,7 +504,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/content/position/position.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/content/position/position.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -478,7 +538,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/content/position/position.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/content/position/position.component.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -512,7 +572,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/content/position/position.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/content/position/position.component.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -530,16 +590,14 @@ import * as leaflet from &#x27;leaflet&#x27;;
 import { LeafletPosition } from &#x27;src/app/service/model/leafletPosition.model&#x27;;
 
 @Component({
-  selector: &#x27;app-position&#x27;,
-  templateUrl: &#x27;./position.component.html&#x27;,
-  styleUrls: [&#x27;./position.component.scss&#x27;]
+    selector: &#x27;app-position&#x27;,
+    templateUrl: &#x27;./position.component.html&#x27;,
+    styleUrls: [&#x27;./position.component.scss&#x27;],
+    standalone: true
 })
 export class PositionComponent implements AfterViewInit, OnChanges {
- 
-  @Input()
-  suppliers: LeafletPosition[] &#x3D; [];
-  @Input()
-  allowNaviation: boolean &#x3D; false;
+  @Input() suppliers: LeafletPosition[] &#x3D; [];
+  @Input() allowNaviation &#x3D; false;
 
   private static readonly startPositionLongitude: number &#x3D; 14.9492;
   private static readonly startPositionLatitude: number &#x3D; 48.1916;
@@ -548,14 +606,14 @@ export class PositionComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.setUpLeafletMap();
-  } 
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setUpLeafletMap();
   }
 
   private setUpLeafletMap(){
-    if(!this.map){
+    if (!this.map) {
       this.map &#x3D; leaflet.map(&quot;positionMap&quot;,{
         center: [ PositionComponent.startPositionLatitude, PositionComponent.startPositionLongitude],
         zoom: 8
@@ -568,10 +626,11 @@ export class PositionComponent implements AfterViewInit, OnChanges {
       });
 
       this.suppliers.forEach(supplier&#x3D;&gt;{
-        if(supplier){
+        if (supplier) {
           const marker &#x3D; leaflet.marker([supplier.latitude, supplier.longitude],{
             title: supplier.title
           });
+
           marker.bindPopup(&#x60;&lt;b&gt;${supplier.title}&lt;/b&gt;&#x60;).openPopup();
           marker.addTo(this.map)
         }
@@ -580,7 +639,7 @@ export class PositionComponent implements AfterViewInit, OnChanges {
       tiles.addTo(this.map);
     }
   }
-  
+
 }
 </code></pre>
     </div>
@@ -627,7 +686,7 @@ export class PositionComponent implements AfterViewInit, OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div>    <div id="positionMap"></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetailComponent', 'selector': 'app-detail'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PositionComponent', 'selector': 'app-position'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetailComponent', 'selector': 'app-detail'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderSettingsComponent', 'selector': 'app-header-settings'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverviewComponent', 'selector': 'app-overview'},{'name': 'PositionComponent', 'selector': 'app-position'},{'name': 'TestComponent', 'selector': ''}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PositionComponent'};
 </script>
