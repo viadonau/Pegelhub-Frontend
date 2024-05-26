@@ -1,0 +1,25 @@
+name: Component Test
+
+on:
+  push:
+    branches:
+      - component-test
+
+jobs:
+  component-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress component tests
+      run: npm run cypress:run:component
