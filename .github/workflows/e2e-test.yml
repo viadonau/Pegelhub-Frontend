@@ -3,7 +3,7 @@ name: End-to-End Test
 on:
   push:
     branches:
-      - end-to-end-test-patch-1
+      - e2e-test
 
 jobs:
   e2e-test:
