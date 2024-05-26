@@ -12,7 +12,8 @@
     "test:comp": "ng run pegelhub:cypress-comp",
     "test:e2e": "ng run pegelhub:cypress-e2e",
     "cypress:run:component": "cypress run --component --config-file cypress.config.ts",
-    "cypress:run:e2e": "cypress run"
+    "cypress:run:e2e": "cypress run",
+    "cypress:run": "cypress run"
 },
   "private": true,
   "dependencies": {
