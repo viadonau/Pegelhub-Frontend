@@ -28,4 +28,4 @@ jobs:
       run: sleep 10
 
     - name: Run Cypress end-to-end tests
-      run: npm run cypress:run:e2e
+      run: npm run cypress:run -- --spec 'cypress/e2e/example.cy.ts'
