@@ -24,7 +24,7 @@ jobs:
     - name: Start application
       run: |
         npm start &
-        sleep 30
+        sleep 15
 
     - name: Run Cypress end-to-end tests
       run: npm run cypress:run -- --spec 'cypress/e2e/example.cy.ts'
