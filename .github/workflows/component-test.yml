@@ -21,6 +21,6 @@ jobs:
     - name: Install dependencies
       run: npm install --legacy-peer-deps
 
-    - name: Run Cypress component tests
-      run: npm run cypress:run:component -- --config-file cypress.config.ts
+    - name: Run Cypress component tests and save output to log file
+      run: npm run cypress:run:component -- --config-file cypress.config.ts > cypress-log.txt 2>&1
 
