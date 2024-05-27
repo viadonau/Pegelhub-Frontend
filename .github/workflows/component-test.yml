@@ -22,4 +22,5 @@ jobs:
       run: npm install
 
     - name: Run Cypress component tests
-      run: npm run cypress:run:component
+      run: npm run cypress:run:component -- --config-file cypress.config.ts
+
