@@ -22,10 +22,9 @@ jobs:
       run: npm install --legacy-peer-deps # Verwende --legacy-peer-deps, um das Problem mit peer-Abhängigkeiten zu umgehen
 
     - name: Start application
-      run: npm start &
-
-    - name: Wait for application to start
-      run: sleep 10
+      run: |
+        npm start &
+        sleep 20
 
     - name: Run Cypress end-to-end tests
       run: npm run cypress:run -- --spec 'cypress/e2e/example.cy.ts'
