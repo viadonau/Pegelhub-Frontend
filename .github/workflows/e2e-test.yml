@@ -1,0 +1,32 @@
+---
+name: End-to-End Test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  e2e-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '21.6.2'
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps # Verwende --legacy-peer-deps, um das Problem mit peer-Abhängigkeiten zu umgehen
+
+    - name: Start application
+      run: |
+        npm start &
+        sleep 15
+
+    - name: Run Cypress end-to-end tests
+      run: npm run cypress:run -- --spec 'cypress/e2e/example.cy.ts'
