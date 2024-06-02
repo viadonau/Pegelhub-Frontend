@@ -1,9 +1,11 @@
-name: Component Test
+---
+name: Component Tests
 
 on:
   push:
-    branches:
-      - component-test
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   component-test:
