@@ -17,9 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": {
-              "base": "dist/pegelhub"
-            },
+            "outputPath": "dist/pegelhub",
             "index": "src/index.html",
             "polyfills": [
               "zone.js"
@@ -130,12 +128,7 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css"
             ],
-            "scripts": [
-
-            ],
-            "codeCoverageExclude": [
-              "src/app/service/**/*"
-            ]
+            "scripts": []
           }
         },
         "cypress-comp": {

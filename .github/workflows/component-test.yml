@@ -1,0 +1,25 @@
+name: Component Test
+
+on:
+  push:
+    branches:
+      - component-test
+
+jobs:
+  component-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '21.6.2'
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    - name: Run Cypress component test
+      run: npm run cypress:run:component --config-file cypress.config.ts
