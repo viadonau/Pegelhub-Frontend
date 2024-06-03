@@ -1,7 +1,6 @@
-version: '3'
 services:
-  pegelhub-webapp:
-    image: nginx:1.24
+  pegelhub-frontend:
+    image: pegelhub-frontend
     build:
       dockerfile: Dockerfile
     ports:
