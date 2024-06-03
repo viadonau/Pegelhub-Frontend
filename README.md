@@ -23,7 +23,7 @@ To deploy the application on a web server, follow the instructions below. The ap
 
 ### Prerequisites
 Make sure that the following software is installed on your system:
-- Docker Desktop: `https://www.docker.com/get-started`
+- Docker Compose: `https://docs.docker.com/compose/install/`
 
 ### Configure Environment
 - In Angular, environments are used to define which configuration should be used for which environment.
