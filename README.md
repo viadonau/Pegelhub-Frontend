@@ -2,7 +2,64 @@
 
 This project contains the dedicated Angular application for the Pegelhub project.
 
-The Angular version that is in use is ``18.0.0``
+The Angular version that is in use is `18.0.0`
+
+## Running the application locally
+
+The application can either be started via npm scripts or with the help of Docker.
+
+### NPM Scripts
+
+#### Prerequisites
+Make sure that the following software is installed on your system:
+- Node.js: `https://nodejs.org` - 18.19.1 || ^20.11.1 || ^22.0.0
+
+#### Setup
+
+1. Run `ng serve` for a dev server
+2. Navigate to `http://localhost:4201/`
+3. The application will automatically reload if you change any of the source files
+
+### Docker
+
+#### Prerequisites
+Make sure that the following software is installed on your system:
+- Docker Desktop: `https://www.docker.com/get-started`
+
+#### Setup
+
+1. Change directory to root directory if not already there
+2. Execute command `docker-compose up`
+3. Wait for the command to finish
+4. Navigate to `http://localhost:4201/`
+5. The application will **NOT** automatically reload if you change any of the source files
+
+## Deployment
+
+To deploy the application on a web server, follow the instructions below.
+The application is deployed and made available in a docker container called `pegelhub-frontend`
+
+### Prerequisites
+Make sure that the following software is installed on your system:
+- Docker Compose: `https://docs.docker.com/compose/install/`
+
+### Configure Environment
+- In Angular, environments are used to define which configuration should be used for which environment.
+- The following environment file is used for the deployment via Docker: `environment.prod.ts`
+
+### Involved files
+- Navigate to the root directory of your Angular app.
+- Here we find the `docker-compose.yml` file and `Dockerfile` which are both needed for a functioning deployment.
+- `docker-compose.yml` defines which containers are to be created
+- `Dockerfile` defines a series of commands that initiate the build, copy the resulting source and finally start the container.
+
+### Startup Procedure
+1. Start the process with `docker-compose up` or stop it with `docker-compose down`
+2. Execute command `docker-compose up`
+3. Wait for the command to finish
+4. To make sure the application is running correctly, execute `docker-compose ps`
+5. The container `pegelhub-frontend` should have the status `running`
+6. If the container is running successfully, the application is accessible under port `4201`
 
 ## Architecural Overview
 ![Architectural Overview](Pegelhub.png)
@@ -17,36 +74,6 @@ The main theme file provides scss-variables used for coloring and shaping HTML e
 
 ### base-theme.scss
 This is the PrimeNG main theme which is responsible for the general styling of the application. Here, changes can be done to the PrimeNG style classes and rules.
-
-## Deployment
-To deploy the application on a web server, follow the instructions below. The application is deployed and made available in a docker container.
-
-### Prerequisites
-Make sure that the following software is installed on your system:
-- Docker Compose: `https://docs.docker.com/compose/install/`
-
-### Configure Environment
-- In Angular, environments are used to define which configuration should be used for which environment.
-- The following environment file is used for the deployment via Docker: `environment.prod.ts`
-- Inside this particular file the endpoint of the API is stored in the variable `BASE_URL`.
-
-### Involved files
-- Navigate to the root directory of your Angular app.
-- Here we find a `docker-compose.yml` file and a `Dockerfile` which are both needed for a functioning deployment.
-- `docker-compose.yml` defines which containers are to be created
-- `Dockerfile` defines a series of commands that initiate the build, copy the resulting source and finally start the container.
-
-### Startup Procedure
-1. Start `Docker Desktop` on your local machine and wait until it has booted successfully.
-2. Afterward the container can be built with the command `docker-compose build`. This will take some time depending on the power of your system.
-3. It is finished once the docker image `nginx` appears in the `Images` section of Docker Desktop.
-4. You can then start it with `docker-compose up` or stop it with `docker-compose down`.
-5. To make sure the application is running correctly, take a look at `Containers` inside Docker Desktop. Here you should see the container `pegelhub-frontend` and a green icon on the left.
-6. After the container has been successfully started with `docker-compose up`, the application is accessible under port 80.
-
-## Running the application locally
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
