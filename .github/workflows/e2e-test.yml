@@ -1,5 +1,5 @@
 ---
-name: End-to-End Test
+name: End-to-End Tests
 
 on:
   push:
@@ -21,12 +21,13 @@ jobs:
         node-version: '21.6.2'
 
     - name: Install dependencies
-      run: npm install --legacy-peer-deps # Verwende --legacy-peer-deps, um das Problem mit peer-Abhängigkeiten zu umgehen
+      run: npm install
 
     - name: Start application
-      run: |
-        npm start &
-        sleep 15
+      run: npm start &
 
-    - name: Run Cypress end-to-end tests
-      run: npm run cypress:run -- --spec 'cypress/e2e/example.cy.ts'
+    - name: Wait for application to start
+      run: sleep 10
+
+    - name: End-to-End tests
+      run: npm run cy:e2e
