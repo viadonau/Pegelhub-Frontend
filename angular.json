@@ -88,6 +88,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4201
+          },
           "configurations": {
             "production": {
               "buildTarget": "pegelhub:build:production"
@@ -98,9 +101,6 @@
             "test": {
               "buildTarget": "pegelhub:build:test"
             }
-          },
-          "options": {
-            "proxyConfig": "src/proxy.conf.json"
           },
           "defaultConfiguration": "development"
         },
