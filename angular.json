@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/pegelhub",
+            "outputPath": "dist/pegelhub-frontend",
             "index": "src/index.html",
             "polyfills": [
               "zone.js"
