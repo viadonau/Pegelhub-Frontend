@@ -32,27 +32,6 @@ export class UiService {
 
     return new Promise((resolve) => {
       const prognose: Measurement[] = [];
-
-      /* const date = new Date();
-      date.setMilliseconds(0);
-      date.setSeconds(0);
-      date.setMinutes(0);
-      date.setHours(date.getHours() + 1);
-
-      date.setDate(14);
-      date.setMonth(4);
-
-      for(let i = 0; i < 48; i++){
-        date.setMinutes(date.getMinutes() + 30);
-        prognose.push(
-          {
-            id: String(Math.round(Math.random() * 100000000)),
-            timestamp: date.toISOString(),
-            fields: {'value': String(Math.round(Math.random() * 150))}
-          }
-        )
-      } */
-
       resolve(prognose);
   });
   }
