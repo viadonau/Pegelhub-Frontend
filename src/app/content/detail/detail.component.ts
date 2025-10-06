@@ -109,25 +109,80 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   private initChart(pData: Measurement[], prognose: Measurement[] = []): void {
+    const data = this.prepareMeasurementsForChart(pData)
+
+    const ys  = data.map(p => p[1]).filter(n => Number.isFinite(n));
+    const dataMin = Math.min(...ys);
+    const dataMax = Math.max(...ys);
+    const pad = Math.max(2, (dataMax - dataMin) * 0.1);
+
     // @ts-ignore
     Highcharts.chart('container', {
-      navigator: {
-        enabled: true,
-        yAxis: {
-          max: this.supplierDetail?.hsw ? this.supplierDetail?.hsw + 50 : null,
-          min: 0
+      title: {
+        text: 'Messdaten',
+        align: 'left',
+        style: {
+          color: "#ffff"
         }
       },
+      chart: {
+        zoomType: 'x',
+        height: 'auto',
+      },
+
+      xAxis: {
+        type: 'datetime',
+        tickColor: "#ffff",
+        labels: {
+          style: {
+            color: "#ffff"
+          }
+        },
+        dateTimeLabelFormats: {
+          day: '%d. %b',
+        },
+        title: {
+          text: "Zeitpunkt",
+          style: {
+            color: "#ffff"
+          }
+        }
+      },
+      yAxis: [{
+        title: {
+          text: 'Pegel',
+          style: {
+            color: '#ffff'
+          }
+        },
+        min: dataMin - pad,
+        startOnTick: true,
+        endOnTick: true,
+        labels: { style: { color: '#ffff' } },
+      }],
       rangeSelector: {
         enabled: true,
         allButtonsEnabled: true,
         selected: 0,
+        labelStyle: {
+          color: '#fffff'
+        },
+
+        buttonTheme: {
+          fill: '#1f2937',
+          stroke: '#374151',
+          style: { color: '#fff' },
+          states: {
+            hover: { fill: '#334155' },
+            select: { fill: '#151111' }
+          }
+        },
         buttons: [
           {
             type: 'hour',
             count: 12,
             text: '12h',
-            title: 'View 12 hours'
+            title: 'View 12 hours',
           },
           {
             type: 'day',
@@ -144,7 +199,7 @@ export class DetailComponent implements OnInit, OnDestroy {
           {
             type: 'month',
             count: 1,
-            text: '1m',
+            text: '1M',
             title: 'View 1 month'
           },
           {
@@ -155,86 +210,37 @@ export class DetailComponent implements OnInit, OnDestroy {
         ]
 
       },
-      chart: {
-        zoomType: 'x',
-        height: 'auto'
-      },
-      title: {
-        text: 'Messdaten',
-        align: 'left'
-      },
-      xAxis: {
-        type: 'datetime',
-        dateTimeLabelFormats: {
-          day: '%d. %b'
-        },
-        title: {
-          text: "Zeitpunkt"
-        }
-      },
-      yAxis: [
-        {
-          title: {
-            text: "Pegel"
-          },
-          max: this.supplierDetail?.hsw,
-          plotLines: this.getChartPlotlines(this.supplierDetail),
-          tickInterval: 50
-        }
-      ],
+
       legend: {
-        enabled: true
-      },
-      plotOptions: {
-        area: {
-          fillColor: {
-            linearGradient: {
-              x1: 0,
-              y1: 0,
-              x2: 0,
-              y2: 1
-            },
-            stops: [
-              // @ts-ignore
-              [0, Highcharts.getOptions().colors[0]],
-              // @ts-ignore
-              [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-            ]
-          },
-          marker: {
-            radius: 2
-          },
-          lineWidth: 1,
-          states: {
-            hover: {
-              lineWidth: 1
-            }
-          }
+        enabled: true,
+        itemStyle: {
+          color: 'white'
         }
+      },
+      tooltip: {
+        style: { color: '#fff' }
       },
       series: [
         {
           threshold: 0,
-          fillColor: 'transparent',
-          type: 'spline',
+          fillColor: 'lightblue',
+          colorAxis: 'lightblue',
           name: 'Pegel',
-          showInNavigator: true,
-          data: this.prepareMeasurementsForChart(pData)
-        }, {
-          threshold: 0,
-          fillColor: 'transparent',
-          type: 'spline',
-          name: 'Prognose',
-          data: this.prepareMeasurementsForChart(prognose)
-        }
+          data: data,
+        },
       ]
     });
   }
 
-  private prepareMeasurementsForChart(arr: Measurement[]): any {
-    return arr.map(entry => {
-      return [new Date(entry.timestamp).getTime() + new Date(entry.timestamp).getTimezoneOffset() * -60 * 1000, Math.round(parseFloat((entry.fields as any)['pegel']) + parseFloat(entry?.infos['height'] || '0') / 100.0)];
-    }).sort((a, b) => a[0] - b[0])
+
+  private prepareMeasurementsForChart(arr: Measurement[]): number[][] {
+    return arr
+      .map(entry => {
+        const ts = new Date(entry.timestamp);
+        const y  = Number((entry.fields as any).value);
+        return [ts.getTime(), Number.isFinite(y) ? y : 0];
+      })
+      .sort((a, b) => a[0] - b[0]);
   }
 
   private getChartPlotlines(detail?: Supplier): any[] {
